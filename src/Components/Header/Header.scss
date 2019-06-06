@@ -1,0 +1,118 @@
+@import '../../styles/colors';
+
+#sticky-nav {
+  padding: 0;
+  .navbar-collapse {
+    flex-grow: unset;
+  }
+}
+.nav-left {
+  .navbar-toggler {
+    margin-left: 0.5rem;
+  }
+}
+
+.nav-search {
+  background-color: $surface;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 1rem;
+  border-radius: 1.5rem;
+  -webkit-border-radius: 1.5rem;
+  -moz-border-radius: 1.5rem;
+  -ms-border-radius: 1.5rem;
+  -o-border-radius: 1.5rem;
+  min-width: 400px;
+  max-width: 100%;
+  input {
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    flex: 1;
+    height: 2rem;
+  }
+  i {
+    padding-right: 0.3rem;
+  }
+}
+
+@mixin notif-counter {
+  .counter {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    font-size: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: #fff;
+    font-weight: 600;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+  }
+}
+
+.user-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  &__names {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+  &__notif {
+    position: relative;
+    margin-right: 2rem;
+    @include notif-counter();
+    .fa-bell {
+      font-size: 25px;
+      color: gray;
+    }
+  }
+  &__message {
+    position: relative;
+    margin-right: 2rem;
+    @include notif-counter();
+    .fa-envelope {
+      font-size: 25px;
+      color: gray;
+    }
+  }
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    background-color: $surface;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #sticky-nav {
+    .nav-search {
+      order: 2;
+      width: 100%;
+      margin-top: 0.5rem;
+      min-width: 100%;
+    }
+    .navbar-collapse {
+      order: 2;
+      text-align: center;
+      .navbar-nav {
+        .nav-link {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
