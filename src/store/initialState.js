@@ -1,5 +1,6 @@
-const initialState = {
-    name: { team: "Wakanda" }
-}
-
-export default initialState;
+module.exports = {
+  currentUser: {
+    isAuth: localStorage.getItem('token') !== null,
+    user: {},
+  },
+};
