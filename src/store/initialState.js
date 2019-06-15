@@ -1,6 +1,10 @@
 module.exports = {
+  auth: {
+    loading: false,
+    error: null,
+  },
   currentUser: {
-    isAuth: localStorage.getItem('token') !== null,
+    isAuth: localStorage.getItem('tech_community_token') !== null,
     user: {},
   },
 };

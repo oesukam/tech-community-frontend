@@ -11,6 +11,7 @@ import { PropTypes } from 'prop-types';
 
 import Home from '../pages/Home/Home';
 import Login from '../pages/Home/Home';
+import Signup from '../pages/Signup/Signup';
 import NotFound from '../pages/NotFound/NotFound';
 
 export const Routes = ({ isAuth }) => (
@@ -27,6 +28,14 @@ export const Routes = ({ isAuth }) => (
         path="/protected"
         render={props =>
           isAuth ? <Home {...props} /> : <Redirect to="/login" />
+        }
+      />
+
+      <Route
+        exact
+        path="/signup"
+        render={props =>
+          !isAuth ? <Signup {...props} /> : <Redirect to="/" />
         }
       />
 
