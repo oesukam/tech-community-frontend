@@ -21,7 +21,7 @@ export class Header extends Component {
     } = this.props;
     const { menu } = this.state;
 
-    if (!isAuth) {
+    if (isAuth) {
       return (
         <div className="user-info">
           <div className="user-info__notif">

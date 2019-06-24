@@ -6,9 +6,11 @@ package-lock.json
 /.pnp
 .pnp.js
 yarn.lock
+.env
 
 # testing
 /coverage
+/src/__tests__/pages/__snapshots__
 
 # production
 /build
