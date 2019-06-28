@@ -3,8 +3,6 @@ import './Home.scss';
 import { connect } from 'react-redux';
 import Layout from '../../containers/Layout/Layout';
 
-import { changeName } from '../../actions/changeName';
-
 export class Home extends Component {
   render() {
     const { match } = this.props;
@@ -20,15 +18,7 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ name }) => ({
-  name,
-});
-
-const mapDispatchToProps = dispatch => ({
-  changeName: name => dispatch(changeName(name)),
-});
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  null,
+  null,
 )(Home);

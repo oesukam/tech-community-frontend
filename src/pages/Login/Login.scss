@@ -2,9 +2,10 @@
 @import '../../variables.scss';
 
 #root {
+  padding: 0 10px;
   background-color: $surface;
 }
-section {
+section.login {
   height: 100vh;
   .layout {
     background-color: #fff;
@@ -50,13 +51,16 @@ section {
     }
     .girl {
       img {
-        width: 80%;
-        margin: 60px 10% 20px;
+        width: 40%;
+        margin: 50px 30% 20px;
       }
     }
   }
 
   form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px 40px !important;
     .title {
       padding: 5px 0 0px;
