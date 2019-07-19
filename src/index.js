@@ -8,8 +8,6 @@ import * as serviceWorker from './serviceWorker';
 import store from './store';
 import Routes from './components/Routes';
 
-import 'typeface-open-sans';
-
 const routing = (
   <Provider store={store}>
     <Routes />

@@ -1,4 +1,5 @@
-import axios from 'axios';
+import server from '../Api/server';
+
 import {
   SIGNUP_ERROR,
   SIGNUP_SUCCESS,
@@ -62,20 +63,12 @@ export const signup = ({
   dispatch(signupStarted());
 
   try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/signup`,
-      {
-        companyName,
-        username,
-        email,
-        password,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    const res = await server.post(`/api/v1/auth/signup`, {
+      companyName,
+      username,
+      email,
+      password,
+    });
 
     const { token, user } = res.data;
 

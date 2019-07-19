@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Home.scss';
-import { connect } from 'react-redux';
 import Layout from '../../containers/Layout/Layout';
 
 export class Home extends Component {
@@ -18,7 +17,4 @@ export class Home extends Component {
   }
 }
 
-export default connect(
-  null,
-  null,
-)(Home);
+export default Home;

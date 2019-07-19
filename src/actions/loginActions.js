@@ -1,4 +1,5 @@
-import axios from 'axios';
+import server from '../Api/server';
+
 import {
   LOGIN_ERROR,
   LOGIN_SUCCESS,
@@ -57,18 +58,10 @@ export const login = ({ email, password }) => async dispatch => {
   dispatch(loginStarted());
 
   try {
-    const res = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/login`,
-      {
-        username: email,
-        password,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    const res = await server.post(`/api/v1/auth/login`, {
+      username: email,
+      password,
+    });
 
     const { token, user } = res.data;
 
@@ -79,7 +72,7 @@ export const login = ({ email, password }) => async dispatch => {
   } catch (e) {
     if (e.response) {
       if (e.response.data.errors) {
-        dispatch(loginError(e.response.data.errors[0].message));
+        dispatch(loginError('Incorrect password'));
         return false;
       }
       dispatch(loginError(e.response.data.message));
