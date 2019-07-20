@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './Home.scss';
-import { connect } from 'react-redux';
 import Layout from '../../containers/Layout/Layout';
-
-import { changeName } from '../../actions/changeName';
 
 export class Home extends Component {
   render() {
@@ -20,15 +17,4 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ name }) => ({
-  name,
-});
-
-const mapDispatchToProps = dispatch => ({
-  changeName: name => dispatch(changeName(name)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home);
+export default Home;

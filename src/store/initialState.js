@@ -3,8 +3,12 @@ module.exports = {
     loading: false,
     error: null,
   },
+  login: {
+    loading: false,
+    error: null,
+  },
   currentUser: {
-    isAuth: localStorage.getItem('tech_community_token') !== null,
+    isAuth: localStorage.getItem('token') !== null,
     user: {},
   },
 };

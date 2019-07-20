@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import Home from '../pages/Home/Home';
-import Login from '../pages/Home/Home';
 import Signup from '../pages/Signup/Signup';
+import Login from '../pages/Login/Login';
 import NotFound from '../pages/NotFound/NotFound';
 
 export const Routes = ({ isAuth }) => (
@@ -19,15 +19,16 @@ export const Routes = ({ isAuth }) => (
       <Route exact path="/" component={Home} />
       <Route
         exact
-        path="/login"
-        render={props => (!isAuth ? <Login {...props} /> : <Redirect to="/" />)}
-      />
-      <Route
-        exact
         path="/protected"
         render={props =>
           isAuth ? <Home {...props} /> : <Redirect to="/login" />
         }
+      />
+
+      <Route
+        exact
+        path="/login"
+        render={props => (!isAuth ? <Login {...props} /> : <Redirect to="/" />)}
       />
 
       <Route
