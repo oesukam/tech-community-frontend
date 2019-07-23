@@ -86,29 +86,6 @@ section.login {
         }
       }
     }
-    .button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 0.9em;
-      font-weight: 600;
-      width: 100%;
-      text-align: center;
-      padding: 7px;
-      margin: 20px 0 0;
-      background-color: $primary;
-      border-radius: 3px;
-      .spinner-border {
-        width: 15px;
-        height: 15px;
-        border-width: 2px;
-        margin-right: 10px;
-      }
-      &:hover {
-        cursor: pointer;
-      }
-    }
     .login {
       text-align: right;
       font-size: 0.9em;

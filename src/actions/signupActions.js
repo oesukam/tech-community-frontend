@@ -1,11 +1,6 @@
 import server from '../Api/server';
 
-import {
-  SIGNUP_ERROR,
-  SIGNUP_SUCCESS,
-  SIGNUP_STARTED,
-  SIGNUP_INPUT_CHANGED,
-} from '../actionTypes/signupTypes';
+import * as types from '../actionTypes/signupTypes';
 
 /**
  * Updates the form inputs
@@ -13,8 +8,15 @@ import {
  * @return {object} action
  */
 export const formInputChanged = attribute => ({
-  type: SIGNUP_INPUT_CHANGED,
+  type: types.SIGNUP_INPUT_CHANGED,
   payload: attribute,
+});
+
+/** Toggle the error to null
+ * @return {object}
+ */
+export const noError = () => ({
+  type: types.NO_ERROR,
 });
 
 /**
@@ -23,7 +25,7 @@ export const formInputChanged = attribute => ({
  * @return {object} action
  */
 export const signupStarted = () => ({
-  type: SIGNUP_STARTED,
+  type: types.SIGNUP_STARTED,
 });
 
 /**
@@ -33,7 +35,7 @@ export const signupStarted = () => ({
  * @return {object} action
  */
 export const signupSuccess = user => ({
-  type: SIGNUP_SUCCESS,
+  type: types.SIGNUP_SUCCESS,
   payload: user,
 });
 
@@ -45,7 +47,7 @@ export const signupSuccess = user => ({
  */
 
 export const signupError = error => ({
-  type: SIGNUP_ERROR,
+  type: types.SIGNUP_ERROR,
   payload: error,
 });
 

@@ -1,10 +1,4 @@
-import initialState from '../store/initialState';
-import {
-  LOGIN_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_STARTED,
-  LOGIN_INPUT_CHANGED,
-} from '../actionTypes/loginTypes';
+import * as types from '../actionTypes/loginTypes';
 
 /**
  * Login reducer
@@ -14,12 +8,17 @@ import {
  */
 const loginReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case LOGIN_STARTED:
+    case types.NO_ERROR:
+      return {
+        ...state,
+        error: false,
+      };
+    case types.LOGIN_STARTED:
       return {
         ...state,
         loading: true,
       };
-    case LOGIN_SUCCESS:
+    case types.LOGIN_SUCCESS:
       return {
         ...state,
         user: payload,
@@ -27,14 +26,14 @@ const loginReducer = (state = {}, { type, payload }) => {
         error: false,
         loggedIn: true,
       };
-    case LOGIN_ERROR:
+    case types.LOGIN_ERROR:
       return {
         ...state,
         loading: false,
         error: payload,
         loggedIn: false,
       };
-    case LOGIN_INPUT_CHANGED:
+    case types.LOGIN_INPUT_CHANGED:
       return {
         ...state,
         user: {
