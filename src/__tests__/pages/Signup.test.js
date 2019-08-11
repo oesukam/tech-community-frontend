@@ -85,7 +85,7 @@ describe('Signup.jsx', () => {
       .find('input[name="password"]')
       .simulate('change', { target: { value: 'wrongformat' } });
 
-    wrapper.find('.button').simulate('click');
+    wrapper.find('button').simulate('click');
 
     shallow(<Signup {...props} />)
       .instance()

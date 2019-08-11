@@ -1,10 +1,5 @@
 import initialState from '../store/initialState';
-import {
-  SIGNUP_ERROR,
-  SIGNUP_SUCCESS,
-  SIGNUP_STARTED,
-  SIGNUP_INPUT_CHANGED,
-} from '../actionTypes/signupTypes';
+import * as types from '../actionTypes/signupTypes';
 
 /**
  * Signup reducer
@@ -14,12 +9,17 @@ import {
  */
 const signupReducer = (state = initialState.auth, { type, payload }) => {
   switch (type) {
-    case SIGNUP_STARTED:
+    case types.NO_ERROR:
+      return {
+        ...state,
+        error: false,
+      };
+    case types.SIGNUP_STARTED:
       return {
         ...state,
         loading: true,
       };
-    case SIGNUP_SUCCESS:
+    case types.SIGNUP_SUCCESS:
       return {
         ...state,
         user: payload,
@@ -27,14 +27,14 @@ const signupReducer = (state = initialState.auth, { type, payload }) => {
         error: false,
         loggedIn: true,
       };
-    case SIGNUP_ERROR:
+    case types.SIGNUP_ERROR:
       return {
         ...state,
         loading: false,
         error: payload,
         loggedIn: false,
       };
-    case SIGNUP_INPUT_CHANGED:
+    case types.SIGNUP_INPUT_CHANGED:
       return {
         ...state,
         user: {

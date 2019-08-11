@@ -9,7 +9,9 @@ import github from '../../assets/images/github.png';
 import girl from '../../assets/images/girl.svg';
 import backgroundImage from '../../assets/images/man.jpg';
 
-import { signup, formInputChanged } from '../../actions/signupActions';
+import { signup, formInputChanged, noError } from '../../actions/signupActions';
+
+import Button from '../../components/Button/Button';
 
 export class Signup extends Component {
   form = React.createRef();
@@ -63,7 +65,7 @@ export class Signup extends Component {
   }
 
   organizationForm() {
-    const { loading } = this.props;
+    const { loading, error, onNoError } = this.props;
     return (
       <form
         className="col-md-6 col-sm-12"
@@ -71,7 +73,6 @@ export class Signup extends Component {
         onSubmit={e => e.preventDefault()}
       >
         <div className="title">Register as a company</div>
-        <small className="text-danger">{this.props.error}</small>
         <div className="input">
           <div className="label">Organization name</div>
           <input
@@ -112,15 +113,20 @@ export class Signup extends Component {
             onChange={this.handleInput}
           />
         </div>
-        <div
-          className="button"
+
+        <Button
           onClick={() =>
-            this.form.current.reportValidity() ? this.onSubmit() : null
+            !error
+              ? this.form.current.reportValidity()
+                ? this.onSubmit()
+                : null
+              : onNoError()
           }
-        >
-          {loading ? this.spinner() : null}
-          <span>REGISTER</span>
-        </div>
+          text="REGISTER"
+          error={error && `${error} | DISMISS`}
+          loading={loading && 'Loading..'}
+        />
+
         <div className="login">
           Already have an account ?
           <Link to="/login">
@@ -184,6 +190,7 @@ export const mapStateToProps = ({ auth }) => {
 export const mapDispatchToProps = dispatch => ({
   signup: user => dispatch(signup(user)),
   onFormInputChanged: data => dispatch(formInputChanged(data)),
+  onNoError: () => dispatch(noError()),
 });
 
 export default connect(

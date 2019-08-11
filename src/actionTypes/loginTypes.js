@@ -1,3 +1,4 @@
+export const NO_ERROR = 'NO_ERROR';
 export const LOGIN = 'LOGIN';
 export const LOGIN_STARTED = 'LOGIN_STARTED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

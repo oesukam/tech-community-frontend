@@ -1,11 +1,13 @@
 import server from '../Api/server';
 
-import {
-  LOGIN_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_STARTED,
-  LOGIN_INPUT_CHANGED,
-} from '../actionTypes/loginTypes';
+import * as types from '../actionTypes/loginTypes';
+
+/** Toggle the error to null
+ * @return {object}
+ */
+export const noError = () => ({
+  type: types.NO_ERROR,
+});
 
 /**
  * Updates the form inputs
@@ -13,7 +15,7 @@ import {
  * @return {object} action
  */
 export const formInputChanged = attribute => ({
-  type: LOGIN_INPUT_CHANGED,
+  type: types.LOGIN_INPUT_CHANGED,
   payload: attribute,
 });
 
@@ -23,7 +25,7 @@ export const formInputChanged = attribute => ({
  * @return {object} action
  */
 export const loginStarted = () => ({
-  type: LOGIN_STARTED,
+  type: types.LOGIN_STARTED,
 });
 
 /**
@@ -33,7 +35,7 @@ export const loginStarted = () => ({
  * @return {object} action
  */
 export const loginSuccess = user => ({
-  type: LOGIN_SUCCESS,
+  type: types.LOGIN_SUCCESS,
   payload: user,
 });
 
@@ -45,7 +47,7 @@ export const loginSuccess = user => ({
  */
 
 export const loginError = error => ({
-  type: LOGIN_ERROR,
+  type: types.LOGIN_ERROR,
   payload: error,
 });
 
