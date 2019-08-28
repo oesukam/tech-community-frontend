@@ -4,7 +4,7 @@ const token = localStorage.getItem('token') || null;
 const server = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
   headers: {
-    Authorization: token,
+    Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
   },
 });
@@ -12,7 +12,7 @@ const server = axios.create({
 server.interceptors.request.use(
   async config => {
     const token = await localStorage.getItem('token');
-    if (token) config.headers['Authorization'] = token;
+    if (token) config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   },
   error => {
