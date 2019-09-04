@@ -14,7 +14,6 @@ export class PostTextArea extends Component {
     showEmojiPicker: false,
   };
 
-  fileInput = React.createRef();
   imageInput = React.createRef();
   emojiToggle = React.createRef();
 
@@ -30,7 +29,6 @@ export class PostTextArea extends Component {
         target: { id, parentNode },
       } = e;
       let isEmoji = false;
-      console.log(e.target, '===');
       let node = parentNode;
       for (let i = 0; i < 6; i++) {
         if (!node.classList) break;
@@ -118,14 +116,6 @@ export class PostTextArea extends Component {
           onChange={this.onChange}
           placeholder="Write something ..."
         />
-        <input
-          type="file"
-          name="file"
-          className="file-upload"
-          onChange={this.fileChange}
-          ref={this.fileInput}
-          style={{ display: 'none' }}
-        />
 
         <input
           type="file"
@@ -162,7 +152,7 @@ export class PostTextArea extends Component {
 
             {showEmojiPicker && (
               <Picker
-                title=""
+                title="Tech Community"
                 emoji="point_up"
                 style={{ position: 'absolute', left: 0, top: '100%' }}
                 onSelect={this.addEmoji}

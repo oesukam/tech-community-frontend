@@ -71,16 +71,6 @@ describe('PostTextArea.jsx', () => {
         expect(wrapper.instance().state.value).toEqual('&123');
     });
 
-    test('should click on window', () => {
-        wrapper = shallow(
-            <PostTextArea {...props} />
-        );
-        // const emoji = { native: '&123' }
-        // wrapper.instance().addEmoji(emoji);
-        wrapper.find('#emoji-btn').simulate('click')
-        // expect(wrapper.instance().state.value).toEqual('&123');
-    });
-
     describe('reducers', () => {
         test('should return `mapStateToProps`', () => {
             const expectedState = {
