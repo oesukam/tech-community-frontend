@@ -10,7 +10,7 @@ import {
  * @param {*} { type, payload }
  * @returns {object} updated state
  */
-const loginReducer = (state = {}, { type, payload }) => {
+const postReducer = (state = {}, { type, payload }) => {
     switch (type) {
         case POST_STARTED:
             return {
@@ -36,4 +36,4 @@ const loginReducer = (state = {}, { type, payload }) => {
     }
 };
 
-export default loginReducer;
+export default postReducer;

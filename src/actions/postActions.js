@@ -79,9 +79,9 @@ const post = (data) => async dispatch => {
         if (data.image) payload.image = await uploadImage(data.image);
 
         const res = await server.post(`/api/v1/posts`, payload);
+        console.log(res);
 
         const { post } = res.data;
-        console.log(post)
         dispatch(postSuccess(post));
         return true;
     } catch (e) {

@@ -37,7 +37,7 @@ class Button extends Component {
             </svg>
 
             <span className="loading" style={{ display: !loading && 'none' }}>
-              {loading}
+              {text}
             </span>
 
             <span style={{ display: loading && 'none' }}>

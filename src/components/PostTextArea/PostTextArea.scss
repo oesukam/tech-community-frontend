@@ -59,6 +59,13 @@
       cursor: pointer;
     }
   }
+
+  #emoji {
+    width: 0px;
+    border: none;
+    background-color: transparent;
+    outline: none
+  }
   
   .img-preview {
     height: 25px;
