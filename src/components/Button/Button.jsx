@@ -3,7 +3,7 @@ import './Button.scss';
 
 class Button extends Component {
   render() {
-    const { error, text, loading, onClick, tick, style } = this.props;
+    const { error, text, loading, onClick, tick, style, disabled } = this.props;
 
     return (
       <React.Fragment>
@@ -12,10 +12,12 @@ class Button extends Component {
             className={
               error
                 ? 'reactive-button reactive-button-error'
+                : disabled
+                ? 'reactive-button button-disabled'
                 : 'reactive-button'
             }
             style={style}
-            onClick={onClick}
+            onClick={!disabled ? onClick : undefined}
           >
             <svg
               className="spinner"
@@ -40,7 +42,7 @@ class Button extends Component {
               {text}
             </span>
 
-            <span style={{ display: loading && 'none' }}>
+            <span className="text" style={{ display: loading && 'none' }}>
               {error || text} {tick && <span className="tick">✓</span>}
             </span>
           </button>

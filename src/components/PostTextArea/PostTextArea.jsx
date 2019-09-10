@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Picker } from 'emoji-mart';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import postAction from '../../actions/postActions';
 import Button from '../Button/Button';
+import Modal from '../Modal/Modal';
 import 'emoji-mart/css/emoji-mart.css';
 import './PostTextArea.scss';
 
@@ -11,7 +10,9 @@ export class PostTextArea extends Component {
   state = {
     value: '',
     rows: 3,
+    show: false,
     showEmojiPicker: false,
+    disabled: true,
   };
 
   imageInput = React.createRef();
@@ -31,6 +32,7 @@ export class PostTextArea extends Component {
       let isEmoji = false;
       let node = parentNode;
       for (let i = 0; i < 6; i++) {
+        if (!node) break;
         if (!node.classList) break;
         isEmoji = node && node.classList.contains('emoji-mart');
         node = node.parentNode;
@@ -47,12 +49,14 @@ export class PostTextArea extends Component {
   onChange = e => {
     const textareaLineHeight = 24;
     const { minRows, maxRows } = this.props;
-    const { maxChar } = this.props;
-    if (maxChar && maxChar <= e.target.value.length) return;
+    const { minChar, maxChar } = this.props;
+    if (maxChar && maxChar <= e.target.value.length - 1) return;
+
+    if (e.target.value.length >= minChar) this.setState({ disabled: false });
+    if (e.target.value.length < minChar) this.setState({ disabled: true });
 
     const previousRows = e.target.rows;
     e.target.rows = minRows; // reset number of rows in textarea
-
     const currentRows = ~~(e.target.scrollHeight / textareaLineHeight);
 
     if (currentRows === previousRows) {
@@ -94,6 +98,14 @@ export class PostTextArea extends Component {
     this.setState({ showEmojiPicker: !this.state.showEmojiPicker });
   };
 
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+
   submitPost = () => {
     const { value, image = '' } = this.state;
     const { post } = this.props;
@@ -103,10 +115,9 @@ export class PostTextArea extends Component {
   };
 
   render() {
-    const { showEmojiPicker, value, rows, imageUrl } = this.state;
+    const { showEmojiPicker, value, rows, imageUrl, disabled } = this.state;
 
-    const { error, loading, tick } = this.props;
-
+    const { error, loading, tick, maxChar } = this.props;
     return (
       <div id="text-area-post">
         <textarea
@@ -126,29 +137,39 @@ export class PostTextArea extends Component {
           ref={this.imageInput}
           style={{ display: 'none' }}
         />
+        <Modal show={this.state.show} handleClose={this.hideModal}>
+          <img
+            className="img-preview"
+            style={{ width: '70%' }}
+            alt="preview"
+            src={imageUrl}
+            onClick={this.showModal}
+          />
+        </Modal>
+        {imageUrl ? (
+          <div className="image">
+            <div className="remove-image" onClick={this.restoreImage}>
+              <span>&times;</span>
+            </div>
+            <img
+              className="img-preview"
+              alt="preview"
+              src={imageUrl}
+              onClick={this.showModal}
+            />
+          </div>
+        ) : null}
         <div className="actions">
           <div>
-            <label htmlFor="emoji">
-              <i
-                id="emoji-btn"
-                className="fas fa-smile"
-                onClick={this.toogleOnClickEmojiPicker}
-              />
-            </label>
-            {!imageUrl ? (
-              <i
-                className="fas fa-image"
-                onClick={() => this.imageInput.current.click()}
-              />
-            ) : (
-              <span id="restore" onClick={this.restoreImage}>
-                X
-              </span>
-            )}
-
-            {imageUrl ? (
-              <img className="img-preview" alt="preview" src={imageUrl} />
-            ) : null}
+            <i
+              id="emoji-btn"
+              className="fas fa-smile"
+              onClick={this.toogleOnClickEmojiPicker}
+            />
+            <i
+              className="fas fa-image"
+              onClick={() => this.imageInput.current.click()}
+            />
 
             {showEmojiPicker && (
               <Picker
@@ -159,12 +180,22 @@ export class PostTextArea extends Component {
               />
             )}
           </div>
-          <div>
+          <div
+            title={disabled ? 'The minimum number of character is 50' : ''}
+            className="post-action"
+          >
+            <span
+              className="number-character"
+              style={{ color: disabled ? '#fff' : '#13c39a' }}
+            >
+              {value.length}/{maxChar}
+            </span>
             <Button
               style={buttonStyle}
               error={error}
               loading={loading}
               text="POST"
+              disabled={disabled}
               tick={tick}
               onClick={() => this.submitPost()}
             />
@@ -186,43 +217,22 @@ const buttonStyle = {
 PostTextArea.propTypes = {
   minRows: PropTypes.number,
   maxRows: PropTypes.number,
+  minChar: PropTypes.number,
+  maxChar: PropTypes.number,
   loading: PropTypes.bool,
   error: PropTypes.any,
   tick: PropTypes.bool,
+  post: PropTypes.func.isRequired,
 };
 
 PostTextArea.defaultProps = {
   minRows: 3,
   maxRows: 15,
+  minChar: 50,
+  maxChar: 500,
   loading: false,
   error: false,
   tick: false,
 };
 
-/**
- * Maps the state to props
- * @param {*} { auth }
- * @returns {object} props
- */
-export const mapStateToProps = ({ posts }) => {
-  const { loading, error, post } = posts;
-  return {
-    loading,
-    error,
-    tick: !!post,
-  };
-};
-
-/**
- * Maps dispatches to props
- * @param {*} dispatch
- * @returns {object} props
- */
-export const mapDispatchToProps = dispatch => ({
-  post: data => dispatch(postAction(data)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PostTextArea);
+export default PostTextArea;
