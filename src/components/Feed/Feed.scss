@@ -1,0 +1,149 @@
+@import '../../styles/colors';
+
+.feed {
+  width: 100%;
+  margin: 20px 27% 0px;
+  padding-bottom: 80px;
+  transition: height 1s ease;
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    background-color: #fff;
+    margin: 0px 0 20px;
+    transform: translateY(150px);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+
+      .right {
+        display: flex;
+
+        .image {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          margin-right: 20px;
+          object-fit: cover;
+          background-color: $surface;
+        }
+
+        .info {
+          display: flex;
+          flex-direction: column;
+
+          .name {
+            font-weight: 600;
+            &:hover {
+              cursor: pointer;
+              color: $primary;
+            }
+          }
+
+          .label {
+            font-size: 0.9em;
+            font-weight: 300;
+          }
+        }
+      }
+      .date {
+        font-size: 0.8em;
+        font-weight: 300;
+      }
+    }
+
+    .body {
+      font-size: 1em;
+      padding-top: 20px;
+      font-weight: 400;
+    }
+
+    .category {
+      text-transform: uppercase;
+      font-size: 0.8em;
+      margin-top: 15px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      background-color: $surface;
+      align-self: flex-start;
+      &:hover {
+        color: #fff;
+        background-color: $primary;
+      }
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 20px 0 0px;
+
+      .left {
+        display: flex;
+        div {
+          margin-right: 35px;
+        }
+      }
+
+      .action {
+        color: #888;
+
+        i {
+          font-size: 0.85em;
+        }
+        .count {
+          font-size: 0.95em;
+          margin-left: 10px;
+        }
+
+        &:hover {
+          color: $primary;
+          cursor: pointer;
+        }
+      }
+
+      .share {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: $surface;
+        &:hover {
+          cursor: pointer;
+          background-color: $primary;
+          color: #fff;
+        }
+      }
+    }
+
+    .post-image {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      margin-top: 20px;
+      object-fit: cover;
+      background-color: $surface;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    opacity: 0.2;
+    animation: post 1.2s ease 0s forwards;
+  }
+
+  @keyframes post {
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+}

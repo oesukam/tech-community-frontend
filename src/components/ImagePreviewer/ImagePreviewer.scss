@@ -1,0 +1,32 @@
+@import '../../styles/colors';
+@import '../../variables.scss';
+
+.image-previewer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+  overflow: scroll;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  img {
+    max-width: 70vw;
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: $mobile-size) {
+  .image-previewer {
+    img {
+      margin-top: 23vh;
+    }
+  }
+}

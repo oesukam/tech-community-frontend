@@ -2,7 +2,7 @@ import { currentUser as initialState } from '../store/initialState';
 import * as types from '../actionTypes/currentUserTypes';
 
 const reducer = (state = initialState, { type, payload }) => {
-  switch (types) {
+  switch (type) {
     case types.SET_IS_AUTH:
       return {
         ...state,
