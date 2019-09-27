@@ -76,16 +76,10 @@ export class Header extends Component {
     return (
       <div className={`collapse navbar-collapse ${menu ? 'show' : ''}`}>
         <ul className="navbar-nav mr-auto">
-          <li
-            className={`nav-link ${path === '/signup' ? 'active' : ''}`}
-            onClick={this.showModal}
-          >
-            <button className="nav-link login-btn">SIGNUP</button>
+          <li className="nav-link" onClick={this.showModal}>
+            <button className="nav-link signup-btn">SIGNUP</button>
           </li>
-          <li
-            className={`nav-link ${path === '/login' ? 'active' : ''}`}
-            onClick={this.showModal}
-          >
+          <li className="nav-link" onClick={this.showModal}>
             <button className="nav-link login-btn">LOGIN</button>
           </li>
         </ul>

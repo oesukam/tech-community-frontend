@@ -7,6 +7,14 @@ import initialState from '../../store/initialState';
 let wrapper;
 const props = {
   match: { path: '' },
+  location: {
+    search: {}
+  },
+  user: {
+    user: {
+      picture: 'http://picture.jpg'
+    }
+  }
 };
 describe('Header.jsx', () => {
   beforeEach(() => {
@@ -52,33 +60,36 @@ describe('Header.jsx', () => {
     });
   });
 
-  describe('when props changes', () => {
-    beforeEach(() => {});
-
-    test('should render `/login` as `active', () => {
-      props.match.path = '/login';
-      wrapper = mount(
-        <Router>
-          <Header {...props} />
-        </Router>,
-      );
-      const path = '/login';
+  describe('when click on `login` button', () => {
+    test('should show the Modal', () => {
+      wrapper.find('button.nav-link.login-btn').simulate('click');
       const component = wrapper.find('Header');
-      expect(component.props().match.path).toBe(path);
-    });
+      expect(component.state().showModal).toBeTruthy();
+    })
 
-    test('should render `/signup` as `active`', () => {
-      props.match.path = '/signup';
-      wrapper = mount(
-        <Router>
-          <Header {...props} />
-        </Router>,
-      );
-      const path = '/signup';
+    test('should hide the Modal', () => {
       const component = wrapper.find('Header');
-      expect(component.props().match.path).toBe(path);
+      const instance = component.instance();
+      instance.hideModal();
+    })
+  })
+
+  describe('when click on `login with google/github` button', () => {
+
+    beforeEach(() => {
+      delete window.location;
+      window.location = { replace: jest.fn() };
     });
-  });
+    test('should hit the login with google endpoint', () => {
+      wrapper.find('button.social-login-google').simulate('click');
+      expect(window.location.replace).toHaveBeenCalled();
+    })
+
+    test('should hit the login with github endpoint', () => {
+      wrapper.find('button.social-login-github').simulate('click');
+      expect(window.location.replace).toHaveBeenCalled();
+    })
+  })
 
   describe('reducers', () => {
     test('should return `mapStateToProps`', () => {
