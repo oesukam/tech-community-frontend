@@ -7,10 +7,9 @@ import Feed from '../../components/Feed/Feed';
 
 export class Home extends Component {
   render() {
-    const { match } = this.props;
-
+    const { match, location } = this.props;
     return (
-      <Layout match={match}>
+      <Layout match={match} location={location}>
         <div className="container-fluid">
           <div className="row">
             <Post />
