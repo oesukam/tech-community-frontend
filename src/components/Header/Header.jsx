@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import Modal from '../Modal/Modal';
-import google from '../../assets/images/google.png';
-import github from '../../assets/images/github.png';
-import socialAuth from '../../actions/socialAuth';
+import SocialAuth from '../Login/socialAuth';
+import socialAuth, { handleShowAndHide } from '../../actions/socialAuth';
 import './Header.scss';
 
 export class Header extends Component {
   state = {
     menu: false,
-    showModal: false,
   };
 
   componentDidMount = () => {
@@ -35,24 +32,11 @@ export class Header extends Component {
     });
   };
 
-  showModal = () => {
-    this.setState({ showModal: true });
-  };
-
-  hideModal = () => {
-    this.setState({ showModal: false });
-  };
-
-  login = platform => {
-    window.location.replace(
-      `http://${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/${platform}`,
-    );
-  };
-
   renderUser = () => {
     const {
       isAuth,
       user,
+      handleShowAndHide,
       match: { path },
     } = this.props;
     const { menu } = this.state;
@@ -76,10 +60,10 @@ export class Header extends Component {
     return (
       <div className={`collapse navbar-collapse ${menu ? 'show' : ''}`}>
         <ul className="navbar-nav mr-auto">
-          <li className="nav-link" onClick={this.showModal}>
+          <li className="nav-link" onClick={() => handleShowAndHide(true)}>
             <button className="nav-link signup-btn">SIGNUP</button>
           </li>
-          <li className="nav-link" onClick={this.showModal}>
+          <li className="nav-link" onClick={() => handleShowAndHide(true)}>
             <button className="nav-link login-btn">LOGIN</button>
           </li>
         </ul>
@@ -98,28 +82,7 @@ export class Header extends Component {
             <input type="search" placeholder="Search.." aria-label="Search" />
             <i className="fa fa-search" />
           </div>
-          <Modal show={this.state.showModal} handleClose={this.hideModal}>
-            <div className="social-auth">
-              <p>Authentication</p>
-              <span>Use your favorite platform to login</span>
-              <div className="social-login-btn">
-                <button
-                  className="social-login-google"
-                  onClick={() => this.login('google')}
-                >
-                  <img src={google} alt="" />
-                  <span>LOGIN WITH GOOGLE</span>
-                </button>
-                <button
-                  className="social-login-github"
-                  onClick={() => this.login('github')}
-                >
-                  <img src={github} alt="" />
-                  <span>LOGIN WITH GITHUB</span>
-                </button>
-              </div>
-            </div>
-          </Modal>
+          <SocialAuth />
           {this.renderUser()}
           <button
             onClick={this.toggleMenu}
@@ -144,6 +107,7 @@ export const mapStateToProps = ({ currentUser: { user, isAuth } }) => ({
 
 export const mapDispatchToProps = dispatch => ({
   socialAuth: (token, user) => dispatch(socialAuth(token, user)),
+  handleShowAndHide: show => dispatch(handleShowAndHide(show)),
 });
 
 export default connect(

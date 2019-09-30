@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from "react-redux";
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import { Header, mapStateToProps } from '../../components/Header/Header';
 import initialState from '../../store/initialState';
 
@@ -14,14 +17,25 @@ const props = {
     user: {
       picture: 'http://picture.jpg'
     }
-  }
+  },
+  handleShowAndHide: jest.fn()
 };
+
+const mockStore = configureMockStore([thunk]);
+
 describe('Header.jsx', () => {
+  let store;
   beforeEach(() => {
+    const socialAuth = { show: false }
+    store = mockStore({
+      ...initialState, socialAuth
+    });
     wrapper = mount(
-      <Router>
-        <Header {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <Header {...props} />
+        </Router>
+      </Provider>
     );
   });
   test('should render Header.jx', () => {
@@ -37,22 +51,17 @@ describe('Header.jsx', () => {
   test('should render Header.jx with login user', () => {
     const newProps = { ...props, isAuth: true };
     wrapper = mount(
-      <Router>
-        <Header {...newProps} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <Header {...newProps} />
+        </Router>
+      </Provider>
     );
     const component = wrapper.find('Header');
     expect(component.props().isAuth).toBeTruthy();
   });
 
   describe('when clicking on `menu` button', () => {
-    beforeEach(() => {
-      wrapper = mount(
-        <Router>
-          <Header {...props} />
-        </Router>,
-      );
-    });
     test('should toggle `menu` state', () => {
       wrapper.find('button.navbar-toggler').simulate('click');
       const component = wrapper.find('Header');
@@ -60,35 +69,17 @@ describe('Header.jsx', () => {
     });
   });
 
-  describe('when click on `login` button', () => {
+  describe('when click on `login/signup` button', () => {
     test('should show the Modal', () => {
       wrapper.find('button.nav-link.login-btn').simulate('click');
-      const component = wrapper.find('Header');
-      expect(component.state().showModal).toBeTruthy();
+      expect(props.handleShowAndHide).toHaveBeenCalledWith(true);
     })
 
-    test('should hide the Modal', () => {
-      const component = wrapper.find('Header');
-      const instance = component.instance();
-      instance.hideModal();
-    })
-  })
-
-  describe('when click on `login with google/github` button', () => {
-
-    beforeEach(() => {
-      delete window.location;
-      window.location = { replace: jest.fn() };
-    });
-    test('should hit the login with google endpoint', () => {
-      wrapper.find('button.social-login-google').simulate('click');
-      expect(window.location.replace).toHaveBeenCalled();
+    test('should show the Modal', () => {
+      wrapper.find('button.nav-link.signup-btn').simulate('click');
+      expect(props.handleShowAndHide).toHaveBeenCalledWith(true);
     })
 
-    test('should hit the login with github endpoint', () => {
-      wrapper.find('button.social-login-github').simulate('click');
-      expect(window.location.replace).toHaveBeenCalled();
-    })
   })
 
   describe('reducers', () => {
