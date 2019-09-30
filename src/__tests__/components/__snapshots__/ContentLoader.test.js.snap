@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentLoader should render \`ContentLoader\` 1`] = `ReactWrapper {}`;

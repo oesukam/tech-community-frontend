@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeAgo should return the date in \`time ago\` format 1`] = `ReactWrapper {}`;

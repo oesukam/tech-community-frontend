@@ -3,6 +3,8 @@ import './Home.scss';
 import Layout from '../../containers/Layout/Layout';
 import Post from '../../components/Post/Post';
 
+import Feed from '../../components/Feed/Feed';
+
 export class Home extends Component {
   render() {
     const { match } = this.props;
@@ -11,10 +13,8 @@ export class Home extends Component {
       <Layout match={match}>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-12" title="hello the tooltip">
-              Home
-            </div>
             <Post />
+            <Feed />
           </div>
         </div>
       </Layout>
