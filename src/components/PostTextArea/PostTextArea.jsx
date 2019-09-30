@@ -21,7 +21,13 @@ export class PostTextArea extends Component {
   componentDidUpdate = prevProps => {
     const { tick } = this.props;
     if (prevProps.tick !== tick)
-      this.setState({ value: '', rows: 3, showEmojiPicker: false });
+      this.setState({
+        value: '',
+        rows: 3,
+        showEmojiPicker: false,
+        imageUrl: '',
+        image: {},
+      });
   };
 
   componentDidMount() {
