@@ -108,6 +108,11 @@
         }
       }
 
+      .liked{
+        color: $primary;
+        cursor: pointer;
+      }
+
       .share {
         display: flex;
         justify-content: center;

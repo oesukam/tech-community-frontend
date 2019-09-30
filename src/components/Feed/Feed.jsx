@@ -7,6 +7,7 @@ import { getFeed } from '../../actions/feedActions';
 import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
+import Like from '../../components/Like/Like';
 
 export class Feed extends Component {
   constructor(props) {
@@ -43,6 +44,8 @@ export class Feed extends Component {
                 description,
                 likesCount,
                 createdAt,
+                liked,
+                slug,
               },
               index,
             ) => (
@@ -76,10 +79,7 @@ export class Feed extends Component {
 
                 <div className="bottom">
                   <div className="left">
-                    <div className="action">
-                      <i className="fas fa-thumbs-up" />
-                      <span className="count">{likesCount}</span>
-                    </div>
+                    <Like {...{ slug, likesCount, liked }} />
 
                     <div className="action">
                       <i className="far fa-comment-alt"></i>

@@ -1,6 +1,7 @@
 @import '../../styles/colors';
 
 #text-area-post {
+  z-index: 2;
   width: 100%;
   display: flex;
   flex-direction: column;
