@@ -1,0 +1,84 @@
+@import '../../styles/colors';
+
+#text-area-post {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  background-color: $secondary;
+
+  ::-webkit-input-placeholder {
+    color: $surface;
+  }
+  ::-moz-placeholder {
+    color: $surface;
+  }
+  :-ms-input-placeholder {
+    color: $surface;
+  }
+  :-moz-placeholder {
+    color: $surface;
+  }
+
+  .text-area-post {
+    width: 100%;
+    min-width: 400px;
+    max-width: 100%;
+    padding: 20px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: $surface;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0rem 1rem 1.2rem 1rem;
+    position: 'relative';
+    i {
+      color: $surface;
+      margin: 0 0.5em;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+    span {
+      color: $surface;
+      margin: 0 0.5em;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+  }
+
+  .post-action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .number-character {
+      font-size: 0.8em;
+      margin-right: 1rem;
+    }
+  }
+
+  #emoji {
+    width: 0px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
+
+  .img-preview {
+    height: 25px;
+    width: 30px;
+    margin: 0 0.5em;
+    vertical-align: sub;
+  }
+}

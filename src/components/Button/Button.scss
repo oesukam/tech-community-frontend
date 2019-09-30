@@ -79,3 +79,18 @@ $duration: 1.4s;
       center/15000%;
   }
 }
+
+.button-disabled {
+  background-color: #8c8c8c;
+  outline: none;
+  &:hover {
+    cursor: not-allowed !important;
+    background: #8c8c8c radial-gradient(circle, transparent 1%, #8c8c8c 1%)
+      center/15000%;
+  }
+  .text {
+    &:hover {
+      cursor: not-allowed !important;
+    }
+  }
+}
