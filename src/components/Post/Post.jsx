@@ -32,11 +32,11 @@ Post.defaultProps = {
  * @returns {object} props
  */
 export const mapStateToProps = ({ posts }) => {
-  const { loading, error, post } = posts;
+  const { loading, error, tick } = posts;
   return {
     loading,
     error,
-    tick: !!post,
+    tick,
   };
 };
 
