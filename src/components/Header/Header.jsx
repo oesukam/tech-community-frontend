@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import queryString from 'query-string';
 import SocialAuth from '../Login/socialAuth';
 import socialAuth, { handleShowAndHide } from '../../actions/socialAuth';
+import defaultAvatar from '../../assets/images/person.png';
 import './Header.scss';
 
 export class Header extends Component {
@@ -52,7 +53,12 @@ export class Header extends Component {
             <i className="fas fa-envelope" alt="User avatar" />
           </div>
           <div className="user-info__avatar" alt="User avatar">
-            {user.user && <img src={user.user.picture} alt="User avatar" />}
+            {
+              <img
+                src={user.user ? user.user.picture : defaultAvatar}
+                alt="User avatar"
+              />
+            }
           </div>
         </div>
       );

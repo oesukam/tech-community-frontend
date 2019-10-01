@@ -4,6 +4,7 @@ import Modal from '../Modal/Modal';
 import { handleShowAndHide } from '../../actions/socialAuth';
 import google from '../../assets/images/google.png';
 import github from '../../assets/images/github.png';
+import './socialAuth.scss';
 
 class SocialAuth extends Component {
   state = {};
