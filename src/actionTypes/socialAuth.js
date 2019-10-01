@@ -1,0 +1,2 @@
+export const SHOW_SOCIAL_AUTH = 'SHOW_SOCIAL_AUTH';
+export const HIDE_SOCIAL_AUTH = 'HIDE_SOCIAL_AUTH';
