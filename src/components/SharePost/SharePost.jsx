@@ -8,14 +8,22 @@ import PropTypes from 'prop-types';
 
 import { FRONTEND_BASE_URL } from '../../constants';
 
+import share from '../../actions/sharePostAction';
+
 import {
   FacebookShareButton,
   TwitterShareButton,
-  LinkedinShareButton,
-  EmailShareButton,
+  // LinkedinShareButton,
+  // EmailShareButton,
 } from 'react-share';
 
-class SharePost extends Component {
+export class SharePost extends Component {
+  handleClick = (postSlug, platform) => {
+    const { share, handleClose } = this.props;
+    share({ postSlug, platform });
+    handleClose();
+  };
+
   render() {
     const { show, handleClose, postSlug } = this.props;
     const POST_URL = `${FRONTEND_BASE_URL}/post/${postSlug}`;
@@ -23,7 +31,11 @@ class SharePost extends Component {
     return (
       <Modal show={show} handleClose={handleClose}>
         <div className="share-post">
-          <div className="social_share" id="twitter">
+          <div
+            className="social_share"
+            id="twitter"
+            onClick={() => this.handleClick(postSlug, 'twitter')}
+          >
             <TwitterShareButton url={POST_URL}>
               <img
                 src={twitter_logo}
@@ -34,7 +46,11 @@ class SharePost extends Component {
             </TwitterShareButton>
           </div>
 
-          <div className="social_share" id="facebook">
+          <div
+            className="social_share"
+            id="facebook"
+            onClick={() => this.handleClick(postSlug, 'facebook')}
+          >
             <FacebookShareButton url={POST_URL}>
               <img
                 src={facebook_logo}
@@ -45,7 +61,7 @@ class SharePost extends Component {
             </FacebookShareButton>
           </div>
 
-          <div className="social_share" id="facebook">
+          {/* <div className="social_share" id="facebook">
             <LinkedinShareButton url={POST_URL}>
               <img
                 src={facebook_logo}
@@ -65,7 +81,7 @@ class SharePost extends Component {
               />
               <p className="social_name">SHARE ON EMAIL</p>
             </EmailShareButton>
-          </div>
+          </div> */}
         </div>
       </Modal>
     );
@@ -74,14 +90,17 @@ class SharePost extends Component {
 
 // const mapStateToProps = state => ({});
 
-// const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  share: data => dispatch(share(data)),
+});
 
 SharePost.propTypes = {
   show: PropTypes.bool,
+  postSlug: PropTypes.string,
+  handleClose: PropTypes.func.isRequired,
 };
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(SharePost);
-export default SharePost;
+export default connect(
+  null,
+  mapDispatchToProps,
+)(SharePost);

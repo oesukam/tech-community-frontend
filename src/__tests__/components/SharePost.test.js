@@ -1,15 +1,32 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import SharePost from '../../components/SharePost/SharePost';
-import renderer from 'react-test-renderer';
+import { shallow, mount } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import SharePost, {
+  SharePost as SharePostComponent,
+} from '../../components/SharePost/SharePost';
 
 describe(`SharePost`, () => {
   const props = {
     show: true,
-    handleClose: null,
+    handleClose: jest.fn(),
+    share: jest.fn(),
   };
   it('should render `SharePost`', () => {
-    const tree = renderer.create(<SharePost {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const mockStore = configureMockStore([thunk]);
+    const store = mockStore({});
+    const wrapper = shallow(
+      <Provider store={store}>
+        <SharePost {...props} />
+      </Provider>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should close SharePost modal when handleClose is hit', () => {
+    const wrapper = mount(<SharePostComponent {...props} />);
+    wrapper.find('#twitter').simulate('click');
+    expect(wrapper.props().handleClose).toHaveBeenCalled();
   });
 });
