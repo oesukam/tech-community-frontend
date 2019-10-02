@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SharePost should render \`SharePost\` 1`] = `
+<div
+  className="modal"
+  style={
+    Object {
+      "display": "flex",
+    }
+  }
+>
+  <div
+    className="dismiss"
+    onClick={null}
+  >
+    <span>
+      ×
+    </span>
+  </div>
+  <div
+    className="modal-dismiss"
+    onClick={null}
+  />
+  <section
+    className="modal-main"
+  >
+    <div
+      className="share-post"
+    >
+      <div
+        className="social_share"
+        id="twitter"
+      >
+        <div
+          aria-label="twitter"
+          className="SocialMediaShareButton SocialMediaShareButton--twitter"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          style={Object {}}
+          tabIndex="0"
+        >
+          <img
+            alt="twitter_logo"
+            className="social_logo"
+            src="twitter_logo.png"
+          />
+          <p
+            className="social_name"
+          >
+            SHARE ON TWITTER
+          </p>
+        </div>
+      </div>
+      <div
+        className="social_share"
+        id="facebook"
+      >
+        <div
+          aria-label="facebook"
+          className="SocialMediaShareButton SocialMediaShareButton--facebook"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          style={Object {}}
+          tabIndex="0"
+        >
+          <img
+            alt="facebook_logo"
+            className="social_logo"
+            src="facebook_logo.png"
+          />
+          <p
+            className="social_name"
+          >
+            SHARE ON FACEBOOK
+          </p>
+        </div>
+      </div>
+      <div
+        className="social_share"
+        id="facebook"
+      >
+        <div
+          aria-label="linkedin"
+          className="SocialMediaShareButton SocialMediaShareButton--linkedin"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          style={Object {}}
+          tabIndex="0"
+        >
+          <img
+            alt="facebook_logo"
+            className="social_logo"
+            src="facebook_logo.png"
+          />
+          <p
+            className="social_name"
+          >
+            SHARE ON LINKED IN
+          </p>
+        </div>
+      </div>
+      <div
+        className="social_share"
+        id="facebook"
+      >
+        <div
+          aria-label="email"
+          className="SocialMediaShareButton SocialMediaShareButton--email"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          style={Object {}}
+          tabIndex="0"
+        >
+          <img
+            alt="facebook_logo"
+            className="social_logo"
+            src="facebook_logo.png"
+          />
+          <p
+            className="social_name"
+          >
+            SHARE ON EMAIL
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;
