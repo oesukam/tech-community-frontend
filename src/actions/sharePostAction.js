@@ -20,7 +20,7 @@ export const sharePostError = () => ({
  * @param {object} value
  * @return {object} action
  */
-export const setSharePostContent = (payload) => ({
+export const setSharePostContent = payload => ({
   type: types.SET_SHARE_POST_CONTENT,
   payload,
 });
@@ -41,7 +41,7 @@ export const handleShowSharePost = () => ({
   type: types.CLEAR_SHARE_POST_CONTENT,
 });
 
-export const sharePost = ({ url, platform }) => async (dispatch) => {
+export const sharePost = ({ url, platform }) => async dispatch => {
   dispatch(sharePostStarted());
   try {
     await server.post(`${url}/share/${platform}`);
