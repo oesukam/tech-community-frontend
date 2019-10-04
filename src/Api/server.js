@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const token = localStorage.getItem('token') || null;
+const token = localStorage.getItem('token') || undefined;
 const server = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
   headers: {
-    Authorization: `Bearer ${token}`,
+    Authorization: token && `Bearer ${token}`,
     'Content-Type': 'application/json',
   },
 });

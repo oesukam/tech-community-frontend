@@ -1,0 +1,23 @@
+@import '../../styles/colors';
+
+.action {
+  color: #888;
+
+  i {
+    font-size: 0.85em;
+  }
+  .count {
+    font-size: 0.95em;
+    margin-left: 10px;
+  }
+
+  &:hover {
+    color: $primary;
+    cursor: pointer;
+  }
+}
+
+.liked {
+  color: $primary;
+  cursor: pointer;
+}

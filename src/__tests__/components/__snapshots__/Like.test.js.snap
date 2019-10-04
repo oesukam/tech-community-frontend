@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Like Like.jsx should render the component 1`] = `ShallowWrapper {}`;
+
+exports[`Like Login actions Should call the \`like\` action with error 1`] = `
+Array [
+  Object {
+    "payload": true,
+    "type": "TOOGLE_LOADING",
+  },
+  Object {
+    "payload": false,
+    "type": "TOOGLE_LOADING",
+  },
+]
+`;
+
+exports[`Like Login actions Should call the \`like\` action with success 1`] = `
+Array [
+  Object {
+    "payload": true,
+    "type": "TOOGLE_LOADING",
+  },
+  Object {
+    "payload": false,
+    "type": "TOOGLE_LOADING",
+  },
+]
+`;
+
+exports[`Like Login actions Should call the \`unLike\` action with error 1`] = `
+Array [
+  Object {
+    "payload": true,
+    "type": "TOOGLE_LOADING",
+  },
+  Object {
+    "payload": false,
+    "type": "TOOGLE_LOADING",
+  },
+]
+`;
+
+exports[`Like Login actions Should call the \`unLike\` action with success 1`] = `
+Array [
+  Object {
+    "payload": true,
+    "type": "TOOGLE_LOADING",
+  },
+  Object {
+    "payload": false,
+    "type": "TOOGLE_LOADING",
+  },
+]
+`;
