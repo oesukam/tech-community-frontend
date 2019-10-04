@@ -13,15 +13,23 @@ describe(`SharePost`, () => {
     handleClose: jest.fn(),
     share: jest.fn(),
   };
+
+  const mockStore = configureMockStore([thunk]);
+  const store = mockStore({});
+
   it('should render `SharePost`', () => {
-    const mockStore = configureMockStore([thunk]);
-    const store = mockStore({});
     const wrapper = shallow(
       <Provider store={store}>
         <SharePost {...props} />
       </Provider>,
     );
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should share to a platform', () => {
+    const wrapper = mount(<SharePostComponent {...props} />);
+    wrapper.find('#twitter').simulate('click');
+    expect(wrapper.props().share).toHaveBeenCalled();
   });
 
   it('should close SharePost modal when handleClose is hit', () => {

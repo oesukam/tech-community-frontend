@@ -4,7 +4,7 @@ import {
   SHARE_POST_ERROR,
 } from '../actionTypes/sharePostTypes';
 
-const sharePostReducer = (state = {}, { type, payload }) => {
+const sharePostReducer = (state = {}, { type }) => {
   switch (type) {
     case SHARE_POST_STARTED:
       return {
@@ -14,12 +14,10 @@ const sharePostReducer = (state = {}, { type, payload }) => {
     case SHARE_POST_SUCCESS:
       return {
         ...state,
-        response: payload.res,
       };
     case SHARE_POST_ERROR:
       return {
         ...state,
-        error: payload.error,
       };
     default:
       return state;

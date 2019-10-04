@@ -12,13 +12,13 @@ import Like from '../../components/Like/Like';
 import SharePost from '../SharePost/SharePost';
 
 export class Feed extends Component {
-  state = {
-    show: false,
-    postSlug: null,
-  };
-
   constructor(props) {
     super(props);
+
+    this.state = {
+      show: false,
+      postSlug: '',
+    };
 
     window.onscroll = debounce(() => {
       onScrollToBottom(() => this.handleInfiniteScroll());
