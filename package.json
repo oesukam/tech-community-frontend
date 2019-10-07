@@ -7,7 +7,7 @@
     "build": "node scripts/build.js && echo '/* /index.html 200' > ./build/_redirects",
     "test": "node scripts/test.js",
     "serve": "npm run build && serve -s build/",
-    "test-coveralls": "jest --detectOpenHandles --coverage  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test-coveralls": "jest -u --detectOpenHandles --coverage  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "@babel/core": "7.4.3",
