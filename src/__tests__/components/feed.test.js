@@ -29,8 +29,6 @@ describe('Feed', () => {
     limit: 2,
   };
 
-  const mockStore = configureMockStore([thunk]);
-
   describe('Feed.jsx', () => {
     beforeEach(() => {
       store = mockStore({ ...initialState });
