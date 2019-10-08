@@ -8,6 +8,7 @@ import singlePost from './singlePost';
 import postComment from './postComment';
 import search from './search';
 import postComments from './postComments';
+import userProfile from './userProfile';
 
 const reducers = combineReducers({
   currentUser,
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   postComment,
   search,
   postComments,
+  userProfile,
 });
 
 export default reducers;
