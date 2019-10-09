@@ -123,7 +123,7 @@ export class PostTextArea extends Component {
   render() {
     const { showEmojiPicker, value, rows, imageUrl, disabled } = this.state;
 
-    const { error, loading, tick, maxChar } = this.props;
+    const { loading, tick, maxChar } = this.props;
     return (
       <div id="text-area-post">
         <textarea
@@ -198,7 +198,6 @@ export class PostTextArea extends Component {
             </span>
             <Button
               style={buttonStyle}
-              error={error}
               loading={loading}
               text="POST"
               disabled={disabled}
@@ -213,11 +212,11 @@ export class PostTextArea extends Component {
 }
 
 const buttonStyle = {
-  paddingTop: '3px',
-  paddingBottom: '3px',
+  paddingTop: '5px',
+  paddingBottom: '5px',
   paddingLeft: '10px',
   paddingRight: '10px',
-  fontSize: '0.6em',
+  fontSize: '10px',
 };
 
 PostTextArea.propTypes = {
@@ -226,7 +225,6 @@ PostTextArea.propTypes = {
   minChar: PropTypes.number,
   maxChar: PropTypes.number,
   loading: PropTypes.bool,
-  error: PropTypes.any,
   tick: PropTypes.bool,
   post: PropTypes.func.isRequired,
 };
@@ -237,7 +235,6 @@ PostTextArea.defaultProps = {
   minChar: 50,
   maxChar: 500,
   loading: false,
-  error: false,
   tick: false,
 };
 

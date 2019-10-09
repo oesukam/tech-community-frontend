@@ -16,7 +16,7 @@ class Button extends Component {
                 ? 'reactive-button button-disabled'
                 : 'reactive-button'
             }
-            style={style}
+            style={{ ...style, boxShadow: disabled && 'none' }}
             onClick={!disabled ? onClick : undefined}
           >
             <svg
