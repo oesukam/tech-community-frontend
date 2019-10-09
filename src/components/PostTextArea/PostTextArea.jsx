@@ -53,13 +53,16 @@ export class PostTextArea extends Component {
   }
 
   onChange = e => {
+    let { value } = e.target;
+    value = String(value).replace('  ', ' ');
+
     const textareaLineHeight = 24;
     const { minRows, maxRows } = this.props;
     const { minChar, maxChar } = this.props;
-    if (maxChar && maxChar <= e.target.value.length - 1) return;
+    if (maxChar && maxChar <= value.length - 1) return;
 
-    if (e.target.value.length >= minChar) this.setState({ disabled: false });
-    if (e.target.value.length < minChar) this.setState({ disabled: true });
+    if (value.length >= minChar) this.setState({ disabled: false });
+    if (value.length < minChar) this.setState({ disabled: true });
 
     const previousRows = e.target.rows;
     e.target.rows = minRows; // reset number of rows in textarea
@@ -75,11 +78,11 @@ export class PostTextArea extends Component {
     }
 
     this.setState({
-      value: e.target.value,
+      value: value,
       rows: currentRows < maxRows ? currentRows : maxRows,
     });
 
-    if (this.props.onChange) this.props.onChange(e.target.value);
+    if (this.props.onChange) this.props.onChange(value);
   };
 
   onImageChange = e => {
