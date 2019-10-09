@@ -6,13 +6,17 @@ import Feed from '../../components/Feed/Feed';
 
 export class Home extends Component {
   render() {
-    const { match, location } = this.props;
+    const {
+      match,
+      location,
+      history: { push },
+    } = this.props;
     return (
       <Layout match={match} location={location}>
         <div className="container-fluid">
           <div className="row">
             <Post />
-            <Feed />
+            <Feed push={push} />
           </div>
         </div>
       </Layout>

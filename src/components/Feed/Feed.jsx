@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 import './Feed.scss';
 import TimeAgo from '../Helpers/TimeAgo';
@@ -30,7 +31,7 @@ export class Feed extends Component {
   }
 
   render() {
-    const { feed = [], loading } = this.props;
+    const { feed = [], loading, push } = this.props;
 
     return (
       <React.Fragment>
@@ -49,7 +50,11 @@ export class Feed extends Component {
               },
               index,
             ) => (
-              <div className="post" key={index}>
+              <div
+                className="post"
+                key={index}
+                onClick={() => push(`/post/${slug}`)}
+              >
                 <div className="header">
                   <div className="right">
                     <img
@@ -59,7 +64,12 @@ export class Feed extends Component {
                     />
 
                     <div className="info">
-                      <span className="name">{username}</span>
+                      <span
+                        className="name"
+                        onClick={() => push(`/profile/${username}`)}
+                      >
+                        {username}
+                      </span>
                       <span className="label">{userType}</span>
                     </div>
                   </div>
