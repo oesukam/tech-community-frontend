@@ -9,14 +9,29 @@ import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
 import Like from '../../components/Like/Like';
 
+import SharePost from '../SharePost/SharePost';
+
 export class Feed extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      show: false,
+      postSlug: '',
+    };
 
     window.onscroll = debounce(() => {
       onScrollToBottom(() => this.handleInfiniteScroll());
     });
   }
+
+  handleOpenSharePost = postSlug => {
+    this.setState({ show: true, postSlug });
+  };
+
+  handleCloseSharePost = () => {
+    this.setState({ show: false });
+  };
 
   componentDidMount() {
     const { onGetFeed, limit } = this.props;
@@ -31,9 +46,17 @@ export class Feed extends Component {
 
   render() {
     const { feed = [], loading } = this.props;
+    const { show, postSlug } = this.state;
+    const { handleCloseSharePost } = this;
 
     return (
       <React.Fragment>
+        <SharePost
+          show={show}
+          handleClose={handleCloseSharePost}
+          postSlug={postSlug}
+        />
+
         <div className="feed">
           {feed.map(
             (
@@ -87,7 +110,10 @@ export class Feed extends Component {
                     </div>
                   </div>
 
-                  <div className="action share">
+                  <div
+                    className="action share"
+                    onClick={() => this.handleOpenSharePost(slug)}
+                  >
                     <i className="fas fa-share-alt"></i>
                   </div>
                 </div>

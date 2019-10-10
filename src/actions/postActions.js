@@ -4,7 +4,7 @@ import {
   POST_ERROR,
   POST_STARTED,
   POST_SUCCESS,
-  RESTORE_TICK
+  RESTORE_TICK,
 } from '../actionTypes/postTypes';
 
 const {
@@ -17,7 +17,7 @@ const {
  * when the process starts
  * @return {object} action
  */
-const postStarted = () => ({ type: POST_STARTED })
+const postStarted = () => ({ type: POST_STARTED });
 
 /**
  * Triggers an action
@@ -25,10 +25,10 @@ const postStarted = () => ({ type: POST_STARTED })
  * @param {object} post
  * @return {object} action
  */
-const postSuccess = (post) => ({
+const postSuccess = post => ({
   type: POST_SUCCESS,
-  payload: post
-})
+  payload: post,
+});
 
 /**
  * Triggers an action
@@ -36,11 +36,10 @@ const postSuccess = (post) => ({
  * @param {object} error
  * @return {object} action
  */
-const postError = (error) => ({
+const postError = error => ({
   type: POST_ERROR,
-  payload: error
-})
-
+  payload: error,
+});
 
 /**
  * Triggers an action
@@ -48,8 +47,7 @@ const postError = (error) => ({
  * to restore the tick
  * @return {object} action
  */
-const restoreTick = () => ({ type: RESTORE_TICK })
-
+const restoreTick = () => ({ type: RESTORE_TICK });
 
 const uploadImage = async file => {
   const formData = new FormData();
@@ -64,27 +62,25 @@ const uploadImage = async file => {
         'Content-Type': 'application/x-ww-form-urlencoded',
       },
       data: formData,
-    })
-    return res.data.secure_url
-
+    });
+    return res.data.secure_url;
   } catch (error) {
     throw error;
   }
 };
-
 
 /**
  * post
  * @param {*} { username, email, password }
  * @return {object} response
  */
-const post = (data) => async dispatch => {
+const post = data => async dispatch => {
   dispatch(postStarted());
 
   try {
     const payload = {
       description: data.value,
-      title: 'this is a wrong title'
+      title: 'this is a wrong title',
     };
 
     if (data.image) payload.image = await uploadImage(data.image);
@@ -112,4 +108,3 @@ const post = (data) => async dispatch => {
 };
 
 export default post;
-

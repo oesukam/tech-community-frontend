@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SharePost should render \`SharePost\` 1`] = `ShallowWrapper {}`;
