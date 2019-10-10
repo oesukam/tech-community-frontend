@@ -96,6 +96,14 @@
   }
 }
 
+.header-popup-dismiss {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 @mixin notif-counter {
   .counter {
     position: absolute;
@@ -155,6 +163,7 @@
     -o-border-radius: 50%;
     box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.3);
     img {
+      cursor: pointer;
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -184,5 +193,43 @@
         }
       }
     }
+  }
+}
+
+.header-popup {
+  padding: 0 1%;
+  margin-top: 1px;
+  position: absolute;
+  right: 5px;
+  background: white;
+  color: #5e6c84;
+  width: 15%;
+  display: none;
+  p {
+    margin-bottom: auto;
+    padding: 10px 10px;
+  }
+  &__username {
+    margin-top: 2%;
+    padding-bottom: 2%;
+    margin-left: 4%;
+    text-align: center;
+  }
+  &__logout {
+    cursor: pointer;
+    border-top: 1px solid #eaeaea;
+    padding-top: 2%;
+    &:hover {
+      background-color: #f9f8f8;
+    }
+  }
+  &__profile {
+    cursor: pointer;
+    &:hover {
+      background-color: #f9f8f8;
+    }
+  }
+  &__profile {
+    border-top: 1px solid #eaeaea;
   }
 }

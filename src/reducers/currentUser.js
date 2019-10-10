@@ -13,6 +13,22 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         user: payload,
       };
+    case types.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isAuth: null,
+        user: null,
+      };
+    case types.GET_USER_DETAILS:
+      return {
+        ...state,
+        details: payload,
+      };
+    case types.GET_USER_DETAILS_ERROR:
+      return {
+        ...state,
+        error: payload,
+      };
     default:
       return state;
   }
