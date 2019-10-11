@@ -2,8 +2,6 @@ import * as types from '../actionTypes/currentUserTypes';
 import { SHOW_SOCIAL_AUTH, HIDE_SOCIAL_AUTH } from '../actionTypes/socialAuth';
 import server from '../Api/server';
 
-const { REACT_APP_BACKEND_URL } = process.env;
-
 export const setIsAuth = () => ({
   type: types.SET_IS_AUTH,
   payload: true,

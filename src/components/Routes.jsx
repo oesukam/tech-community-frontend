@@ -10,19 +10,19 @@ import { PropTypes } from 'prop-types';
 
 import Home from '../pages/Home/Home';
 import NotFound from '../pages/NotFound/NotFound';
+import Profile from './Profile/Profile';
 
 export const Routes = ({ isAuth }) => (
   <Router>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route
-        exact
+      <exact
         path="/protected"
         render={props =>
           isAuth ? <Home {...props} /> : <Redirect to="/login" />
         }
       />
-
+      <Route exact path="/profile" component={Profile} />
       <Route exact path="*" component={NotFound} />
     </Switch>
   </Router>

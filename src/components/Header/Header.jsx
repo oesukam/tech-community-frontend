@@ -42,6 +42,7 @@ export class Header extends Component {
     window.addEventListener('click', e => {
       if (
         e.target.parentNode.className !== 'user-info__avatar' &&
+        !e.target.parentNode.className.includes('header-popup') &&
         this.state.dropdown
       ) {
         this.setState({ dropdown: false });
@@ -72,7 +73,7 @@ export class Header extends Component {
       user,
       userDetails,
       handleShowAndHide,
-      match: { path },
+      // match: { path },
     } = this.props;
     const { menu, dropdown } = this.state;
     const currentUser = user.user ? user.user : userDetails;
@@ -100,7 +101,12 @@ export class Header extends Component {
               {currentUser && (
                 <p className="header-popup__username">{currentUser.username}</p>
               )}
-              <p className="header-popup__profile">Profile</p>
+              <p
+                className="header-popup__profile"
+                onClick={() => this.props.history.push('/profile')}
+              >
+                Profile
+              </p>
               <p onClick={this.logout} className="header-popup__logout">
                 Logout
               </p>

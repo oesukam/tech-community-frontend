@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
 import './Layout.scss';
 
-const Layout = ({ children, match, location }) => (
+const Layout = ({ children, match, location, history }) => (
   <React.Fragment>
-    <Header match={match} location={location} />
+    <Header match={match} location={location} history={history} />
     <div className="main-content">{children}</div>
   </React.Fragment>
 );

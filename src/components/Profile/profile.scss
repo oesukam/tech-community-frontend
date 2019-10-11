@@ -1,0 +1,183 @@
+.profile {
+  background-color: #f4f6f9;
+  &__details {
+    margin: 3% 10px;
+    padding-left: 10px;
+    background-color: white;
+    .belt {
+      h3 {
+        padding-left: 2%;
+        padding-top: 15px;
+      }
+    }
+  }
+
+  &__social {
+    margin: 3% 10px;
+    padding-left: 10px;
+    background-color: white;
+    .belt {
+      h5 {
+        padding-left: 2%;
+        padding-top: 15px;
+      }
+    }
+    &--facebook {
+      span {
+        font-size: 12px;
+        color: gray;
+        font-weight: lighter;
+      }
+    }
+
+    &--linkedIn {
+      span {
+        font-size: 12px;
+        color: gray;
+        font-weight: lighter;
+      }
+    }
+
+    &--twitter {
+      span {
+        font-size: 12px;
+        color: gray;
+        font-weight: lighter;
+      }
+    }
+
+    &--github {
+      span {
+        font-size: 12px;
+        color: gray;
+        font-weight: lighter;
+      }
+    }
+  }
+
+  &__location {
+    margin: 3% 10px;
+    padding-left: 10px;
+    background-color: white;
+    .belt {
+      h5 {
+        padding-left: 2%;
+        padding-top: 15px;
+      }
+    }
+
+    &--country {
+      span {
+        font-size: 12px;
+        color: gray;
+        font-weight: lighter;
+      }
+    }
+
+    &--city {
+      span {
+        font-size: 12px;
+        color: gray;
+        font-weight: lighter;
+      }
+    }
+
+    &--province {
+      span {
+        font-size: 12px;
+        color: gray;
+        font-weight: lighter;
+      }
+    }
+  }
+}
+
+.belt {
+  border-left: solid 5px #56b7fd;
+}
+
+.names {
+  &__first {
+    span {
+      font-size: 12px;
+      color: gray;
+      font-weight: lighter;
+    }
+  }
+  &__last {
+    span {
+      color: gray;
+      font-size: 12px;
+      font-weight: lighter;
+    }
+  }
+
+  &__middle {
+    span {
+      font-size: 12px;
+      color: gray;
+      font-weight: lighter;
+    }
+  }
+}
+
+.addresses {
+  &__email {
+    span {
+      font-size: 12px;
+      color: gray;
+      font-weight: lighter;
+    }
+  }
+  &__username {
+    span {
+      font-size: 12px;
+      color: gray;
+      font-weight: lighter;
+    }
+  }
+
+  &__website {
+    span {
+      font-size: 12px;
+      color: gray;
+      font-weight: lighter;
+    }
+    /* p a {
+      text-decoration: none;
+    } */
+  }
+}
+
+.title {
+  display: flex;
+  h3 {
+    width: 93%;
+  }
+
+  h5 {
+    width: 93%;
+  }
+
+  i {
+    margin-top: 2%;
+    width: 7%;
+  }
+}
+
+@media (max-width: 425px) {
+  .title {
+    display: flex;
+    h3 {
+      width: 90%;
+    }
+
+    h5 {
+      width: 90%;
+    }
+
+    i {
+      width: 10%;
+    }
+  }
+}
