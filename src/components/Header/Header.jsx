@@ -23,7 +23,11 @@ export class Header extends Component {
   };
 
   componentDidMount = () => {
-    const { location, _socialAuth: socialAuthAction, _getUserDetails } = this.props;
+    const {
+      location,
+      _socialAuth: socialAuthAction,
+      _getUserDetails,
+    } = this.props;
     const url = location.search;
     const userData = queryString.parse(url);
     const { token, user } = userData;
@@ -37,11 +41,12 @@ export class Header extends Component {
       _getUserDetails(username);
     }
 
-    window.addEventListener('click', (e) => {
+    window.addEventListener('click', e => {
       const { dropdown } = this.state;
       if (
-        e.target.parentNode.className !== 'user-info__avatar'
-        && dropdown
+        e.target.parentNode.className !== 'user-info__avatar' &&
+        !e.target.parentNode.className.includes('header-popup') &&
+        this.state.dropdown
       ) {
         this.setState({ dropdown: false });
       }
@@ -69,12 +74,7 @@ export class Header extends Component {
   };
 
   renderUser = () => {
-    const {
-      isAuth,
-      user,
-      userDetails,
-      _handleShowAndHide,
-    } = this.props;
+    const { isAuth, user, userDetails, _handleShowAndHide } = this.props;
     const { menu, dropdown } = this.state;
     const currentUser = user.user ? user.user : userDetails;
     if (isAuth) {
@@ -100,8 +100,13 @@ export class Header extends Component {
               {currentUser && (
                 <p className="header-popup__username">{currentUser.username}</p>
               )}
-              <p className="header-popup__profile">Profile</p>
-              <p role="presentation" onClick={this.logout} className="header-popup__logout">
+              <p
+                className="header-popup__profile"
+                onClick={() => this.props.history.push('/profile')}
+              >
+                Profile
+              </p>
+              <p onClick={this.logout} className="header-popup__logout">
                 Logout
               </p>
             </div>
@@ -113,7 +118,13 @@ export class Header extends Component {
       <div className={`collapse navbar-collapse ${menu ? 'show' : ''}`}>
         <ul className="navbar-nav mr-auto">
           <li className="nav-link">
-            <button type="button" onClick={() => _handleShowAndHide(true)} className="nav-link login-btn">LOGIN</button>
+            <button
+              type="button"
+              onClick={() => _handleShowAndHide(true)}
+              className="nav-link login-btn"
+            >
+              LOGIN
+            </button>
           </li>
         </ul>
       </div>
@@ -154,11 +165,11 @@ export const mapStateToProps = ({
   userDetails,
 });
 
-export const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = dispatch => ({
   _socialAuth: (token, user) => dispatch(socialAuth(token, user)),
-  _handleShowAndHide: (show) => dispatch(handleShowAndHide(show)),
+  _handleShowAndHide: show => dispatch(handleShowAndHide(show)),
   _logout: () => dispatch(setIsLoggedOut()),
-  _getUserDetails: (username) => dispatch(getUserDetails(username)),
+  _getUserDetails: username => dispatch(getUserDetails(username)),
 });
 
 Header.propTypes = {
