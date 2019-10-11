@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PostTextArea from '../PostTextArea/PostTextArea';
 import postCommentAction from '../../actions/postCommentAction';
 
-class PostComment extends Component {
+export class PostComment extends Component {
   state = {};
   render() {
     const { post, slug, loading, error, tick } = this.props;

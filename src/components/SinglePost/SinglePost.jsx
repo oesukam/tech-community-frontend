@@ -6,7 +6,7 @@ import PostComment from '../PostComment/PostComment';
 import fetchSinglePost from '../../actions/fetchSinglePostAction';
 import './SinglePost.scss';
 
-class SinglePost extends Component {
+export class SinglePost extends Component {
   state = {};
   componentDidMount() {
     const { onFetchSinglePost, slug } = this.props;

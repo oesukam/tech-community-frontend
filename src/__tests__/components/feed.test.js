@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import moxios from 'moxios';
@@ -23,6 +23,7 @@ describe('Feed', () => {
   let store;
   const props = {
     onGetFeed: jest.fn(),
+    push: jest.fn(),
     feed: [feedMocks],
     loading: false,
     limit: 2,
@@ -38,7 +39,7 @@ describe('Feed', () => {
           <Router>
             <Feed {...props} />
           </Router>
-,
+          ,
         </Provider>,
       );
 

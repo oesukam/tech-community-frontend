@@ -103,6 +103,7 @@ Post.propTypes = {
   createdAt: PropTypes.string.isRequired,
   liked: PropTypes.bool,
   slug: PropTypes.string.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 Post.defaultProps = {
