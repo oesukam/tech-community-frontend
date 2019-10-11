@@ -28,7 +28,7 @@ export class PostTextArea extends Component {
   emojiToggle = React.createRef();
 
   componentDidMount() {
-    window.addEventListener('click', (e) => {
+    window.addEventListener('click', e => {
       const {
         target: { id, parentNode },
       } = e;
@@ -49,7 +49,7 @@ export class PostTextArea extends Component {
     });
   }
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     const { tick } = this.props;
     if (prevProps.tick !== tick) {
       this.setState({
@@ -62,11 +62,9 @@ export class PostTextArea extends Component {
     }
   };
 
-  _onChange = (e) => {
+  _onChange = e => {
     const textareaLineHeight = 24;
-    const {
-      minRows, maxRows, minChar, maxChar, onChange,
-    } = this.props;
+    const { minRows, maxRows, minChar, maxChar, onChange } = this.props;
     if (maxChar && maxChar <= e.target.value.length - 1) return;
 
     if (e.target.value.length >= minChar) this.setState({ disabled: false });
@@ -93,7 +91,7 @@ export class PostTextArea extends Component {
     if (onChange) onChange(e.target.value);
   };
 
-  onImageChange = (e) => {
+  onImageChange = e => {
     this.setState({
       imageUrl: URL.createObjectURL(e.target.files[0]),
       image: e.target.files[0],
@@ -107,9 +105,12 @@ export class PostTextArea extends Component {
     });
   };
 
-  addEmoji = (emoji) => {
-    const { value } = this.state;
-    this.setState({ value: value + emoji.native });
+  addEmoji = emoji => {
+    const { minChar } = this.props;
+    const value = this.state.value + emoji.native;
+
+    this.setState({ value });
+    if (value.length >= minChar) this.setState({ disabled: false });
   };
 
   toogleOnClickEmojiPicker = () => {
@@ -127,9 +128,9 @@ export class PostTextArea extends Component {
 
   submitPost = () => {
     const { value, image = '' } = this.state;
-    const { post } = this.props;
+    const { post, slug, allowImagePicker } = this.props;
     if (value) {
-      post({ value, image });
+      allowImagePicker || slug ? post(slug, value) : post({ value, image });
     }
   };
 
@@ -144,7 +145,12 @@ export class PostTextArea extends Component {
     } = this.state;
 
     const {
-      error, loading, tick, maxChar,
+      error,
+      loading,
+      tick,
+      maxChar,
+      allowImagePicker,
+      placeholder,
     } = this.props;
     return (
       <div id="text-area-post">
@@ -153,7 +159,7 @@ export class PostTextArea extends Component {
           value={value}
           rows={rows}
           onChange={this._onChange}
-          placeholder="Write something ..."
+          placeholder={placeholder}
         />
 
         <input
@@ -177,7 +183,11 @@ export class PostTextArea extends Component {
         </Modal>
         {imageUrl ? (
           <div className="image">
-            <div role="presentation" className="remove-image" onClick={this.restoreImage}>
+            <div
+              role="presentation"
+              className="remove-image"
+              onClick={this.restoreImage}
+            >
               <span>&times;</span>
             </div>
             <img
@@ -197,11 +207,13 @@ export class PostTextArea extends Component {
               className="fas fa-smile"
               onClick={this.toogleOnClickEmojiPicker}
             />
-            <i
-              role="presentation"
-              className="fas fa-image"
-              onClick={() => this.imageInput.current.click()}
-            />
+            {allowImagePicker && (
+              <i
+                role="presentation"
+                className="fas fa-image"
+                onClick={() => this.imageInput.current.click()}
+              />
+            )}
 
             {showEmojiPicker && (
               <Picker
@@ -220,9 +232,7 @@ export class PostTextArea extends Component {
               className="number-character"
               style={{ color: disabled ? '#fff' : '#13c39a' }}
             >
-              {value.length}
-/
-              {maxChar}
+              {value.length}/{maxChar}
             </span>
             <Button
               style={buttonStyle}
@@ -245,6 +255,9 @@ PostTextArea.propTypes = {
   maxRows: PropTypes.number,
   minChar: PropTypes.number,
   maxChar: PropTypes.number,
+  slug: PropTypes.string,
+  allowImagePicker: PropTypes.bool,
+  placeholder: PropTypes.string,
   loading: PropTypes.bool,
   error: PropTypes.any,
   tick: PropTypes.bool,
@@ -257,6 +270,9 @@ PostTextArea.defaultProps = {
   maxRows: 15,
   minChar: 50,
   maxChar: 500,
+  slug: null,
+  allowImagePicker: true,
+  placeholder: 'Write something ...',
   loading: false,
   error: false,
   tick: false,

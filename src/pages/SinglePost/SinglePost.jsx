@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import './Home.scss';
 import Layout from '../../containers/Layout/Layout';
 import Post from '../../components/SinglePost/SinglePost';
-import Feed from '../../components/Feed/Feed';
 
 export class SinglePost extends Component {
   render() {
@@ -12,7 +11,6 @@ export class SinglePost extends Component {
         <div className="container-fluid">
           <div className="row">
             <Post slug={match.params.slug} />
-            {/* <Feed /> */}
           </div>
         </div>
       </Layout>

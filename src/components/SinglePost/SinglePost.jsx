@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import ContentLoader from '../Helpers/ContentLoader';
 import Post from '../PostComponent/Post';
-import PostTextArea from '../PostTextArea/PostTextArea';
+import PostComment from '../PostComment/PostComment';
 import fetchSinglePost from '../../actions/fetchSinglePostAction';
 import './SinglePost.scss';
 
@@ -15,12 +15,17 @@ class SinglePost extends Component {
   render() {
     const { post } = this.props;
     return (
-      <Fragment>
-        <div className="single-post">
-          {!post ? <ContentLoader /> : <Post {...post} />}
-        </div>
-        <PostTextArea />
-      </Fragment>
+      <div className="single-post">
+        {!post ? (
+          <ContentLoader />
+        ) : (
+          <Fragment>
+            <Post {...post} />
+            <hr />
+            <PostComment slug={post.slug} allowImagePicker={false} />
+          </Fragment>
+        )}
+      </div>
     );
   }
 }
