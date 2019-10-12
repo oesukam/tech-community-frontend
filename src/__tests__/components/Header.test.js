@@ -18,7 +18,8 @@ const props = {
       picture: 'http://picture.jpg',
     },
   },
-  handleShowAndHide: jest.fn(),
+  _handleShowAndHide: jest.fn(),
+  show: true,
 };
 
 const mockStore = configureMockStore([thunk]);
@@ -71,8 +72,12 @@ describe('Header.jsx', () => {
 
   describe('when click on `login/signup` button', () => {
     test('should show the Modal', () => {
+      wrapper.find('Header').setState({
+        menu: true,
+      });
+      wrapper.find('Header').update();
       wrapper.find('button.nav-link.login-btn').simulate('click');
-      expect(props.handleShowAndHide).toHaveBeenCalledWith(true);
+      expect(props._handleShowAndHide).toHaveBeenCalledWith(true);
     });
   });
 

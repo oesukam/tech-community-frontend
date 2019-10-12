@@ -111,8 +111,8 @@ export class Header extends Component {
     return (
       <div className={`collapse navbar-collapse ${menu ? 'show' : ''}`}>
         <ul className="navbar-nav mr-auto">
-          <li role="presentation" className="nav-link" onClick={() => _handleShowAndHide(true)}>
-            <button type="button" className="nav-link login-btn">LOGIN</button>
+          <li className="nav-link">
+            <button type="button" onClick={() => _handleShowAndHide(true)} className="nav-link login-btn">LOGIN</button>
           </li>
         </ul>
       </div>

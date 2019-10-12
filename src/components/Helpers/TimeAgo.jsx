@@ -7,12 +7,12 @@ import PropTypes from 'prop-types';
 const TimeAgo = ({ date, style }) => <span style={style}>{moment(date).fromNow()}</span>;
 
 TimeAgo.propTypes = {
-  date: PropTypes.string,
+  date: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   style: PropTypes.object,
 };
 
 TimeAgo.defaultProps = {
-  date: '',
+  date: 0,
   style: {},
 };
 

@@ -51,7 +51,7 @@ Button.propTypes = {
   text: PropTypes.string,
   loading: PropTypes.bool,
   onClick: PropTypes.func,
-  tick: PropTypes.func,
+  tick: PropTypes.bool,
   style: PropTypes.object,
   disabled: PropTypes.bool,
 };
@@ -61,7 +61,7 @@ Button.defaultProps = {
   text: '',
   loading: false,
   onClick: () => '',
-  tick: () => '',
+  tick: false,
   style: {},
   disabled: false,
 };

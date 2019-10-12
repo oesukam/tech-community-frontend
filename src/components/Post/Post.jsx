@@ -12,14 +12,14 @@ Post.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.any,
   tick: PropTypes.bool,
-  post: PropTypes.object,
+  post: PropTypes.func,
 };
 
 Post.defaultProps = {
   loading: false,
   error: false,
   tick: false,
-  post: {},
+  post: () => '',
 };
 
 /**

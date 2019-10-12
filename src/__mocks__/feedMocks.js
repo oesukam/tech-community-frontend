@@ -5,4 +5,5 @@ export default {
   description: 'description',
   likesCount: 1,
   createdAt: '2019-09-22',
+  slug: 'slug',
 };

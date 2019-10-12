@@ -18,7 +18,6 @@ export class Feed extends Component {
     postSlug: '',
   };
 
-
   componentDidMount() {
     const { onGetFeed, limit } = this.props;
     onGetFeed(limit, 0);
@@ -120,7 +119,7 @@ export class Feed extends Component {
 
           {loading
             && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
-              <ContentLoader key={value.slug} />
+              <ContentLoader key={value} />
             ))}
         </div>
       </>
