@@ -1,6 +1,6 @@
 import * as types from '../actionTypes/socialAuth';
 
-const reducer = (state = { show: false }, { type, payload }) => {
+const reducer = (state = { show: false }, { type }) => {
   switch (type) {
     case types.SHOW_SOCIAL_AUTH:
       return {

@@ -6,6 +6,14 @@ import Modal from '../Modal/Modal';
 import 'emoji-mart/css/emoji-mart.css';
 import './PostTextArea.scss';
 
+const buttonStyle = {
+  paddingTop: '3px',
+  paddingBottom: '3px',
+  paddingLeft: '10px',
+  paddingRight: '10px',
+  fontSize: '0.6em',
+};
+
 export class PostTextArea extends Component {
   state = {
     value: '',
@@ -16,28 +24,17 @@ export class PostTextArea extends Component {
   };
 
   imageInput = React.createRef();
+
   emojiToggle = React.createRef();
 
-  componentDidUpdate = prevProps => {
-    const { tick } = this.props;
-    if (prevProps.tick !== tick)
-      this.setState({
-        value: '',
-        rows: 3,
-        showEmojiPicker: false,
-        imageUrl: '',
-        image: {},
-      });
-  };
-
   componentDidMount() {
-    window.addEventListener('click', e => {
+    window.addEventListener('click', (e) => {
       const {
         target: { id, parentNode },
       } = e;
       let isEmoji = false;
       let node = parentNode;
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 6; i += 1) {
         if (!node) break;
         if (!node.classList) break;
         isEmoji = node && node.classList.contains('emoji-mart');
@@ -52,10 +49,24 @@ export class PostTextArea extends Component {
     });
   }
 
-  onChange = e => {
+  componentDidUpdate = (prevProps) => {
+    const { tick } = this.props;
+    if (prevProps.tick !== tick) {
+      this.setState({
+        value: '',
+        rows: 3,
+        showEmojiPicker: false,
+        imageUrl: '',
+        image: {},
+      });
+    }
+  };
+
+  _onChange = (e) => {
     const textareaLineHeight = 24;
-    const { minRows, maxRows } = this.props;
-    const { minChar, maxChar } = this.props;
+    const {
+      minRows, maxRows, minChar, maxChar, onChange,
+    } = this.props;
     if (maxChar && maxChar <= e.target.value.length - 1) return;
 
     if (e.target.value.length >= minChar) this.setState({ disabled: false });
@@ -79,10 +90,10 @@ export class PostTextArea extends Component {
       rows: currentRows < maxRows ? currentRows : maxRows,
     });
 
-    if (this.props.onChange) this.props.onChange(e.target.value);
+    if (onChange) onChange(e.target.value);
   };
 
-  onImageChange = e => {
+  onImageChange = (e) => {
     this.setState({
       imageUrl: URL.createObjectURL(e.target.files[0]),
       image: e.target.files[0],
@@ -96,12 +107,14 @@ export class PostTextArea extends Component {
     });
   };
 
-  addEmoji = emoji => {
-    this.setState({ value: this.state.value + emoji.native });
+  addEmoji = (emoji) => {
+    const { value } = this.state;
+    this.setState({ value: value + emoji.native });
   };
 
   toogleOnClickEmojiPicker = () => {
-    this.setState({ showEmojiPicker: !this.state.showEmojiPicker });
+    const { showEmojiPicker } = this.state;
+    this.setState({ showEmojiPicker: !showEmojiPicker });
   };
 
   showModal = () => {
@@ -121,16 +134,25 @@ export class PostTextArea extends Component {
   };
 
   render() {
-    const { showEmojiPicker, value, rows, imageUrl, disabled } = this.state;
+    const {
+      showEmojiPicker,
+      value,
+      rows,
+      imageUrl,
+      disabled,
+      show,
+    } = this.state;
 
-    const { error, loading, tick, maxChar } = this.props;
+    const {
+      error, loading, tick, maxChar,
+    } = this.props;
     return (
       <div id="text-area-post">
         <textarea
           className="text-area-post"
           value={value}
           rows={rows}
-          onChange={this.onChange}
+          onChange={this._onChange}
           placeholder="Write something ..."
         />
 
@@ -143,8 +165,9 @@ export class PostTextArea extends Component {
           ref={this.imageInput}
           style={{ display: 'none' }}
         />
-        <Modal show={this.state.show} handleClose={this.hideModal}>
+        <Modal show={show} handleClose={this.hideModal}>
           <img
+            role="presentation"
             className="img-preview"
             style={{ width: '70%' }}
             alt="preview"
@@ -154,10 +177,11 @@ export class PostTextArea extends Component {
         </Modal>
         {imageUrl ? (
           <div className="image">
-            <div className="remove-image" onClick={this.restoreImage}>
+            <div role="presentation" className="remove-image" onClick={this.restoreImage}>
               <span>&times;</span>
             </div>
             <img
+              role="presentation"
               className="img-preview"
               alt="preview"
               src={imageUrl}
@@ -168,11 +192,13 @@ export class PostTextArea extends Component {
         <div className="actions">
           <div>
             <i
+              role="presentation"
               id="emoji-btn"
               className="fas fa-smile"
               onClick={this.toogleOnClickEmojiPicker}
             />
             <i
+              role="presentation"
               className="fas fa-image"
               onClick={() => this.imageInput.current.click()}
             />
@@ -194,7 +220,9 @@ export class PostTextArea extends Component {
               className="number-character"
               style={{ color: disabled ? '#fff' : '#13c39a' }}
             >
-              {value.length}/{maxChar}
+              {value.length}
+/
+              {maxChar}
             </span>
             <Button
               style={buttonStyle}
@@ -212,14 +240,6 @@ export class PostTextArea extends Component {
   }
 }
 
-const buttonStyle = {
-  paddingTop: '3px',
-  paddingBottom: '3px',
-  paddingLeft: '10px',
-  paddingRight: '10px',
-  fontSize: '0.6em',
-};
-
 PostTextArea.propTypes = {
   minRows: PropTypes.number,
   maxRows: PropTypes.number,
@@ -229,6 +249,7 @@ PostTextArea.propTypes = {
   error: PropTypes.any,
   tick: PropTypes.bool,
   post: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 };
 
 PostTextArea.defaultProps = {
@@ -239,6 +260,7 @@ PostTextArea.defaultProps = {
   loading: false,
   error: false,
   tick: false,
+  onChange: () => '',
 };
 
 export default PostTextArea;

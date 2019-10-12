@@ -18,9 +18,7 @@ export const Routes = ({ isAuth }) => (
       <Route
         exact
         path="/protected"
-        render={props =>
-          isAuth ? <Home {...props} /> : <Redirect to="/login" />
-        }
+        render={(props) => (isAuth ? <Home {...props} /> : <Redirect to="/login" />)}
       />
 
       <Route exact path="*" component={NotFound} />

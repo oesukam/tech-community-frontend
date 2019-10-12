@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import PropTypes from 'prop-types';
 import Modal from '../Modal/Modal';
 import './SharePost.scss';
-import facebook_logo from '../../assets/images/facebook_logo.png';
-import twitter_logo from '../../assets/images/twitter_logo.png';
-import PropTypes from 'prop-types';
+import facebookLogo from '../../assets/images/facebook_logo.png';
+import twitterLogo from '../../assets/images/twitter_logo.png';
 
 import { FRONTEND_BASE_URL } from '../../constants';
 
-import share from '../../actions/sharePostAction';
+import shareAction from '../../actions/sharePostAction';
 
-import { FacebookShareButton, TwitterShareButton } from 'react-share';
 
 export class SharePost extends Component {
   handleClick = (postSlug, platform) => {
@@ -27,13 +27,14 @@ export class SharePost extends Component {
       <Modal show={show} handleClose={handleClose}>
         <div className="share-post">
           <div
+            role="presentation"
             className="social_share"
             id="twitter"
             onClick={() => this.handleClick(postSlug, 'twitter')}
           >
             <TwitterShareButton url={POST_URL}>
               <img
-                src={twitter_logo}
+                src={twitterLogo}
                 className="social_logo"
                 alt="twitter_logo"
               />
@@ -42,13 +43,14 @@ export class SharePost extends Component {
           </div>
 
           <div
+            role="presentation"
             className="social_share"
             id="facebook"
             onClick={() => this.handleClick(postSlug, 'facebook')}
           >
             <FacebookShareButton url={POST_URL}>
               <img
-                src={facebook_logo}
+                src={facebookLogo}
                 className="social_logo"
                 alt="facebook_logo"
               />
@@ -61,19 +63,21 @@ export class SharePost extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  share: data => dispatch(share(data)),
+const mapDispatchToProps = (dispatch) => ({
+  share: (data) => dispatch(shareAction(data)),
 });
 
 SharePost.propTypes = {
   show: PropTypes.bool,
   postSlug: PropTypes.string,
   handleClose: PropTypes.func.isRequired,
+  share: PropTypes.func,
 };
 
 SharePost.defaultProps = {
   show: false,
   postSlug: '',
+  share: () => '',
 };
 
 export default connect(

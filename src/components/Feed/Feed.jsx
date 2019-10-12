@@ -1,42 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
+import PropTypes from 'prop-types';
 import './Feed.scss';
 import TimeAgo from '../Helpers/TimeAgo';
 import { getFeed } from '../../actions/feedActions';
 import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
-import Like from '../../components/Like/Like';
+import Like from '../Like/Like';
 
 import SharePost from '../SharePost/SharePost';
 
 export class Feed extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    show: false,
+    postSlug: '',
+  };
 
-    this.state = {
-      show: false,
-      postSlug: '',
-    };
 
+  componentDidMount() {
+    const { onGetFeed, limit } = this.props;
+    onGetFeed(limit, 0);
     window.onscroll = debounce(() => {
       onScrollToBottom(() => this.handleInfiniteScroll());
     });
   }
 
-  handleOpenSharePost = postSlug => {
+  handleOpenSharePost = (postSlug) => {
     this.setState({ show: true, postSlug });
   };
 
   handleCloseSharePost = () => {
     this.setState({ show: false });
   };
-
-  componentDidMount() {
-    const { onGetFeed, limit } = this.props;
-    onGetFeed(limit, 0);
-  }
 
   handleInfiniteScroll() {
     const { onGetFeed, feed = [], limit } = this.props;
@@ -50,7 +47,7 @@ export class Feed extends Component {
     const { handleCloseSharePost } = this;
 
     return (
-      <React.Fragment>
+      <>
         <SharePost
           show={show}
           handleClose={handleCloseSharePost}
@@ -70,9 +67,8 @@ export class Feed extends Component {
                 liked,
                 slug,
               },
-              index,
             ) => (
-              <div className="post" key={index}>
+              <div className="post" key={slug}>
                 <div className="header">
                   <div className="right">
                     <img
@@ -105,28 +101,29 @@ export class Feed extends Component {
                     <Like {...{ slug, likesCount, liked }} />
 
                     <div className="action">
-                      <i className="far fa-comment-alt"></i>
+                      <i className="far fa-comment-alt" />
                       <span className="count">12</span>
                     </div>
                   </div>
 
                   <div
+                    role="presentation"
                     className="action share"
                     onClick={() => this.handleOpenSharePost(slug)}
                   >
-                    <i className="fas fa-share-alt"></i>
+                    <i className="fas fa-share-alt" />
                   </div>
                 </div>
               </div>
             ),
           )}
 
-          {loading &&
-            [...Array(feed.length > 1 ? 1 : 3)].map((value, index) => (
-              <ContentLoader key={index} />
+          {loading
+            && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
+              <ContentLoader key={value.slug} />
             ))}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -136,18 +133,36 @@ export class Feed extends Component {
  * @param {*} { auth }
  * @returns {object} props
  */
-export const mapStateToProps = ({ feed: { items: feed, loading, limit } }) => {
-  return { feed, loading, limit };
-};
+export const mapStateToProps = ({
+  feed: {
+    items: feed,
+    loading,
+    limit,
+  },
+}) => ({ feed, loading, limit });
 
 /**
  * Maps dispatches to props
  * @param {*} dispatch
  * @returns {object} props
  */
-export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = (dispatch) => ({
   onGetFeed: (limit, itemsLength) => dispatch(getFeed(limit, itemsLength)),
 });
+
+Feed.propTypes = {
+  feed: PropTypes.array,
+  loading: PropTypes.bool,
+  limit: PropTypes.number,
+  onGetFeed: PropTypes.func,
+};
+
+Feed.defaultProps = {
+  feed: [],
+  loading: false,
+  limit: 0,
+  onGetFeed: () => '',
+};
 
 export default connect(
   mapStateToProps,

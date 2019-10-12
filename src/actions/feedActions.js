@@ -8,7 +8,7 @@ import { FEED_LIMIT } from '../constants';
  * Toggles the loading state
  * @return {object} action
  */
-export const toggleLoading = state => ({
+export const toggleLoading = (state) => ({
   type: types.TOOGLE_LOADING,
   payload: state,
 });
@@ -17,7 +17,7 @@ export const toggleLoading = state => ({
  * Set feed
  * @return {object} action
  */
-export const setFeed = feed => ({
+export const setFeed = (feed) => ({
   type: types.SET_FEED,
   payload: feed,
 });
@@ -26,7 +26,7 @@ export const setFeed = feed => ({
  * Get feed
  * @return {object} response
  */
-export const getFeed = (limit, itemsLength) => async dispatch => {
+export const getFeed = (limit, itemsLength) => async (dispatch) => {
   if (limit > itemsLength + FEED_LIMIT) return;
 
   dispatch(toggleLoading(true));

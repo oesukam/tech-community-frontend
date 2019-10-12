@@ -10,14 +10,12 @@ const server = axios.create({
 });
 
 server.interceptors.request.use(
-  async config => {
-    const token = await localStorage.getItem('token');
-    if (token) config.headers['Authorization'] = `Bearer ${token}`;
+  async (config) => {
+    const userToken = await localStorage.getItem('token');
+    if (userToken) config.headers.Authorization = `Bearer ${userToken}`;
     return config;
   },
-  error => {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
 export default server;

@@ -6,7 +6,7 @@ import { toggleLoading } from './feedActions';
  * Like a post
  * @return {object} action
  */
-export const like = postSlug => async dispatch => {
+export const like = (postSlug) => async (dispatch) => {
   dispatch(toggleLoading(true));
 
   try {
@@ -21,7 +21,7 @@ export const like = postSlug => async dispatch => {
  * Unlike a post
  * @return {object} action
  */
-export const unlike = postSlug => async dispatch => {
+export const unlike = (postSlug) => async (dispatch) => {
   dispatch(toggleLoading(true));
 
   try {

@@ -6,10 +6,11 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js && echo '/* /index.html 200' > ./build/_redirects",
     "test": "node scripts/test.js --watchAll=false",
-    "test:watfh": "node scripts/test.js --watchAll=false",
+    "test:watch": "node scripts/test.js",
     "serve": "npm run build && serve -s build/",
     "test-coveralls": "jest --detectOpenHandles --coverage  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "lint": "eslint src",
+    "lint": "eslint src --ext .js,.jsx",
+    "linte": "eslint src/components/Like/Like.jsx",
     "lint:fix": "npm run lint -- --fix"
   },
   "husky": {
