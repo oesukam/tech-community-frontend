@@ -14,3 +14,5 @@ exclude_paths:
   - config
   - public
   - scripts
+pull_requests:
+  enabled: true
