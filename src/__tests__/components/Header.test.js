@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Header, mapStateToProps } from '../../components/Header/Header';
@@ -11,14 +11,14 @@ let wrapper;
 const props = {
   match: { path: '' },
   location: {
-    search: {}
+    search: {},
   },
   user: {
     user: {
-      picture: 'http://picture.jpg'
-    }
+      picture: 'http://picture.jpg',
+    },
   },
-  handleShowAndHide: jest.fn()
+  handleShowAndHide: jest.fn(),
 };
 
 const mockStore = configureMockStore([thunk]);
@@ -26,16 +26,16 @@ const mockStore = configureMockStore([thunk]);
 describe('Header.jsx', () => {
   let store;
   beforeEach(() => {
-    const socialAuth = { show: false }
+    const socialAuth = { show: false };
     store = mockStore({
-      ...initialState, socialAuth
+      ...initialState, socialAuth,
     });
     wrapper = mount(
       <Provider store={store}>
         <Router>
           <Header {...props} />
         </Router>
-      </Provider>
+      </Provider>,
     );
   });
   test('should render Header.jx', () => {
@@ -55,7 +55,7 @@ describe('Header.jsx', () => {
         <Router>
           <Header {...newProps} />
         </Router>
-      </Provider>
+      </Provider>,
     );
     const component = wrapper.find('Header');
     expect(component.props().isAuth).toBeTruthy();
@@ -73,14 +73,8 @@ describe('Header.jsx', () => {
     test('should show the Modal', () => {
       wrapper.find('button.nav-link.login-btn').simulate('click');
       expect(props.handleShowAndHide).toHaveBeenCalledWith(true);
-    })
-
-    test('should show the Modal', () => {
-      wrapper.find('button.nav-link.signup-btn').simulate('click');
-      expect(props.handleShowAndHide).toHaveBeenCalledWith(true);
-    })
-
-  })
+    });
+  });
 
   describe('reducers', () => {
     test('should return `mapStateToProps`', () => {

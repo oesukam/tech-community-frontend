@@ -16,14 +16,13 @@ describe('SharePost reducer', () => {
   });
 
   it('SHARE_POST_SUCCESS', () => {
-    const res = { res: { status: 200 } };
     const action = {
       type: SHARE_POST_SUCCESS,
-      payload: { res },
+      payload: { message: 'Success' },
     };
     const response = reducer({}, action);
 
-    expect(response.response).toBe(res);
+    expect(response.message).toBe('Success');
   });
 
   it('SHARE_POST_ERROR', () => {

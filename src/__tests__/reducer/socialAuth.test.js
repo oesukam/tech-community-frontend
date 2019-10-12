@@ -9,7 +9,7 @@ describe('Social Auth reducer', () => {
     };
     const res = reducer({}, action);
     expect(res.show).toBeTruthy();
-  })
+  });
 
   it('HIDE_SOCIAL_AUTH', async () => {
     const action = {
@@ -18,14 +18,14 @@ describe('Social Auth reducer', () => {
     };
     const res = reducer({}, action);
     expect(res.show).toBeFalsy();
-  })
+  });
 
   it('DEFAULT', async () => {
     const action = {
-      type: HIDE_SOCIAL_AUTH + 'default',
+      type: `${HIDE_SOCIAL_AUTH}default`,
       payload: {},
     };
     const res = reducer({}, action);
     expect(res.show).toBeFalsy();
-  })
-})
+  });
+});

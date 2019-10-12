@@ -1,6 +1,6 @@
 import React from 'react';
-import ContentLoader from '../../components/Helpers/ContentLoader';
 import { mount } from 'enzyme';
+import ContentLoader from '../../components/Helpers/ContentLoader';
 
 describe('ContentLoader', () => {
   let wrapper;

@@ -10,7 +10,7 @@ const props = {
   loading: false,
   error: false,
   tick: false,
-  post: jest.fn()
+  post: jest.fn(),
 };
 
 describe('PostTextArea.jsx', () => {
@@ -18,26 +18,26 @@ describe('PostTextArea.jsx', () => {
     wrapper = shallow(<PostTextArea {...props} />);
     const event = {
       target: {
-        value: 'this is the PostTextArea'
-      }
-    }
-    wrapper.find('textarea').simulate('change', event)
+        value: 'this is the PostTextArea',
+      },
+    };
+    wrapper.find('textarea').simulate('change', event);
     expect(wrapper.instance().state.value).toEqual(event.target.value);
   });
 
   test('should PostTextArea', () => {
     wrapper = shallow(<PostTextArea {...props} />);
-    const event = { target: { value: 'this is the PostTextArea' } }
-    wrapper.find('textarea').simulate('change', event)
-    wrapper.find('Button').simulate('click')
+    const event = { target: { value: 'this is the PostTextArea' } };
+    wrapper.find('textarea').simulate('change', event);
+    wrapper.find('Button').simulate('click');
     expect(props.post).toHaveBeenCalled();
   });
 
   test('should select the emage', () => {
     wrapper = shallow(<PostTextArea {...props} />);
     global.URL.createObjectURL = jest.fn(() => 'this is the imageUrl');
-    const event = { target: { files: ['this is the image'] } }
-    wrapper.find('input[name="image"]').simulate('change', event)
+    const event = { target: { files: ['this is the image'] } };
+    wrapper.find('input[name="image"]').simulate('change', event);
     expect(global.URL.createObjectURL).toHaveBeenCalled();
     expect(wrapper.instance().state.image).toEqual(event.target.files[0]);
   });
@@ -45,24 +45,24 @@ describe('PostTextArea.jsx', () => {
   test('should clear the image', () => {
     wrapper = shallow(<PostTextArea {...props} />);
     global.URL.createObjectURL = jest.fn(() => 'this is the imageUrl');
-    const event = { target: { files: ['this is the image'] } }
-    wrapper.find('input[name="image"]').simulate('change', event)
-    wrapper.find('.remove-image').simulate('click')
+    const event = { target: { files: ['this is the image'] } };
+    wrapper.find('input[name="image"]').simulate('change', event);
+    wrapper.find('.remove-image').simulate('click');
     expect(wrapper.instance().state.imageUrl).toEqual('');
   });
 
   test('should add emoji', () => {
     wrapper = mount(
-      <PostTextArea {...props} />
+      <PostTextArea {...props} />,
     );
-    const emoji = { native: '&123' }
+    const emoji = { native: '&123' };
     wrapper.instance().addEmoji(emoji);
     expect(wrapper.instance().state.value).toEqual('&123');
   });
 
   test('should show emoji picker', () => {
     wrapper = mount(
-      <PostTextArea {...props} />
+      <PostTextArea {...props} />,
     );
     wrapper.instance().toogleOnClickEmojiPicker();
     expect(wrapper.instance().state.showEmojiPicker).toEqual(true);
@@ -70,18 +70,18 @@ describe('PostTextArea.jsx', () => {
 
   test('should hide emoji picker', () => {
     wrapper = mount(
-      <PostTextArea {...props} />
+      <PostTextArea {...props} />,
     );
     const event = {
       target: { id: 'id', parentNode: { classList: 'this is the classList' } },
-    }
-    wrapper.find('button').simulate('click', event)
+    };
+    wrapper.find('button').simulate('click', event);
     expect(wrapper.instance().state.showEmojiPicker).toEqual(false);
   });
 
   test('should show the modal', () => {
     wrapper = mount(
-      <PostTextArea {...props} />
+      <PostTextArea {...props} />,
     );
     wrapper.instance().showModal();
     expect(wrapper.instance().state.show).toEqual(true);
@@ -89,7 +89,7 @@ describe('PostTextArea.jsx', () => {
 
   test('should hide the modal', () => {
     wrapper = mount(
-      <PostTextArea {...props} />
+      <PostTextArea {...props} />,
     );
     wrapper.instance().hideModal();
     expect(wrapper.instance().state.show).toEqual(false);

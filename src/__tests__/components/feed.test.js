@@ -5,6 +5,7 @@ import axios from 'axios';
 import moxios from 'moxios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 import { getFeed } from '../../actions/feedActions';
 import feedReducer from '../../reducers/feed';
 import { SET_FEED, TOOGLE_LOADING } from '../../actionTypes/feed';
@@ -14,9 +15,12 @@ import {
   mapDispatchToProps,
 } from '../../components/Feed/Feed';
 import feedMocks from '../../__mocks__/feedMocks';
+import initialState from '../../store/initialState';
+
 
 describe('Feed', () => {
   let wrapper;
+  let store;
   const props = {
     onGetFeed: jest.fn(),
     feed: [feedMocks],
@@ -28,10 +32,14 @@ describe('Feed', () => {
 
   describe('Feed.jsx', () => {
     beforeEach(() => {
+      store = mockStore({ ...initialState });
       wrapper = mount(
-        <Router>
-          <Feed {...props} />
-        </Router>,
+        <Provider store={store}>
+          <Router>
+            <Feed {...props} />
+          </Router>
+,
+        </Provider>,
       );
 
       moxios.install(axios);
@@ -44,7 +52,8 @@ describe('Feed', () => {
   });
 
   describe('State', () => {
-    let mapped, dispatch;
+    let mapped; let
+      dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);
@@ -84,7 +93,6 @@ describe('Feed', () => {
   });
 
   describe('Login actions', () => {
-    let store;
     let axiosInstance;
 
     beforeEach(() => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import TimeAgo from '../../components/Helpers/TimeAgo';
 import { mount } from 'enzyme';
+import TimeAgo from '../../components/Helpers/TimeAgo';
 
 describe('TimeAgo', () => {
   let wrapper;

@@ -7,7 +7,7 @@ import SharePost, {
   SharePost as SharePostComponent,
 } from '../../components/SharePost/SharePost';
 
-describe(`SharePost`, () => {
+describe('SharePost', () => {
   const props = {
     show: true,
     handleClose: jest.fn(),

@@ -12,7 +12,7 @@ describe('CurrentUser reducer', () => {
     };
     const res = reducer({}, action);
     expect(res.isAuth).toBeTruthy();
-  })
+  });
 
   it('SET_CURRENT_USER', async () => {
     const action = {
@@ -21,14 +21,14 @@ describe('CurrentUser reducer', () => {
     };
     const res = reducer({}, action);
     expect(res.user).toBe(action.payload);
-  })
+  });
 
   it('DEFAULT', async () => {
     const action = {
-      type: types.SET_CURRENT_USER + 'default',
+      type: `${types.SET_CURRENT_USER}default`,
       payload: {},
     };
     const res = reducer({ initialState }, action);
     expect(res.initialState.isAuth).toBeFalsy();
-  })
-})
+  });
+});
