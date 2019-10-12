@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import axios from 'axios';
 import moxios from 'moxios';
 import configureMockStore from 'redux-mock-store';
@@ -21,7 +21,7 @@ const props = {
   loading: false,
   error: false,
   tick: false,
-  post: jest.fn()
+  post: jest.fn(),
 };
 
 describe('Post.jsx', () => {
@@ -40,7 +40,7 @@ describe('Post.jsx', () => {
       expect(state).toEqual(expectedState);
     });
     test('should return `mapDispatchToProps`', () => {
-      const dispatch = action => action;
+      const dispatch = (action) => action;
       const mappedObject = mapDispatchToProps(dispatch);
       expect(mappedObject).toHaveProperty('post');
       expect(mappedObject.post('post')).toEqual(expect.any(Function));
@@ -74,7 +74,7 @@ describe('Post actions', () => {
             post: {
               description: 'description',
               image: 'image',
-            }
+            },
           },
         },
       },
@@ -85,12 +85,12 @@ describe('Post actions', () => {
         status: 201,
         response: {
           data: {
-            secure_url: 'image.url'
+            secure_url: 'image.url',
           },
         },
       },
     );
-    store.dispatch(post({ value: 'value', image: 'image' })).then(res => {
+    store.dispatch(post({ value: 'value', image: 'image' })).then((res) => {
       expect(res).toBe(true);
     });
   });
@@ -105,7 +105,7 @@ describe('Post actions', () => {
             post: {
               description: 'description',
               image: 'image',
-            }
+            },
           },
         },
       },
@@ -116,12 +116,12 @@ describe('Post actions', () => {
         status: 400,
         response: {
           data: {
-            secure_url: 'image.url'
+            secure_url: 'image.url',
           },
         },
       },
     );
-    store.dispatch(post({ value: 'value', image: 'image' })).then(res => {
+    store.dispatch(post({ value: 'value', image: 'image' })).then((res) => {
       expect(res).toBe(true);
     });
   });

@@ -18,7 +18,7 @@ export const sharePostError = () => ({
   type: SHARE_POST_ERROR,
 });
 
-const share = data => async dispatch => {
+const share = (data) => async (dispatch) => {
   dispatch(sharePostStarted());
   const url = `/api/v1/posts/${data.postSlug}/share/${data.platform}`;
   try {

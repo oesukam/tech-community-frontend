@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Like, {
-  Like as LikeComponent,
-  mapStateToProps,
-  mapDispatchToProps,
-} from '../../components/Like/Like';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import moxios from 'moxios';
+import Like, {
+  Like as LikeComponent,
+  mapStateToProps,
+  mapDispatchToProps,
+} from '../../components/Like/Like';
 import { like, unlike } from '../../actions/likeActions';
 
 describe('Like', () => {
@@ -65,7 +65,8 @@ describe('Like', () => {
   });
 
   describe('State', () => {
-    let mapped, dispatch;
+    let mapped; let
+      dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);

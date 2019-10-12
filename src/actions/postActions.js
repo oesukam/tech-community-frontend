@@ -25,7 +25,7 @@ const postStarted = () => ({ type: POST_STARTED });
  * @param {object} post
  * @return {object} action
  */
-const postSuccess = post => ({
+const postSuccess = (post) => ({
   type: POST_SUCCESS,
   payload: post,
 });
@@ -36,7 +36,7 @@ const postSuccess = post => ({
  * @param {object} error
  * @return {object} action
  */
-const postError = error => ({
+const postError = (error) => ({
   type: POST_ERROR,
   payload: error,
 });
@@ -49,24 +49,21 @@ const postError = error => ({
  */
 const restoreTick = () => ({ type: RESTORE_TICK });
 
-const uploadImage = async file => {
+const uploadImage = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', REACT_APP_CLOUDINARY_PRESET);
 
-  try {
-    const res = await axios({
-      url: REACT_APP_CLOUDINARY_URL_IMAGE,
-      method: 'POST',
-      header: {
-        'Content-Type': 'application/x-ww-form-urlencoded',
-      },
-      data: formData,
-    });
-    return res.data.secure_url;
-  } catch (error) {
-    throw error;
-  }
+  const res = await axios({
+    url: REACT_APP_CLOUDINARY_URL_IMAGE,
+    method: 'POST',
+    header: {
+      'Content-Type': 'application/x-ww-form-urlencoded',
+    },
+    data: formData,
+  });
+  if (res) return res.data.secure_url;
+  return null;
 };
 
 /**
@@ -74,7 +71,7 @@ const uploadImage = async file => {
  * @param {*} { username, email, password }
  * @return {object} response
  */
-const post = data => async dispatch => {
+const post = (data) => async (dispatch) => {
   dispatch(postStarted());
 
   try {
@@ -85,10 +82,9 @@ const post = data => async dispatch => {
 
     if (data.image) payload.image = await uploadImage(data.image);
 
-    const res = await server.post(`/api/v1/posts`, payload);
+    const res = await server.post('/api/v1/posts', payload);
 
-    const { post } = res.data;
-    dispatch(postSuccess(post));
+    dispatch(postSuccess(res.data.post));
     setTimeout(() => {
       dispatch(restoreTick());
     }, 3000);

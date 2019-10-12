@@ -69,7 +69,7 @@ describe('Social auth action', () => {
         },
       },
     );
-    store.dispatch(getUserDetails('username')).then(res => {
+    store.dispatch(getUserDetails('username')).then((res) => {
       expect(res).toBe(true);
     });
   });

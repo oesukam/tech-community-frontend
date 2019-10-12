@@ -2,24 +2,22 @@ import * as types from '../actionTypes/currentUserTypes';
 import { SHOW_SOCIAL_AUTH, HIDE_SOCIAL_AUTH } from '../actionTypes/socialAuth';
 import server from '../Api/server';
 
-const { REACT_APP_BACKEND_URL } = process.env;
-
 export const setIsAuth = () => ({
   type: types.SET_IS_AUTH,
   payload: true,
 });
 
-export const setCurrentUser = user => ({
+export const setCurrentUser = (user) => ({
   type: types.SET_CURRENT_USER,
   payload: user,
 });
 
-export const showSocialAuth = user => ({
+export const showSocialAuth = (user) => ({
   type: SHOW_SOCIAL_AUTH,
   payload: user,
 });
 
-export const hideSocialAuth = user => ({
+export const hideSocialAuth = (user) => ({
   type: HIDE_SOCIAL_AUTH,
   payload: user,
 });
@@ -29,20 +27,20 @@ export const hideSocialAuth = user => ({
  * @param {*} { username, email, password }
  * @return {object} response
  */
-export default (token, user) => async dispatch => {
+export default (token, user) => async (dispatch) => {
   localStorage.setItem('token', token);
-  localStorage.setItem('username', user.user.username);
+  localStorage.setItem('username', user.username);
   dispatch(setIsAuth());
   dispatch(setCurrentUser(user));
   return true;
 };
 
-export const handleShowAndHide = show => dispatch => {
+export const handleShowAndHide = (show) => (dispatch) => {
   if (show) dispatch(showSocialAuth());
   if (!show) dispatch(hideSocialAuth());
 };
 
-export const getUserDetails = username => async dispatch => {
+export const getUserDetails = (username) => async (dispatch) => {
   try {
     const {
       data: { profile },

@@ -1,10 +1,10 @@
 import React from 'react';
+import ReactContentLoader from 'react-content-loader';
+import PropTypes from 'prop-types';
 
-import ContentLoader from 'react-content-loader';
-
-export default ({ style }) => (
+const ContentLoader = ({ style }) => (
   <div style={{ ...style, width: '100%' }}>
-    <ContentLoader
+    <ReactContentLoader
       height={160}
       width={400}
       speed={2}
@@ -17,6 +17,15 @@ export default ({ style }) => (
       <rect x="0" y="100" rx="3" ry="3" width="380" height="6" />
       <rect x="0" y="120" rx="3" ry="3" width="201" height="6" />
       <circle cx="30" cy="30" r="30" />
-    </ContentLoader>
+    </ReactContentLoader>
   </div>
 );
+
+ContentLoader.propTypes = {
+  style: PropTypes.object,
+};
+
+ContentLoader.defaultProps = {
+  style: {},
+};
+export default ContentLoader;

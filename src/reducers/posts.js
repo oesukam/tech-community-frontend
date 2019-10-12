@@ -38,7 +38,7 @@ const postReducer = (state = {}, { type, payload }) => {
     case RESTORE_TICK:
       return {
         ...state,
-        tick: false
+        tick: false,
       };
     default:
       return state;
