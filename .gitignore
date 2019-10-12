@@ -10,7 +10,7 @@ yarn.lock
 
 # testing
 /coverage
-/src/__tests__/pages/__snapshots__
+src/**/*/__snapshots__
 
 # production
 /build
