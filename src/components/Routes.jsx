@@ -11,6 +11,7 @@ import { PropTypes } from 'prop-types';
 import Home from '../pages/Home/Home';
 import NotFound from '../pages/NotFound/NotFound';
 import SinglePost from '../pages/SinglePost/SinglePost';
+import Profile from './Profile/Profile';
 
 export const Routes = ({ isAuth }) => (
   <Router>
@@ -22,6 +23,7 @@ export const Routes = ({ isAuth }) => (
         path="/protected"
         render={(props) => (isAuth ? <Home {...props} /> : <Redirect to="/login" />)}
       />
+      <Route exact path="/profile" render={(props) => (isAuth ? <Profile {...props} /> : <Redirect to="/" />)} />
 
       <Route exact path="*" component={NotFound} />
     </Switch>

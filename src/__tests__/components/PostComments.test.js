@@ -13,7 +13,7 @@ import postCommentMock from '../../__mocks__/postCommentMock';
 describe('PostComments', () => {
   let wrapper;
   const props = {
-    post: { likesCount: 2, slug: 'slug' },
+    post: { likesCount: 2, slug: 'slug', id: 1 },
     items: [postCommentMock],
     loading: false,
     onGetPostComments: jest.fn(),
@@ -35,8 +35,8 @@ describe('PostComments', () => {
   });
 
   describe('State', () => {
-    let mapped; let
-      dispatch;
+    let mapped;
+    let dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);
@@ -69,10 +69,7 @@ describe('PostComments', () => {
     });
 
     test('should test the reducer with type TOGGLE_LOADING', () => {
-      const state = postCommentsReducer(
-        {},
-        { type: TOGGLE_LOADING, payload: true },
-      );
+      const state = postCommentsReducer({}, { type: TOGGLE_LOADING, payload: true });
       expect(state.loading).toBe(true);
     });
   });

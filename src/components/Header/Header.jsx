@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
@@ -5,10 +7,7 @@ import { connect } from 'react-redux';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import SocialAuth from '../Login/socialAuth';
-import socialAuth, {
-  handleShowAndHide,
-  getUserDetails,
-} from '../../actions/socialAuth';
+import socialAuth, { handleShowAndHide, getUserDetails } from '../../actions/socialAuth';
 import defaultAvatar from '../../assets/images/person.png';
 import './Header.scss';
 import { setIsLoggedOut } from '../../actions/logout';
@@ -23,30 +22,33 @@ export class Header extends Component {
   };
 
   componentDidMount = () => {
-    const {
-      location,
-      _socialAuth: socialAuthAction,
-      _getUserDetails,
-    } = this.props;
+    const { location, _socialAuth: socialAuthAction, _getUserDetails } = this.props;
     const url = location.search;
     const userData = queryString.parse(url);
     const { token, user } = userData;
     const username = localStorage.getItem('username');
     const localToken = localStorage.getItem('token');
 
-    if (user && !localToken) {
-      socialAuthAction(token, JSON.parse(user));
-      history.push('/');
-    } else if (username) {
-      _getUserDetails(username);
+    try {
+      if (user && !localToken) {
+        socialAuthAction(token, JSON.parse(user));
+        localStorage.setItem('username', JSON.parse(user).user.username);
+        history.push('/');
+      } else if (username) {
+        _getUserDetails(username);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
 
-    window.addEventListener('click', e => {
+    window.addEventListener('click', (e) => {
       const { dropdown } = this.state;
       if (
-        e.target.parentNode.className !== 'user-info__avatar' &&
-        !e.target.parentNode.className.includes('header-popup') &&
-        this.state.dropdown
+        e.target.parentNode.className !== 'user-info__avatar'
+        && e.target.parentNode.className
+        && !e.target.parentNode.className.includes('header-popup')
+        && dropdown
       ) {
         this.setState({ dropdown: false });
       }
@@ -74,7 +76,9 @@ export class Header extends Component {
   };
 
   renderUser = () => {
-    const { isAuth, user, userDetails, _handleShowAndHide } = this.props;
+    const {
+      isAuth, user, userDetails, _handleShowAndHide, history: _history,
+    } = this.props;
     const { menu, dropdown } = this.state;
     const currentUser = user.user ? user.user : userDetails;
     if (isAuth) {
@@ -82,28 +86,23 @@ export class Header extends Component {
         <div className="user-info">
           <div className="user-info__notif">
             <span className="counter">12</span>
-            <i className="fas fa-bell" alt="User avatar" />
+            <i className="fas fa-bell" alt="" />
           </div>
           <div className="user-info__message">
             <span className="counter">12</span>
-            <i className="fas fa-envelope" alt="User avatar" />
+            <i className="fas fa-envelope" alt="" />
           </div>
-          <div className="user-info__avatar" alt="User avatar">
+          <div className="user-info__avatar" alt="">
             <img
               role="presentation"
               src={currentUser ? currentUser.picture : defaultAvatar}
               className="dropdown-img"
-              alt="User avatar"
+              alt=""
               onClick={this.toggleDropdown}
             />
             <div className={`header-popup ${dropdown ? 'show' : 'hide'}`}>
-              {currentUser && (
-                <p className="header-popup__username">{currentUser.username}</p>
-              )}
-              <p
-                className="header-popup__profile"
-                onClick={() => this.props.history.push('/profile')}
-              >
+              {currentUser && <p className="header-popup__username">{currentUser.username}</p>}
+              <p className="header-popup__profile" onClick={() => _history.push('/profile')}>
                 Profile
               </p>
               <p onClick={this.logout} className="header-popup__logout">
@@ -157,19 +156,17 @@ export class Header extends Component {
   }
 }
 
-export const mapStateToProps = ({
-  currentUser: { user, isAuth, details: userDetails },
-}) => ({
+export const mapStateToProps = ({ currentUser: { user, isAuth, details: userDetails } }) => ({
   isAuth,
   user,
   userDetails,
 });
 
-export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = (dispatch) => ({
   _socialAuth: (token, user) => dispatch(socialAuth(token, user)),
-  _handleShowAndHide: show => dispatch(handleShowAndHide(show)),
+  _handleShowAndHide: (show) => dispatch(handleShowAndHide(show)),
   _logout: () => dispatch(setIsLoggedOut()),
-  _getUserDetails: username => dispatch(getUserDetails(username)),
+  _getUserDetails: (username) => dispatch(getUserDetails(username)),
 });
 
 Header.propTypes = {
@@ -181,6 +178,7 @@ Header.propTypes = {
   _handleShowAndHide: PropTypes.func,
   _logout: PropTypes.func,
   _getUserDetails: PropTypes.func,
+  history: PropTypes.any,
 };
 
 Header.defaultProps = {
@@ -192,6 +190,7 @@ Header.defaultProps = {
   _handleShowAndHide: () => '',
   _logout: () => '',
   _getUserDetails: () => '',
+  history: {},
 };
 
 export default connect(

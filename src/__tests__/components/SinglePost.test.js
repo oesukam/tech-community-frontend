@@ -7,18 +7,29 @@ import thunk from 'redux-thunk';
 import server from '../../Api/server';
 import postCommentAction from '../../actions/postCommentAction';
 import singlePostReducer from '../../reducers/singlePost';
+import { FETCH_SUCCESS } from '../../actionTypes/singlePostTypes';
 import {
-  FETCH_SUCCESS,
-} from '../../actionTypes/singlePostTypes';
-import { SinglePost, mapStateToProps, mapDispatchToProps } from '../../components/SinglePost/SinglePost';
+  SinglePost,
+  mapStateToProps,
+  mapDispatchToProps,
+} from '../../components/SinglePost/SinglePost';
 
 const mockStore = configureMockStore([thunk]);
 
 let wrapper;
 
 const props = {
-  post: {},
+  post: {
+    slug: 'slug',
+    author: {},
+    userType: 'userType',
+    description: 'description',
+    likesCount: 1,
+    createdAt: 'createdAt',
+    push: () => {},
+  },
   onFetchSinglePost: jest.fn(),
+  slug: 'slug',
 };
 
 describe('Post.jsx', () => {
@@ -28,8 +39,8 @@ describe('Post.jsx', () => {
   });
 
   describe('State', () => {
-    let mapped; let
-      dispatch;
+    let mapped;
+    let dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);

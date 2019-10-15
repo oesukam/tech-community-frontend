@@ -8,7 +8,8 @@ import {
   RESTORE_COMMENT_TICK,
 } from '../../actionTypes/postCommentTypes';
 import {
-  PostComment as Post, mapStateToProps,
+  PostComment as Post,
+  mapStateToProps,
   mapDispatchToProps,
 } from '../../components/PostComment/PostComment';
 
@@ -16,6 +17,7 @@ let wrapper;
 
 const props = {
   slug: 'slug',
+  post: () => {},
 };
 
 describe('Post.jsx', () => {
@@ -25,8 +27,8 @@ describe('Post.jsx', () => {
   });
 
   describe('State', () => {
-    let mapped; let
-      dispatch;
+    let mapped;
+    let dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);

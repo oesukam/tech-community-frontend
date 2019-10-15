@@ -9,6 +9,7 @@ Array [
   Object {
     "payload": Array [
       Object {
+        "_id": 1,
         "author": Object {
           "picture": "img.jpg",
           "username": "username",
