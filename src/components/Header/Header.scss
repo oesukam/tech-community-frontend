@@ -72,30 +72,6 @@
   }
 }
 
-.nav-search {
-  background-color: $surface;
-  display: flex;
-  align-items: center;
-  padding: 0.2rem 1rem;
-  border-radius: 1.5rem;
-  -webkit-border-radius: 1.5rem;
-  -moz-border-radius: 1.5rem;
-  -ms-border-radius: 1.5rem;
-  -o-border-radius: 1.5rem;
-  min-width: 400px;
-  max-width: 100%;
-  input {
-    outline: none;
-    border: 0;
-    background-color: transparent;
-    flex: 1;
-    height: 2rem;
-  }
-  i {
-    padding-right: 0.3rem;
-  }
-}
-
 .header-popup-dismiss {
   position: absolute;
   top: 0;

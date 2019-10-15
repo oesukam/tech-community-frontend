@@ -17,16 +17,30 @@ export const toggleLoading = (state) => ({
  * Set feed
  * @return {object} action
  */
-export const setFeed = (feed) => ({
+export const setFeed = (payload) => ({
   type: types.SET_FEED,
-  payload: feed,
+  payload,
+});
+
+/**
+ * Set feed organization
+ * @return {object} action
+ */
+export const setFeedOrganizations = (payload) => ({
+  type: types.SET_FEED_ORGANIZATIONS,
+  payload,
 });
 
 /**
  * Get feed
  * @return {object} response
  */
-export const getFeed = (limit, itemsLength) => async (dispatch) => {
+export const getFeed = ({
+  limit,
+  itemsLength,
+  category = 'general',
+  search = '',
+}) => async (dispatch) => {
   if (limit > itemsLength + FEED_LIMIT) return;
 
   dispatch(toggleLoading(true));
@@ -35,12 +49,29 @@ export const getFeed = (limit, itemsLength) => async (dispatch) => {
     const {
       data: { feed },
     } = await server.get(
-      `/api/v1/feed?offset=${itemsLength}&&limit=${FEED_LIMIT}`,
+      `/api/v1/feed?offset=${itemsLength}&limit=${FEED_LIMIT}&category=${category}&search=${search}`,
     );
 
     dispatch(setFeed(feed));
     dispatch(toggleLoading(false));
   } catch (e) {
     dispatch(toggleLoading(false));
+  }
+};
+
+
+/**
+ * Get feed
+ * @return {object} response
+ */
+export const getFeedOrganizations = () => async (dispatch) => {
+  const res = await server.get(
+    '/api/v1/organizations?limit=5',
+  );
+  if (res) {
+    const {
+      data: { organizations = [] },
+    } = res;
+    dispatch(setFeedOrganizations(organizations));
   }
 };

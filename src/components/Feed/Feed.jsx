@@ -3,33 +3,29 @@ import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import './Feed.scss';
-import { getFeed } from '../../actions/feedActions';
+import { getFeed, getFeedOrganizations } from '../../actions/feedActions';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
 import Post from '../PostComponent/Post';
 
 export class Feed extends Component {
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
+    const { onGetFeed, limit, onGetFeedOrganizations } = this.props;
+    onGetFeed({ limit, itemsLength: 0 });
+    onGetFeedOrganizations();
     window.onscroll = debounce(() => {
       onScrollToBottom(() => this.handleInfiniteScroll());
     });
   }
 
-  componentDidMount() {
-    const { onGetFeed, limit } = this.props;
-    onGetFeed(limit, 0);
-  }
-
   handleInfiniteScroll() {
     const { onGetFeed, feed = [], limit } = this.props;
     if (feed.length < 1) return;
-    onGetFeed(limit, feed.length);
+    onGetFeed({ limit, itemsLength: feed.length });
   }
 
   render() {
-    const { feed = [], loading, push } = this.props;
+    const { feed = [], loading, history: { push } } = this.props;
 
     return (
       <div className="feed">
@@ -89,7 +85,8 @@ export const mapStateToProps = ({ feed: { items: feed, loading, limit } }) => ({
  * @returns {object} props
  */
 export const mapDispatchToProps = (dispatch) => ({
-  onGetFeed: (limit, itemsLength) => dispatch(getFeed(limit, itemsLength)),
+  onGetFeed: (payload) => dispatch(getFeed(payload)),
+  onGetFeedOrganizations: (payload) => dispatch(getFeedOrganizations(payload)),
 });
 
 Feed.propTypes = {
@@ -97,15 +94,19 @@ Feed.propTypes = {
   loading: PropTypes.bool,
   limit: PropTypes.number,
   onGetFeed: PropTypes.func,
-  push: PropTypes.func,
+  history: PropTypes.any,
+  onGetFeedOrganizations: PropTypes.func,
+  match: PropTypes.any,
 };
 
 Feed.defaultProps = {
   feed: [],
   loading: false,
   limit: 0,
+  match: {},
   onGetFeed: () => '',
-  push: () => '',
+  history: {},
+  onGetFeedOrganizations: () => '',
 };
 
 export default connect(

@@ -12,6 +12,7 @@ import socialAuth, {
 import defaultAvatar from '../../assets/images/person.png';
 import './Header.scss';
 import { setIsLoggedOut } from '../../actions/logout';
+import HeaderSearch from './HeaderSearch';
 
 const history = createBrowserHistory();
 
@@ -126,10 +127,7 @@ export class Header extends Component {
           <Link className="navbar-brand" to="/">
             Navbar
           </Link>
-          <div className="nav-search">
-            <input type="search" placeholder="Search.." aria-label="Search" />
-            <i className="fa fa-search" />
-          </div>
+          <HeaderSearch history={history} />
           <SocialAuth />
           {this.renderUser()}
           <button

@@ -6,6 +6,7 @@ import feed from './feed';
 import sharePost from './sharePost';
 import singlePost from './singlePost';
 import postComment from './postComment';
+import search from './search';
 
 const reducers = combineReducers({
   currentUser,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   sharePost,
   singlePost,
   postComment,
+  search,
 });
 
 export default reducers;

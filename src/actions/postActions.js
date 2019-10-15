@@ -77,7 +77,6 @@ const post = (data) => async (dispatch) => {
   try {
     const payload = {
       description: data.value,
-      title: 'this is a wrong title',
     };
 
     if (data.image) payload.image = await uploadImage(data.image);

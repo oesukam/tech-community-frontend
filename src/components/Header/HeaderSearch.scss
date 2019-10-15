@@ -1,0 +1,72 @@
+@import '../../styles/colors';
+
+.ais-SearchBox-form {
+  background-color: $surface;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 1rem;
+  border-radius: 1.5rem;
+  -webkit-border-radius: 1.5rem;
+  -moz-border-radius: 1.5rem;
+  -ms-border-radius: 1.5rem;
+  -o-border-radius: 1.5rem;
+  min-width: 400px;
+  max-width: 100%;
+  input {
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    flex: 1;
+    height: 2rem;
+  }
+  .ais-SearchBox-submit,
+  .ais-SearchBox-reset {
+    padding-right: 0.3rem;
+    outline: none;
+    background: none;
+    border: none;
+  }
+}
+
+.ais-InstantSearch__root {
+  position: relative;
+  .search-autocomplete {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    max-height: 400px;
+    overflow-y: hidden;
+    height: auto;
+    list-style: none;
+    padding: 0px;
+    li {
+      border-bottom: 1px solid $secondary;
+      padding: 5px 10px;
+      a {
+        text-decoration: none;
+      }
+      &:hover {
+        background-color: $surface;
+        cursor: pointer;
+      }
+      p {
+        padding: 0;
+        margin: 0;
+      }
+      span {
+        background-color: $secondary;
+        color: #fff;
+        display: inline-block;
+        padding: 0 5px;
+        border-radius: 2px;
+        font-size: 0.9em;
+        i {
+          margin-right: 5px;
+          font-size: 0.7em;
+        }
+      }
+    }
+  }
+}
