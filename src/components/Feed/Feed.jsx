@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import './Feed.scss';
 import TimeAgo from '../Helpers/TimeAgo';
-import { getFeed } from '../../actions/feedActions';
+import { getFeed, getFeedOrganizations } from '../../actions/feedActions';
 import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
@@ -19,8 +19,9 @@ export class Feed extends Component {
   };
 
   componentDidMount() {
-    const { onGetFeed, limit } = this.props;
-    onGetFeed(limit, 0);
+    const { onGetFeed, limit, onGetFeedOrganizations } = this.props;
+    onGetFeed({ limit, itemsLength: 0 });
+    onGetFeedOrganizations();
     window.onscroll = debounce(() => {
       onScrollToBottom(() => this.handleInfiniteScroll());
     });
@@ -37,7 +38,7 @@ export class Feed extends Component {
   handleInfiniteScroll() {
     const { onGetFeed, feed = [], limit } = this.props;
     if (feed.length < 1) return;
-    onGetFeed(limit, feed.length);
+    onGetFeed({ limit, itemsLength: feed.length });
   }
 
   render() {
@@ -146,7 +147,8 @@ export const mapStateToProps = ({
  * @returns {object} props
  */
 export const mapDispatchToProps = (dispatch) => ({
-  onGetFeed: (limit, itemsLength) => dispatch(getFeed(limit, itemsLength)),
+  onGetFeed: (payload) => dispatch(getFeed(payload)),
+  onGetFeedOrganizations: (payload) => dispatch(getFeedOrganizations(payload)),
 });
 
 Feed.propTypes = {
@@ -154,13 +156,17 @@ Feed.propTypes = {
   loading: PropTypes.bool,
   limit: PropTypes.number,
   onGetFeed: PropTypes.func,
+  onGetFeedOrganizations: PropTypes.func,
+  match: PropTypes.any,
 };
 
 Feed.defaultProps = {
   feed: [],
   loading: false,
   limit: 0,
+  match: {},
   onGetFeed: () => '',
+  onGetFeedOrganizations: () => '',
 };
 
 export default connect(
