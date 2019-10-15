@@ -10,11 +10,13 @@ import { PropTypes } from 'prop-types';
 
 import Home from '../pages/Home/Home';
 import NotFound from '../pages/NotFound/NotFound';
+import SinglePost from '../pages/SinglePost/SinglePost';
 
 export const Routes = ({ isAuth }) => (
   <Router>
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/post/:slug" component={SinglePost} />
       <Route
         exact
         path="/protected"

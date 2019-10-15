@@ -14,6 +14,10 @@ const props = {
 };
 
 describe('PostTextArea.jsx', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('should render PostTextArea.jx', () => {
     wrapper = shallow(<PostTextArea {...props} />);
     const event = {
@@ -26,11 +30,13 @@ describe('PostTextArea.jsx', () => {
   });
 
   test('should PostTextArea', () => {
-    wrapper = shallow(<PostTextArea {...props} />);
+    const newProps = { ...props, allowImagePicker: false };
+    wrapper = shallow(<PostTextArea {...newProps} />);
     const event = { target: { value: 'this is the PostTextArea' } };
     wrapper.find('textarea').simulate('change', event);
     wrapper.find('Button').simulate('click');
-    expect(props.post).toHaveBeenCalled();
+
+    expect(newProps.post).toHaveBeenCalled();
   });
 
   test('should select the emage', () => {

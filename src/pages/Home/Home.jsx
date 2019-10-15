@@ -17,7 +17,7 @@ export const Home = (props) => (
         </div>
         <div className="col-md-6">
           <Post />
-          <Feed />
+          <Feed {...props} />
         </div>
         <div className="col-md-3">
           <HomeRight {...props} />

@@ -108,8 +108,12 @@ export class PostTextArea extends Component {
   };
 
   addEmoji = (emoji) => {
-    const { value } = this.state;
-    this.setState({ value: value + emoji.native });
+    const { minChar } = this.props;
+    const { value: textValue } = this.state;
+    const value = textValue + emoji.native;
+
+    this.setState({ value });
+    if (value.length >= minChar) this.setState({ disabled: false });
   };
 
   toogleOnClickEmojiPicker = () => {
@@ -127,9 +131,12 @@ export class PostTextArea extends Component {
 
   submitPost = () => {
     const { value, image = '' } = this.state;
-    const { post } = this.props;
+    const { post, slug, allowImagePicker } = this.props;
     if (value) {
-      post({ value, image });
+      if (!allowImagePicker) {
+        if (slug) post(slug, value);
+        else post({ value, image });
+      }
     }
   };
 
@@ -144,7 +151,12 @@ export class PostTextArea extends Component {
     } = this.state;
 
     const {
-      error, loading, tick, maxChar,
+      error,
+      loading,
+      tick,
+      maxChar,
+      allowImagePicker,
+      placeholder,
     } = this.props;
     return (
       <div id="text-area-post">
@@ -153,7 +165,7 @@ export class PostTextArea extends Component {
           value={value}
           rows={rows}
           onChange={this._onChange}
-          placeholder="Write something ..."
+          placeholder={placeholder}
         />
 
         <input
@@ -177,7 +189,11 @@ export class PostTextArea extends Component {
         </Modal>
         {imageUrl ? (
           <div className="image">
-            <div role="presentation" className="remove-image" onClick={this.restoreImage}>
+            <div
+              role="presentation"
+              className="remove-image"
+              onClick={this.restoreImage}
+            >
               <span>&times;</span>
             </div>
             <img
@@ -197,11 +213,13 @@ export class PostTextArea extends Component {
               className="fas fa-smile"
               onClick={this.toogleOnClickEmojiPicker}
             />
-            <i
-              role="presentation"
-              className="fas fa-image"
-              onClick={() => this.imageInput.current.click()}
-            />
+            {allowImagePicker && (
+              <i
+                role="presentation"
+                className="fas fa-image"
+                onClick={() => this.imageInput.current.click()}
+              />
+            )}
 
             {showEmojiPicker && (
               <Picker
@@ -245,6 +263,9 @@ PostTextArea.propTypes = {
   maxRows: PropTypes.number,
   minChar: PropTypes.number,
   maxChar: PropTypes.number,
+  slug: PropTypes.string,
+  allowImagePicker: PropTypes.bool,
+  placeholder: PropTypes.string,
   loading: PropTypes.bool,
   error: PropTypes.any,
   tick: PropTypes.bool,
@@ -257,6 +278,9 @@ PostTextArea.defaultProps = {
   maxRows: 15,
   minChar: 50,
   maxChar: 500,
+  slug: null,
+  allowImagePicker: true,
+  placeholder: 'Write something ...',
   loading: false,
   error: false,
   tick: false,

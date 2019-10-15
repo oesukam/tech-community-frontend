@@ -23,6 +23,7 @@ describe('Feed', () => {
   let store;
   const props = {
     onGetFeed: jest.fn(),
+    push: jest.fn(),
     feed: [feedMocks],
     loading: false,
     limit: 2,
@@ -38,7 +39,7 @@ describe('Feed', () => {
           <Router>
             <Feed {...props} />
           </Router>
-,
+          ,
         </Provider>,
       );
 

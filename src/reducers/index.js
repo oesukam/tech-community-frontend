@@ -4,6 +4,8 @@ import socialAuth from './socialAuth';
 import posts from './posts';
 import feed from './feed';
 import sharePost from './sharePost';
+import singlePost from './singlePost';
+import postComment from './postComment';
 import search from './search';
 
 const reducers = combineReducers({
@@ -12,6 +14,8 @@ const reducers = combineReducers({
   feed,
   socialAuth,
   sharePost,
+  singlePost,
+  postComment,
   search,
 });
 

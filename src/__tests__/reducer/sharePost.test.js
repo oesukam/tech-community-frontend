@@ -5,11 +5,10 @@ import {
   SHARE_POST_ERROR,
 } from '../../actionTypes/sharePostTypes';
 
-describe('SharePost reducer', () => {
+describe.only('SharePost reducer', () => {
   it('SHARE_POST_STARTED', () => {
     const action = {
       type: SHARE_POST_STARTED,
-      payload: {},
     };
     const res = reducer({}, action);
     expect(res.loading).toBeTruthy();

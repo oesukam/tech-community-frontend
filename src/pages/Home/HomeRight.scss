@@ -11,6 +11,9 @@ h1 {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   text-decoration: none;
   color: inherit;
+  height: 20vh;
+  min-height: 50px;
+  max-height: 300px;
   &:link {
     text-decoration: none;
     color: inherit;
@@ -20,9 +23,7 @@ h1 {
   }
   &__image {
     flex: 1;
-    height: 20vh;
-    min-height: 50px;
-    max-height: 300px;
+    height: 100%;
     object-fit: cover;
   }
   &__content {
@@ -37,5 +38,18 @@ h1 {
       font-size: 1.2rem;
       color: lighten($secondary, 40);
     }
+  }
+}
+
+.side-see-more {
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 10px;
+  display: block;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: $secondary;
+  &:hover {
+    text-decoration: none;
   }
 }

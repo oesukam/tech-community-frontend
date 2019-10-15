@@ -3,6 +3,9 @@ module.exports = {
     isAuth: localStorage.getItem('token') !== null,
     user: {},
   },
+  feed: {
+    items: [],
+  },
   search: {
     searchKeywords: '',
     searchItems: [],

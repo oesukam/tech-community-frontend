@@ -20,10 +20,16 @@ export class HomeRight extends Component {
   }
 
   render() {
+    const { organizations } = this.props;
     return (
       <div className="side-container">
-        <div className="side-container__header">Organization</div>
+        <div className="side-container__header">Organizations</div>
         {this.renderOrganizations()}
+        { organizations.length ? (
+          <Link to="/organizations" className="side-see-more">
+          See more
+          </Link>
+        ) : null}
       </div>
     );
   }

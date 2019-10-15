@@ -17,9 +17,9 @@ export const toggleLoading = (state) => ({
  * Set feed
  * @return {object} action
  */
-export const setFeed = (feed) => ({
+export const setFeed = (payload) => ({
   type: types.SET_FEED,
-  payload: feed,
+  payload,
 });
 
 /**
@@ -66,12 +66,12 @@ export const getFeed = ({
  */
 export const getFeedOrganizations = () => async (dispatch) => {
   const res = await server.get(
-    '/api/v1/organizations?limit=10',
+    '/api/v1/organizations?limit=5',
   );
   if (res) {
     const {
       data: { organizations = [] },
     } = res;
-    dispatch(setFeed(organizations));
+    dispatch(setFeedOrganizations(organizations));
   }
 };

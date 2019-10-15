@@ -3,21 +3,12 @@ import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import './Feed.scss';
-import TimeAgo from '../Helpers/TimeAgo';
 import { getFeed, getFeedOrganizations } from '../../actions/feedActions';
-import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
-import Like from '../Like/Like';
-
-import SharePost from '../SharePost/SharePost';
+import Post from '../PostComponent/Post';
 
 export class Feed extends Component {
-  state = {
-    show: false,
-    postSlug: '',
-  };
-
   componentDidMount() {
     const { onGetFeed, limit, onGetFeedOrganizations } = this.props;
     onGetFeed({ limit, itemsLength: 0 });
@@ -27,14 +18,6 @@ export class Feed extends Component {
     });
   }
 
-  handleOpenSharePost = (postSlug) => {
-    this.setState({ show: true, postSlug });
-  };
-
-  handleCloseSharePost = () => {
-    this.setState({ show: false });
-  };
-
   handleInfiniteScroll() {
     const { onGetFeed, feed = [], limit } = this.props;
     if (feed.length < 1) return;
@@ -42,88 +25,45 @@ export class Feed extends Component {
   }
 
   render() {
-    const { feed = [], loading } = this.props;
-    const { show, postSlug } = this.state;
-    const { handleCloseSharePost } = this;
+    const { feed = [], loading, history: { push } } = this.props;
 
     return (
-      <>
-        <SharePost
-          show={show}
-          handleClose={handleCloseSharePost}
-          postSlug={postSlug}
-        />
+      <div className="feed">
+        {feed.map(
+          (
+            {
+              author,
+              userType,
+              image,
+              description,
+              likesCount,
+              createdAt,
+              liked,
+              slug,
+            },
+            index,
+          ) => {
+            const postProps = {
+              author,
+              userType,
+              image,
+              description,
+              likesCount,
+              createdAt,
+              liked,
+              slug,
+              key: index,
+              push,
+            };
+            return <Post {...postProps} />;
+          },
+        )}
 
-        <div className="feed">
-          {feed.map(
-            (
-              {
-                author: { username, picture: profilePicture },
-                userType,
-                image: postImage,
-                description,
-                likesCount,
-                createdAt,
-                liked,
-                slug,
-              },
-            ) => (
-              <div className="post" key={slug}>
-                <div className="header">
-                  <div className="right">
-                    <img
-                      className="image"
-                      src={resolvePlaceholder(profilePicture, userType)}
-                      alt="placeholder"
-                    />
-
-                    <div className="info">
-                      <span className="name">{username}</span>
-                      <span className="label">{userType}</span>
-                    </div>
-                  </div>
-
-                  <div className="date">
-                    <TimeAgo date={createdAt} />
-                  </div>
-                </div>
-
-                {postImage && (
-                  <img src={postImage} alt="" className="post-image" />
-                )}
-
-                <div className="body">{description}</div>
-
-                <div className="category">Web design</div>
-
-                <div className="bottom">
-                  <div className="left">
-                    <Like {...{ slug, likesCount, liked }} />
-
-                    <div className="action">
-                      <i className="far fa-comment-alt" />
-                      <span className="count">12</span>
-                    </div>
-                  </div>
-
-                  <div
-                    role="presentation"
-                    className="action share"
-                    onClick={() => this.handleOpenSharePost(slug)}
-                  >
-                    <i className="fas fa-share-alt" />
-                  </div>
-                </div>
-              </div>
-            ),
-          )}
-
-          {loading
-            && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
-              <ContentLoader key={value} />
-            ))}
-        </div>
-      </>
+        {loading
+        && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
+          <ContentLoader key={value} />
+        ))}
+      </div>
     );
   }
 }
@@ -133,13 +73,11 @@ export class Feed extends Component {
  * @param {*} { auth }
  * @returns {object} props
  */
-export const mapStateToProps = ({
-  feed: {
-    items: feed,
-    loading,
-    limit,
-  },
-}) => ({ feed, loading, limit });
+export const mapStateToProps = ({ feed: { items: feed, loading, limit } }) => ({
+  feed,
+  loading,
+  limit,
+});
 
 /**
  * Maps dispatches to props
@@ -156,6 +94,7 @@ Feed.propTypes = {
   loading: PropTypes.bool,
   limit: PropTypes.number,
   onGetFeed: PropTypes.func,
+  history: PropTypes.any,
   onGetFeedOrganizations: PropTypes.func,
   match: PropTypes.any,
 };
@@ -166,6 +105,7 @@ Feed.defaultProps = {
   limit: 0,
   match: {},
   onGetFeed: () => '',
+  history: {},
   onGetFeedOrganizations: () => '',
 };
 

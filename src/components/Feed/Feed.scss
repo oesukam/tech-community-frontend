@@ -18,6 +18,12 @@
       cursor: pointer;
     }
 
+    a {
+      text-decoration: none;
+      text-decoration-color: none;
+      color: #212529;
+    }
+
     .header {
       display: flex;
       justify-content: space-between;
