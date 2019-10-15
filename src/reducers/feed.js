@@ -6,7 +6,7 @@ const reducer = (
     items: [],
     loading: true,
     limit: 0,
-    organizations: [{ name: 'name', category: 'category' }],
+    organizations: [],
   },
   { type, payload },
 ) => {
