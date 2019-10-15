@@ -49,7 +49,7 @@ export const getFeed = ({
     const {
       data: { feed },
     } = await server.get(
-      `/api/v1/feed?offset=${itemsLength}&&limit=${FEED_LIMIT}&&category${category}&&search=${search}`,
+      `/api/v1/feed?offset=${itemsLength}&limit=${FEED_LIMIT}&category=${category}&search=${search}`,
     );
 
     dispatch(setFeed(feed));
