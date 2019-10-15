@@ -23,6 +23,15 @@ export const setFeed = (feed) => ({
 });
 
 /**
+ * Set feed organization
+ * @return {object} action
+ */
+export const setFeedOrganizations = (payload) => ({
+  type: types.SET_FEED_ORGANIZATIONS,
+  payload,
+});
+
+/**
  * Get feed
  * @return {object} response
  */
@@ -47,5 +56,22 @@ export const getFeed = ({
     dispatch(toggleLoading(false));
   } catch (e) {
     dispatch(toggleLoading(false));
+  }
+};
+
+
+/**
+ * Get feed
+ * @return {object} response
+ */
+export const getFeedOrganizations = () => async (dispatch) => {
+  const res = await server.get(
+    '/api/v1/organizations?limit=10',
+  );
+  if (res) {
+    const {
+      data: { organizations = [] },
+    } = res;
+    dispatch(setFeed(organizations));
   }
 };

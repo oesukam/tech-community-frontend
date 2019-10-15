@@ -24,14 +24,14 @@ export class HomeLeft extends Component {
     const { category = 'general' } = queryString.parse(location.search);
     return (
       <div className="side-container">
-        <div className="side-container__header">Posts</div>
+        <div className="side-container__header">Categories</div>
         <div
           role="presentation"
           onClick={() => this.navigateTo('general')}
           className={`side-container__item ${category === 'general' ? 'active' : ''}`}
         >
           <i className="fa fa-globe" />
-      General
+          General
         </div>
         <div
           role="presentation"
@@ -39,7 +39,7 @@ export class HomeLeft extends Component {
           className={`side-container__item ${category === 'job' ? 'active' : ''}`}
         >
           <i className="fa fa-globe" />
-      Jobs
+          Jobs
         </div>
         <div
           role="presentation"
@@ -47,7 +47,7 @@ export class HomeLeft extends Component {
           className={`side-container__item ${category === 'event' ? 'active' : ''}`}
         >
           <i className="fa fa-globe" />
-      Events
+          Events
         </div>
         <div
           role="presentation"
@@ -55,7 +55,7 @@ export class HomeLeft extends Component {
           className={`side-container__item ${category === 'announcement' ? 'active' : ''}`}
         >
           <i className="fa fa-globe" />
-      Announcements
+          Announcements
         </div>
         <div
           role="presentation"
@@ -63,7 +63,7 @@ export class HomeLeft extends Component {
           className={`side-container__item ${category === 'question' ? 'active' : ''}`}
         >
           <i className="fa fa-globe" />
-      Questions
+          Questions
         </div>
       </div>
     );

@@ -2,7 +2,12 @@ import * as types from '../actionTypes/feed';
 import { FEED_LIMIT } from '../constants';
 
 const reducer = (
-  state = { items: [], loading: true, limit: 0 },
+  state = {
+    items: [],
+    loading: true,
+    limit: 0,
+    organizations: [{ name: 'name', category: 'category' }],
+  },
   { type, payload },
 ) => {
   switch (type) {
@@ -16,6 +21,11 @@ const reducer = (
         ...state,
         items: [...state.items, ...payload],
         limit: state.limit + FEED_LIMIT,
+      };
+    case types.SET_FEED_ORGANIZATIONS:
+      return {
+        ...state,
+        organizations: payload,
       };
     default:
       return state;

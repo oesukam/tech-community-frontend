@@ -1,0 +1,41 @@
+@import '../../styles/colors';
+
+h1 {
+  font-size: 5em;
+}
+
+.org-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: inherit;
+  &:link {
+    text-decoration: none;
+    color: inherit;
+  }
+  &:hover {
+    color: $secondary;
+  }
+  &__image {
+    flex: 1;
+    height: 20vh;
+    min-height: 50px;
+    max-height: 300px;
+    object-fit: cover;
+  }
+  &__content {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+    &__name {
+      font-size: 1.5rem;
+    }
+    &__category {
+      font-size: 1.2rem;
+      color: lighten($secondary, 40);
+    }
+  }
+}

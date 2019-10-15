@@ -5,6 +5,7 @@ import Layout from '../../containers/Layout/Layout';
 import Post from '../../components/Post/Post';
 import Feed from '../../components/Feed/Feed';
 import HomeLeft from './HomeLeft';
+import HomeRight from './HomeRight';
 
 
 export const Home = (props) => (
@@ -19,7 +20,7 @@ export const Home = (props) => (
           <Feed />
         </div>
         <div className="col-md-3">
-          Home Aside
+          <HomeRight {...props} />
         </div>
 
       </div>
