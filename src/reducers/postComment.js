@@ -38,7 +38,7 @@ const postCommentReducer = (state = {}, { type, payload }) => {
     case RESTORE_COMMENT_TICK:
       return {
         ...state,
-        tick: false
+        tick: false,
       };
     default:
       return state;

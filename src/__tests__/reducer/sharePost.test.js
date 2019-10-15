@@ -27,7 +27,7 @@ describe.only('SharePost reducer', () => {
   it('SHARE_POST_ERROR', () => {
     const action = {
       type: SHARE_POST_ERROR,
-      payload: { error: 'Not Found' }
+      payload: { error: 'Not Found' },
     };
     const res = reducer({}, action);
     expect(res.error).toBe('Not Found');

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Post.scss';
 import TimeAgo from '../Helpers/TimeAgo';
@@ -12,13 +12,14 @@ class Post extends Component {
     postSlug: '',
   };
 
-  handleOpenSharePost = postSlug => {
+  handleOpenSharePost(postSlug) {
     this.setState({ show: true, postSlug });
-  };
+  }
 
-  handleCloseSharePost = () => {
+  handleCloseSharePost() {
     this.setState({ show: false });
-  };
+  }
+
   render() {
     const {
       author: { username, picture: profilePicture },
@@ -34,13 +35,19 @@ class Post extends Component {
     const { show, postSlug } = this.state;
     const { handleCloseSharePost } = this;
     return (
-      <Fragment>
+      <>
         <SharePost
           show={show}
           handleClose={handleCloseSharePost}
           postSlug={postSlug}
         />
-        <div className="post" onClick={() => push && push(`/post/${slug}`)}>
+        <div
+          className="post"
+          onClick={() => push && push(`/post/${slug}`)}
+          onKeyDown={() => null}
+          role="button"
+          tabIndex="-1"
+        >
           <div className="header">
             <div className="right">
               <img
@@ -51,6 +58,9 @@ class Post extends Component {
 
               <div className="info">
                 <span
+                  onKeyDown={() => null}
+                  role="button"
+                  tabIndex="-1"
                   className="name"
                   onClick={() => push && push(`/profile/${username}`)}
                 >
@@ -76,20 +86,23 @@ class Post extends Component {
               <Like {...{ slug, likesCount, liked }} />
 
               <div className="action">
-                <i className="far fa-comment-alt"></i>
+                <i className="far fa-comment-alt" />
                 <span className="count">12</span>
               </div>
             </div>
 
             <div
+              onKeyDown={() => null}
+              role="button"
+              tabIndex="-1"
               className="action share"
               onClick={() => this.handleOpenSharePost(slug)}
             >
-              <i className="fas fa-share-alt"></i>
+              <i className="fas fa-share-alt" />
             </div>
           </div>
         </div>
-      </Fragment>
+      </>
     );
   }
 }

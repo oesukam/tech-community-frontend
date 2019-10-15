@@ -19,7 +19,7 @@ const postCommentStarted = () => ({ type: POST_COMMENT_STARTED });
  * @param {object} post
  * @return {object} action
  */
-const postCommentSuccess = post => ({
+const postCommentSuccess = (post) => ({
   type: POST_COMMENT_SUCCESS,
   payload: post,
 });
@@ -30,7 +30,7 @@ const postCommentSuccess = post => ({
  * @param {object} error
  * @return {object} action
  */
-const postError = error => ({
+const postError = (error) => ({
   type: POST_COMMENT_ERROR,
   payload: error,
 });
@@ -48,12 +48,12 @@ const restoreTick = () => ({ type: RESTORE_COMMENT_TICK });
  * @param {*} { username, email, password }
  * @return {object} response
  */
-const postCommentAction = (slug, body) => async dispatch => {
+const postCommentAction = (slug, body) => async (dispatch) => {
   dispatch(postCommentStarted());
 
   try {
     const payload = {
-      body
+      body,
     };
 
     const res = await server.post(`/api/v1/posts/${slug}/comments`, payload);

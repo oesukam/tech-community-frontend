@@ -28,7 +28,7 @@ export class PostTextArea extends Component {
   emojiToggle = React.createRef();
 
   componentDidMount() {
-    window.addEventListener('click', e => {
+    window.addEventListener('click', (e) => {
       const {
         target: { id, parentNode },
       } = e;
@@ -49,7 +49,7 @@ export class PostTextArea extends Component {
     });
   }
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     const { tick } = this.props;
     if (prevProps.tick !== tick) {
       this.setState({
@@ -62,9 +62,11 @@ export class PostTextArea extends Component {
     }
   };
 
-  _onChange = e => {
+  _onChange = (e) => {
     const textareaLineHeight = 24;
-    const { minRows, maxRows, minChar, maxChar, onChange } = this.props;
+    const {
+      minRows, maxRows, minChar, maxChar, onChange,
+    } = this.props;
     if (maxChar && maxChar <= e.target.value.length - 1) return;
 
     if (e.target.value.length >= minChar) this.setState({ disabled: false });
@@ -91,7 +93,7 @@ export class PostTextArea extends Component {
     if (onChange) onChange(e.target.value);
   };
 
-  onImageChange = e => {
+  onImageChange = (e) => {
     this.setState({
       imageUrl: URL.createObjectURL(e.target.files[0]),
       image: e.target.files[0],
@@ -105,9 +107,10 @@ export class PostTextArea extends Component {
     });
   };
 
-  addEmoji = emoji => {
+  addEmoji = (emoji) => {
     const { minChar } = this.props;
-    const value = this.state.value + emoji.native;
+    const { value: textValue } = this.state;
+    const value = textValue + emoji.native;
 
     this.setState({ value });
     if (value.length >= minChar) this.setState({ disabled: false });
@@ -130,7 +133,10 @@ export class PostTextArea extends Component {
     const { value, image = '' } = this.state;
     const { post, slug, allowImagePicker } = this.props;
     if (value) {
-      allowImagePicker || slug ? post(slug, value) : post({ value, image });
+      if (!allowImagePicker) {
+        if (slug) post(slug, value);
+        else post({ value, image });
+      }
     }
   };
 
@@ -232,7 +238,9 @@ export class PostTextArea extends Component {
               className="number-character"
               style={{ color: disabled ? '#fff' : '#13c39a' }}
             >
-              {value.length}/{maxChar}
+              {value.length}
+/
+              {maxChar}
             </span>
             <Button
               style={buttonStyle}

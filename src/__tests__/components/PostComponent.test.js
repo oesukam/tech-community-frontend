@@ -1,17 +1,11 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import axios from 'axios';
 import moxios from 'moxios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import server from '../../Api/server';
 import post from '../../actions/fetchSinglePostAction';
-import postReducer from '../../reducers/posts';
-import {
-  POST_ERROR,
-  POST_SUCCESS,
-  POST_STARTED,
-} from '../../actionTypes/postTypes';
 import Post from '../../components/PostComponent/Post';
 
 const mockStore = configureMockStore([thunk]);
@@ -50,13 +44,12 @@ describe('Post actions', () => {
   });
 
   it('should call the post action with success', () => {
-
     jest.spyOn(server, 'get').mockResolvedValue({
       response: {
-        data: { post: { message: 'message' } }
-      }
+        data: { post: { message: 'message' } },
+      },
     });
-    store.dispatch(post('slug')).then(res => {
+    store.dispatch(post('slug')).then((res) => {
       expect(res).toBe(true);
     });
   });
@@ -64,10 +57,10 @@ describe('Post actions', () => {
   it('should call the post action with error', () => {
     jest.spyOn(server, 'get').mockRejectedValue({
       response: {
-        data: { post: { message: 'message' } }
-      }
+        data: { post: { message: 'message' } },
+      },
     });
-    store.dispatch(post('slug')).then(res => {
+    store.dispatch(post('slug')).then((res) => {
       expect(res).toBe(true);
     });
   });

@@ -5,7 +5,7 @@ const reducer = (state = {}, { type, payload }) => {
     case types.FETCH_SUCCESS:
       return {
         ...state,
-        post: payload
+        post: payload,
       };
     default:
       return state;

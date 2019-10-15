@@ -1,10 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import axios from 'axios';
-import moxios from 'moxios';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import post from '../../actions/postActions';
+import { shallow } from 'enzyme';
 import postCommentReducer from '../../reducers/postComment';
 import {
   POST_COMMENT_ERROR,
@@ -16,8 +11,6 @@ import {
   PostComment as Post, mapStateToProps,
   mapDispatchToProps,
 } from '../../components/PostComment/PostComment';
-
-const mockStore = configureMockStore([thunk]);
 
 let wrapper;
 
@@ -32,7 +25,8 @@ describe('Post.jsx', () => {
   });
 
   describe('State', () => {
-    let mapped, dispatch;
+    let mapped; let
+      dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);

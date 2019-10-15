@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import axios from 'axios';
 import moxios from 'moxios';
 import configureMockStore from 'redux-mock-store';
@@ -8,8 +8,7 @@ import server from '../../Api/server';
 import postCommentAction from '../../actions/postCommentAction';
 import singlePostReducer from '../../reducers/singlePost';
 import {
-  TOGGLE_LOADING,
-  FETCH_SUCCESS
+  FETCH_SUCCESS,
 } from '../../actionTypes/singlePostTypes';
 import { SinglePost, mapStateToProps, mapDispatchToProps } from '../../components/SinglePost/SinglePost';
 
@@ -29,7 +28,8 @@ describe('Post.jsx', () => {
   });
 
   describe('State', () => {
-    let mapped, dispatch;
+    let mapped; let
+      dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);
@@ -38,8 +38,8 @@ describe('Post.jsx', () => {
     test('should return `mapStateToProps`', () => {
       const expectedState = {
         post: {
-          slug: 'slug'
-        }
+          slug: 'slug',
+        },
       };
       const state = mapStateToProps({
         singlePost: { ...expectedState },
@@ -74,10 +74,10 @@ describe('postCommentAction.js actions', () => {
         post: {
           description: 'description',
           image: 'image',
-        }
+        },
       },
     });
-    store.dispatch(postCommentAction('slug', 'body')).then(res => {
+    store.dispatch(postCommentAction('slug', 'body')).then((res) => {
       expect(res).toBe(true);
     });
   });
@@ -85,17 +85,17 @@ describe('postCommentAction.js actions', () => {
   it('should call the post action with error', () => {
     jest.spyOn(server, 'post').mockRejectedValue({
       response: {
-        data: { message: 'message' }
-      }
+        data: { message: 'message' },
+      },
     });
-    store.dispatch(postCommentAction('slug', 'body')).then(res => {
+    store.dispatch(postCommentAction('slug', 'body')).then((res) => {
       expect(res).toBe(true);
     });
   });
 
   it('should call the post action with error', () => {
     jest.spyOn(server, 'post').mockRejectedValue();
-    store.dispatch(postCommentAction('slug', 'body')).then(res => {
+    store.dispatch(postCommentAction('slug', 'body')).then((res) => {
       expect(res).toBe(true);
     });
   });

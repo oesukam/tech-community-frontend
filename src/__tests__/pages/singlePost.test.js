@@ -5,7 +5,7 @@ import SinglePost from '../../pages/SinglePost/SinglePost';
 let wrapper;
 
 const props = {
-  match: { params: { slug: 'slug' } }, location: {}
+  match: { params: { slug: 'slug' } }, location: {},
 };
 
 describe('Post.jsx', () => {
@@ -13,5 +13,4 @@ describe('Post.jsx', () => {
     wrapper = shallow(<SinglePost {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
-
 });

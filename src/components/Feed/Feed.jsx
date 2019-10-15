@@ -8,14 +8,7 @@ import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
 import Post from '../PostComponent/Post';
 
-import SharePost from '../SharePost/SharePost';
-
 export class Feed extends Component {
-  state = {
-    show: false,
-    postSlug: '',
-  };
-
   constructor(props) {
     super(props);
 
@@ -28,14 +21,6 @@ export class Feed extends Component {
     const { onGetFeed, limit } = this.props;
     onGetFeed(limit, 0);
   }
-
-  handleOpenSharePost = postSlug => {
-    this.setState({ show: true, postSlug });
-  };
-
-  handleCloseSharePost = () => {
-    this.setState({ show: false });
-  };
 
   handleInfiniteScroll() {
     const { onGetFeed, feed = [], limit } = this.props;
@@ -78,10 +63,10 @@ export class Feed extends Component {
           },
         )}
 
-        {loading &&
-          [...Array(feed.length > 1 ? 1 : 3)].map(value => (
-            <ContentLoader key={value} />
-          ))}
+        {loading
+        && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
+          <ContentLoader key={value} />
+        ))}
       </div>
     );
   }
@@ -103,7 +88,7 @@ export const mapStateToProps = ({ feed: { items: feed, loading, limit } }) => ({
  * @param {*} dispatch
  * @returns {object} props
  */
-export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = (dispatch) => ({
   onGetFeed: (limit, itemsLength) => dispatch(getFeed(limit, itemsLength)),
 });
 
@@ -112,6 +97,7 @@ Feed.propTypes = {
   loading: PropTypes.bool,
   limit: PropTypes.number,
   onGetFeed: PropTypes.func,
+  push: PropTypes.func,
 };
 
 Feed.defaultProps = {
@@ -119,6 +105,7 @@ Feed.defaultProps = {
   loading: false,
   limit: 0,
   onGetFeed: () => '',
+  push: () => '',
 };
 
 export default connect(

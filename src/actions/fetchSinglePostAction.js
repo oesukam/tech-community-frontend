@@ -6,7 +6,7 @@ import * as types from '../actionTypes/singlePostTypes';
  * Toggles the loading state
  * @return {object} action
  */
-export const toggleLoading = state => ({
+export const toggleLoading = (state) => ({
   type: types.TOGGLE_LOADING,
   payload: state,
 });
@@ -15,7 +15,7 @@ export const toggleLoading = state => ({
  * Set feed
  * @return {object} action
  */
-export const fetchSuccess = post => ({
+export const fetchSuccess = (post) => ({
   type: types.FETCH_SUCCESS,
   payload: post,
 });
@@ -24,7 +24,7 @@ export const fetchSuccess = post => ({
  * Get feed
  * @return {object} response
  */
-export default slug => async dispatch => {
+export default (slug) => async (dispatch) => {
   dispatch(toggleLoading(true));
 
   try {

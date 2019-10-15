@@ -6,8 +6,11 @@ import postCommentAction from '../../actions/postCommentAction';
 
 export class PostComment extends Component {
   state = {};
+
   render() {
-    const { post, slug, loading, error, tick } = this.props;
+    const {
+      post, slug, loading, error, tick,
+    } = this.props;
     return (
       <PostTextArea
         minChar={1}
@@ -28,6 +31,7 @@ PostComment.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.any,
   tick: PropTypes.bool,
+  post: PropTypes.func.isRequired,
 };
 
 PostComment.defaultProps = {
@@ -55,7 +59,7 @@ export const mapStateToProps = ({ postComment }) => {
  * @param {*} dispatch
  * @returns {object} props
  */
-export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = (dispatch) => ({
   post: (slug, body) => dispatch(postCommentAction(slug, body)),
 });
 
