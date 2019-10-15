@@ -6,7 +6,9 @@ import './Feed.scss';
 import { getFeed, getFeedOrganizations } from '../../actions/feedActions';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
-import Post from '../PostComponent/Post';
+import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
+import TimeAgo from '../Helpers/TimeAgo';
+import Like from '../Like/Like';
 
 export class Feed extends Component {
   componentDidMount() {
@@ -28,42 +30,84 @@ export class Feed extends Component {
     const { feed = [], loading, history: { push } } = this.props;
 
     return (
-      <div className="feed">
-        {feed.map(
-          (
-            {
-              author,
-              userType,
-              image,
-              description,
-              likesCount,
-              createdAt,
-              liked,
-              slug,
-            },
-            index,
-          ) => {
-            const postProps = {
-              author,
-              userType,
-              image,
-              description,
-              likesCount,
-              createdAt,
-              liked,
-              slug,
-              key: index,
-              push,
-            };
-            return <Post {...postProps} />;
-          },
-        )}
+      <>
+        <div className="feed">
+          {feed.map(
+            (
+              {
+                author: { username, picture: profilePicture },
+                userType,
+                image: postImage,
+                description,
+                likesCount,
+                createdAt,
+                liked,
+                slug,
+              },
+            ) => (
+              <div
+                role="presentation"
+                className="post"
+                key={slug}
+                onClick={() => push(`/post/${slug}`)}
+              >
+                <div className="header">
+                  <div className="right">
+                    <img
+                      className="image"
+                      src={resolvePlaceholder(profilePicture, userType)}
+                      alt="placeholder"
+                    />
 
-        {loading
-        && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
-          <ContentLoader key={value} />
-        ))}
-      </div>
+                    <div className="info">
+                      <span
+                        role="presentation"
+                        className="name"
+                        onClick={() => push(`/profile/${username}`)}
+                      >
+                        {username}
+                      </span>
+                      <span className="label">{userType}</span>
+                    </div>
+                  </div>
+
+                  <div className="date">
+                    <TimeAgo date={createdAt} />
+                  </div>
+                </div>
+
+                {postImage && (
+                  <img src={postImage} alt="" className="post-image" />
+                )}
+
+                <div className="body">{description}</div>
+
+                <div className="category">Web design</div>
+
+                <div className="bottom">
+                  <div className="left">
+                    <Like {...{ slug, likesCount, liked }} />
+
+                    <div className="action">
+                      <i className="far fa-comment-alt" />
+                      <span className="count">12</span>
+                    </div>
+                  </div>
+
+                  <div className="action share">
+                    <i className="fas fa-share-alt" />
+                  </div>
+                </div>
+              </div>
+            ),
+          )}
+
+          {loading
+            && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
+              <ContentLoader key={value} />
+            ))}
+        </div>
+      </>
     );
   }
 }
