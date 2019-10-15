@@ -26,7 +26,12 @@ export const setFeed = (feed) => ({
  * Get feed
  * @return {object} response
  */
-export const getFeed = (limit, itemsLength) => async (dispatch) => {
+export const getFeed = ({
+  limit,
+  itemsLength,
+  category = 'general',
+  search = '',
+}) => async (dispatch) => {
   if (limit > itemsLength + FEED_LIMIT) return;
 
   dispatch(toggleLoading(true));
@@ -35,7 +40,7 @@ export const getFeed = (limit, itemsLength) => async (dispatch) => {
     const {
       data: { feed },
     } = await server.get(
-      `/api/v1/feed?offset=${itemsLength}&&limit=${FEED_LIMIT}`,
+      `/api/v1/feed?offset=${itemsLength}&&limit=${FEED_LIMIT}&&category${category}&&search=${search}`,
     );
 
     dispatch(setFeed(feed));

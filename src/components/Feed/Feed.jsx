@@ -20,7 +20,7 @@ export class Feed extends Component {
 
   componentDidMount() {
     const { onGetFeed, limit } = this.props;
-    onGetFeed(limit, 0);
+    onGetFeed({ limit, itemsLength: 0 });
     window.onscroll = debounce(() => {
       onScrollToBottom(() => this.handleInfiniteScroll());
     });
@@ -37,7 +37,7 @@ export class Feed extends Component {
   handleInfiniteScroll() {
     const { onGetFeed, feed = [], limit } = this.props;
     if (feed.length < 1) return;
-    onGetFeed(limit, feed.length);
+    onGetFeed({ limit, itemsLength: feed.length });
   }
 
   render() {
@@ -146,7 +146,7 @@ export const mapStateToProps = ({
  * @returns {object} props
  */
 export const mapDispatchToProps = (dispatch) => ({
-  onGetFeed: (limit, itemsLength) => dispatch(getFeed(limit, itemsLength)),
+  onGetFeed: (payload) => dispatch(getFeed(payload)),
 });
 
 Feed.propTypes = {
@@ -154,12 +154,14 @@ Feed.propTypes = {
   loading: PropTypes.bool,
   limit: PropTypes.number,
   onGetFeed: PropTypes.func,
+  match: PropTypes.any,
 };
 
 Feed.defaultProps = {
   feed: [],
   loading: false,
   limit: 0,
+  match: {},
   onGetFeed: () => '',
 };
 

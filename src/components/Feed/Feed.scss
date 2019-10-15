@@ -2,7 +2,7 @@
 
 .feed {
   width: 100%;
-  margin: 20px 27% 0px;
+  margin-top: 20px;
   padding-bottom: 80px;
   transition: height 1s ease;
 
@@ -108,7 +108,7 @@
         }
       }
 
-      .liked{
+      .liked {
         color: $primary;
         cursor: pointer;
       }
