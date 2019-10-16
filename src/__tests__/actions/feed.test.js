@@ -1,7 +1,7 @@
-import server from '../../Api/server';
-import { getFeed } from '../../actions/feedActions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import server from '../../Api/server';
+import { getFeed } from '../../actions/feedActions';
 import feedMocks from '../../__mocks__/feedMocks';
 
 const mockStore = configureMockStore([thunk]);

@@ -35,7 +35,8 @@ describe('PostComments', () => {
   });
 
   describe('State', () => {
-    let mapped, dispatch;
+    let mapped; let
+      dispatch;
     beforeEach(() => {
       dispatch = jest.fn();
       mapped = mapDispatchToProps(dispatch);

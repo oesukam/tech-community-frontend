@@ -1,7 +1,7 @@
-import server from '../../Api/server';
-import { getPostComments } from '../../actions/postComments';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import server from '../../Api/server';
+import { getPostComments } from '../../actions/postComments';
 import postCommentMock from '../../__mocks__/postCommentMock';
 
 const mockStore = configureMockStore([thunk]);

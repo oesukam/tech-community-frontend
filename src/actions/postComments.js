@@ -5,7 +5,7 @@ import * as types from '../actionTypes/postComments';
  * Toggles the loading state
  * @return {object} action
  */
-export const toggleLoading = state => ({
+export const toggleLoading = (state) => ({
   type: types.TOGGLE_LOADING,
   payload: state,
 });
@@ -14,7 +14,7 @@ export const toggleLoading = state => ({
  * Set comments
  * @return {object} action
  */
-export const setComments = comments => ({
+export const setComments = (comments) => ({
   type: types.SET_COMMENTS,
   payload: comments,
 });
@@ -23,7 +23,7 @@ export const setComments = comments => ({
  * Get comments
  * @return {object} response
  */
-export const getPostComments = postSlug => async dispatch => {
+export const getPostComments = (postSlug) => async (dispatch) => {
   dispatch(toggleLoading(true));
 
   try {

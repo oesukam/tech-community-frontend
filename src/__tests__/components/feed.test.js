@@ -17,6 +17,7 @@ import {
 import feedMocks from '../../__mocks__/feedMocks';
 import initialState from '../../store/initialState';
 
+const mockStore = configureMockStore([thunk]);
 
 describe('Feed', () => {
   let wrapper;
