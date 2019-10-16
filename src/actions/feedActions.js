@@ -70,8 +70,8 @@ export const getFeedOrganizations = () => async (dispatch) => {
   );
   if (res) {
     const {
-      data: { organizations = [] },
+      data: { organizations },
     } = res;
-    dispatch(setFeedOrganizations(organizations));
+    dispatch(setFeedOrganizations(organizations.docs || []));
   }
 };
