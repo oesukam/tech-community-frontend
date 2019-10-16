@@ -17,6 +17,7 @@ Array [
         "description": "description",
         "image": "https://image.png",
         "likesCount": 1,
+        "slug": "slug",
         "userType": "organization",
       },
     ],
