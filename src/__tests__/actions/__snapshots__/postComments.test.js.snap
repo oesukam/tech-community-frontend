@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login actions Should call the \`getPostComments\` action with success 1`] = `
+Array [
+  Object {
+    "payload": true,
+    "type": "TOGGLE_LOADING",
+  },
+  Object {
+    "payload": Array [
+      Object {
+        "author": Object {
+          "picture": "img.jpg",
+          "username": "username",
+        },
+        "body": "Hello world",
+        "createdAt": "2019-10-07",
+      },
+    ],
+    "type": "SET_COMMENTS",
+  },
+  Object {
+    "payload": false,
+    "type": "TOGGLE_LOADING",
+  },
+]
+`;
+
+exports[`Login actions Should call the \`getPostComments\` action with success 2`] = `
+Array [
+  Object {
+    "payload": true,
+    "type": "TOGGLE_LOADING",
+  },
+  Object {
+    "payload": false,
+    "type": "TOGGLE_LOADING",
+  },
+]
+`;
