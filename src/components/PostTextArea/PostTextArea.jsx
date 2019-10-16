@@ -151,7 +151,6 @@ export class PostTextArea extends Component {
     } = this.state;
 
     const {
-      error,
       loading,
       tick,
       maxChar,
@@ -244,7 +243,6 @@ export class PostTextArea extends Component {
             </span>
             <Button
               style={buttonStyle}
-              error={error}
               loading={loading}
               text="POST"
               disabled={disabled}
@@ -267,7 +265,6 @@ PostTextArea.propTypes = {
   allowImagePicker: PropTypes.bool,
   placeholder: PropTypes.string,
   loading: PropTypes.bool,
-  error: PropTypes.any,
   tick: PropTypes.bool,
   post: PropTypes.func.isRequired,
   onChange: PropTypes.func,
@@ -282,7 +279,6 @@ PostTextArea.defaultProps = {
   allowImagePicker: true,
   placeholder: 'Write something ...',
   loading: false,
-  error: false,
   tick: false,
   onChange: () => '',
 };
