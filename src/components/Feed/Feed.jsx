@@ -49,7 +49,7 @@ export class Feed extends Component {
                 role="presentation"
                 className="post"
                 key={slug}
-                onClick={() => push(`/post/${slug}`)}
+                onClick={() => push(`/posts/${slug}`)}
               >
                 <div className="header">
                   <div className="right">
