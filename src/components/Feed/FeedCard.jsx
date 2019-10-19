@@ -92,8 +92,14 @@ const FeedCard = ({
 );
 
 FeedCard.propTypes = {
-  push: PropTypes.string.isRequired,
-  content: PropTypes.object.isRequired,
+  push: PropTypes.any,
+  content: PropTypes.object,
+};
+
+
+FeedCard.defaultProps = {
+  push: {},
+  content: { author: {} },
 };
 
 export default FeedCard;

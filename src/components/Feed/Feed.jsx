@@ -37,7 +37,7 @@ export class Feed extends Component {
             />
           ))}
           {loading
-            && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
+            && [...Array(feed.length > 1 ? 1 : 3).keys()].map((value) => (
               <ContentLoader key={value} />
             ))}
         </div>
