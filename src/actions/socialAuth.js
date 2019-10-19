@@ -29,7 +29,6 @@ export const hideSocialAuth = (user) => ({
  */
 export default (token, user) => async (dispatch) => {
   localStorage.setItem('token', token);
-  localStorage.setItem('username', user.username);
   dispatch(setIsAuth());
   dispatch(setCurrentUser(user));
   return true;

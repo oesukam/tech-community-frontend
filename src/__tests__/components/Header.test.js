@@ -9,6 +9,7 @@ import initialState from '../../store/initialState';
 
 let wrapper;
 const props = {
+  indexName: 'sfdg',
   match: { path: '' },
   location: {
     search: {},
@@ -29,7 +30,8 @@ describe('Header.jsx', () => {
   beforeEach(() => {
     const socialAuth = { show: false };
     store = mockStore({
-      ...initialState, socialAuth,
+      ...initialState,
+      socialAuth,
     });
     wrapper = mount(
       <Provider store={store}>
