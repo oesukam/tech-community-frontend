@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
-import './Feed.scss';
 import { getFeed, getFeedOrganizations } from '../../actions/feedActions';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
-import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
-import TimeAgo from '../Helpers/TimeAgo';
-import Like from '../Like/Like';
+import FeedCard from './FeedCard';
 
 export class Feed extends Component {
   componentDidMount() {
@@ -32,76 +29,13 @@ export class Feed extends Component {
     return (
       <>
         <div className="feed">
-          {feed.map(
-            (
-              {
-                author: { username, picture: profilePicture },
-                userType,
-                image: postImage,
-                description,
-                likesCount,
-                createdAt,
-                liked,
-                slug,
-              },
-            ) => (
-              <div
-                role="presentation"
-                className="post"
-                key={slug}
-                onClick={() => push(`/posts/${slug}`)}
-              >
-                <div className="header">
-                  <div className="right">
-                    <img
-                      className="image"
-                      src={resolvePlaceholder(profilePicture, userType)}
-                      alt="placeholder"
-                    />
-
-                    <div className="info">
-                      <span
-                        role="presentation"
-                        className="name"
-                        onClick={() => push(`/profile/${username}`)}
-                      >
-                        {username}
-                      </span>
-                      <span className="label">{userType}</span>
-                    </div>
-                  </div>
-
-                  <div className="date">
-                    <TimeAgo date={createdAt} />
-                  </div>
-                </div>
-
-                {postImage && (
-                  <img src={postImage} alt="" className="post-image" />
-                )}
-
-                <div className="body">{description}</div>
-
-                <div className="category">Web design</div>
-
-                <div className="bottom">
-                  <div className="left">
-                    <Like {...{ slug, likesCount, liked }} />
-
-                    <div className="action">
-                      <i className="far fa-comment-alt" />
-                      <span className="count">12</span>
-                    </div>
-                  </div>
-
-                  <div className="action share">
-                    <i className="fas fa-share-alt" />
-                  </div>
-                </div>
-              </div>
-            ),
-          )}
-
+          {feed.map((content) => (
+            <FeedCard
+              key={content.slug}
+              push={push}
+              content={content}
+            />
+          ))}
           {loading
             && [...Array(feed.length > 1 ? 1 : 3)].map((value) => (
               <ContentLoader key={value} />
@@ -140,14 +74,12 @@ Feed.propTypes = {
   onGetFeed: PropTypes.func,
   history: PropTypes.any,
   onGetFeedOrganizations: PropTypes.func,
-  match: PropTypes.any,
 };
 
 Feed.defaultProps = {
   feed: [],
   loading: false,
   limit: 0,
-  match: {},
   onGetFeed: () => '',
   history: {},
   onGetFeedOrganizations: () => '',
