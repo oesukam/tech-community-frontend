@@ -6,7 +6,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import server from '../../Api/server';
 import post from '../../actions/fetchSinglePostAction';
-import Post from '../../components/PostComponent/Post';
+import Post from '../../components/PostComponent/PostCard';
 
 const mockStore = configureMockStore([thunk]);
 

@@ -12,9 +12,14 @@ import Home from '../pages/Home/Home';
 import NotFound from '../pages/NotFound/NotFound';
 import SinglePost from '../pages/SinglePost/SinglePost';
 import Profile from './Profile/Profile';
+import SharePost from './SharePost/SharePost';
 
-export const Routes = ({ isAuth }) => (
+export const Routes = ({ isAuth, showShare }) => (
   <Router>
+    { showShare ? (
+      <SharePost />
+    ) : null}
+
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/posts/:slug" component={SinglePost} />
@@ -32,14 +37,20 @@ export const Routes = ({ isAuth }) => (
 
 Routes.propTypes = {
   isAuth: PropTypes.bool,
+  showShare: PropTypes.bool,
 };
 
 Routes.defaultProps = {
   isAuth: false,
+  showShare: false,
 };
 
-export const mapStateToProps = ({ currentUser: { isAuth } }) => ({
+export const mapStateToProps = ({
+  currentUser: { isAuth },
+  posts: { share: { show: showShare } },
+}) => ({
   isAuth,
+  showShare,
 });
 
 export default connect(mapStateToProps)(Routes);

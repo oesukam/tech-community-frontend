@@ -1,25 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Post.scss';
+import './PostCard.scss';
 import TimeAgo from '../Helpers/TimeAgo';
 import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import Like from '../Like/Like';
-import SharePost from '../SharePost/SharePost';
 
-class Post extends Component {
-  state = {
-    show: false,
-    postSlug: '',
-  };
-
-  handleOpenSharePost(postSlug) {
-    this.setState({ show: true, postSlug });
-  }
-
-  handleCloseSharePost() {
-    this.setState({ show: false });
-  }
-
+class PostCard extends Component {
   render() {
     const {
       author: { username, picture: profilePicture },
@@ -32,15 +18,8 @@ class Post extends Component {
       slug,
       push,
     } = this.props;
-    const { show, postSlug } = this.state;
-    const { handleCloseSharePost } = this;
     return (
       <>
-        <SharePost
-          show={show}
-          handleClose={handleCloseSharePost}
-          postSlug={postSlug}
-        />
         <div
           className="post"
           onClick={() => push && push(`/post/${slug}`)}
@@ -107,7 +86,7 @@ class Post extends Component {
   }
 }
 
-Post.propTypes = {
+PostCard.propTypes = {
   author: PropTypes.object.isRequired,
   userType: PropTypes.string.isRequired,
   image: PropTypes.string,
@@ -119,9 +98,9 @@ Post.propTypes = {
   push: PropTypes.func.isRequired,
 };
 
-Post.defaultProps = {
+PostCard.defaultProps = {
   image: null,
   liked: false,
 };
 
-export default Post;
+export default PostCard;

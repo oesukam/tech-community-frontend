@@ -4,14 +4,15 @@ import {
   POST_STARTED,
   RESTORE_TICK,
 } from '../actionTypes/postTypes';
+import { posts as initialState } from '../store/initialState';
 
 /**
- * Login reducer
+ * Post reducer
  * @param {*} [state=auth]
  * @param {*} { type, payload }
  * @returns {object} updated state
  */
-const postReducer = (state = {}, { type, payload }) => {
+const postReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case POST_STARTED:
       return {

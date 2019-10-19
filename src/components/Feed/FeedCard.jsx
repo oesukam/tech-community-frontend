@@ -21,6 +21,7 @@ const FeedCard = ({
     createdAt,
     liked,
     slug,
+    organization,
   },
 }) => (
   <div
@@ -41,7 +42,10 @@ const FeedCard = ({
           <span
             role="presentation"
             className="name"
-            onClick={(e) => navigateTo(e, { push, url: `/profiles/${username}` })}
+            onClick={(e) => navigateTo(e, {
+              push,
+              url: `/${userType === 'person' ? 'profiles' : 'organizations'}/${organization || username}`,
+            })}
           >
             {username}
           </span>

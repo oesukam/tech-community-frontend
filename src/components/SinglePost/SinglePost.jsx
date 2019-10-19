@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ContentLoader from '../Helpers/ContentLoader';
-import Post from '../PostComponent/Post';
+import Post from '../PostComponent/PostCard';
 import PostComment from '../PostComment/PostComment';
 import fetchSinglePost from '../../actions/fetchSinglePostAction';
 import './SinglePost.scss';
