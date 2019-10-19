@@ -17,10 +17,17 @@ h1 {
   &__item {
     display: flex;
     align-items: center;
-    i {
-      font-size: 1.5rem;
-      margin-right: 1rem;
+    span {
+      display: inline-block;
+      width: 40px;
+      color: rgba(0, 0, 0, 0.8);
+      i {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        color: inherit;
+      }
     }
+
     padding: 0.8rem 1rem;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
