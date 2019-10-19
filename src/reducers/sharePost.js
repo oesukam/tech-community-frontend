@@ -1,25 +1,35 @@
-import {
-  SHARE_POST_STARTED,
-  SHARE_POST_SUCCESS,
-  SHARE_POST_ERROR,
-} from '../actionTypes/sharePostTypes';
+import * as types from '../actionTypes/sharePostTypes';
+import { sharePost as initialState } from '../store/initialState';
 
-const sharePostReducer = (state = {}, { type, payload }) => {
+
+const sharePostReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case SHARE_POST_STARTED:
+    case types.SHARE_POST_STARTED:
       return {
         ...state,
         loading: true,
       };
-    case SHARE_POST_SUCCESS:
+    case types.SHARE_POST_SUCCESS:
       return {
         ...state,
         message: payload.message,
       };
-    case SHARE_POST_ERROR:
+    case types.SHARE_POST_ERROR:
       return {
         ...state,
-        error: payload.error,
+        error: payload ? payload.error || payload.message : '',
+      };
+    case types.SET_SHARE_POST_CONTENT:
+      return {
+        ...state,
+        content: payload,
+        show: true,
+      };
+    case types.CLEAR_SHARE_POST_CONTENT:
+      return {
+        ...state,
+        content: initialState.content,
+        show: false,
       };
     default:
       return state;

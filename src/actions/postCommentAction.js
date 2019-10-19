@@ -56,7 +56,7 @@ const postCommentAction = (slug, body) => async (dispatch) => {
       body,
     };
 
-    const res = await server.post(`/api/v1/posts/${slug}/comments`, payload);
+    const res = await server.post(`/posts/${slug}/comments`, payload);
 
     const { post } = res.data;
     dispatch(postCommentSuccess(post));

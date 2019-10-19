@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './PostCard.scss';
+import { connect } from 'react-redux';
 import TimeAgo from '../Helpers/TimeAgo';
 import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import Like from '../Like/Like';
+import { setSharePostContent } from '../../actions/sharePostAction';
+
 
 class PostCard extends Component {
+  handleOpenSharePost = () => {
+    const { slug, _setSharePostContent, description } = this.props;
+    _setSharePostContent({
+      url: `/posts/${slug}`,
+      content: description,
+      title: `${description.substring(0, 40)}...`,
+    });
+  }
+
   render() {
     const {
       author: { username, picture: profilePicture },
@@ -75,7 +87,7 @@ class PostCard extends Component {
               role="button"
               tabIndex="-1"
               className="action share"
-              onClick={() => this.handleOpenSharePost(slug)}
+              onClick={() => this.handleOpenSharePost()}
             >
               <i className="fas fa-share-alt" />
             </div>
@@ -96,11 +108,17 @@ PostCard.propTypes = {
   liked: PropTypes.bool,
   slug: PropTypes.string.isRequired,
   push: PropTypes.func.isRequired,
+  _setSharePostContent: PropTypes.func,
 };
 
 PostCard.defaultProps = {
   image: null,
   liked: false,
+  _setSharePostContent: () => '',
 };
 
-export default PostCard;
+const mapDispatchToProps = (dispatch) => ({
+  _setSharePostContent: (payload) => dispatch(setSharePostContent(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(PostCard);

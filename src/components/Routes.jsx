@@ -16,10 +16,7 @@ import SharePost from './SharePost/SharePost';
 
 export const Routes = ({ isAuth, showShare }) => (
   <Router>
-    { showShare ? (
-      <SharePost />
-    ) : null}
-
+    <SharePost show={showShare} />
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/posts/:slug" component={SinglePost} />
@@ -47,7 +44,7 @@ Routes.defaultProps = {
 
 export const mapStateToProps = ({
   currentUser: { isAuth },
-  posts: { share: { show: showShare } },
+  sharePost: { show: showShare },
 }) => ({
   isAuth,
   showShare,

@@ -5,6 +5,7 @@ import TimeAgo from '../Helpers/TimeAgo';
 import Like from '../Like/Like';
 import './FeedCard.scss';
 
+
 const navigateTo = (e, { push, url }) => {
   e.stopPropagation();
   push(url);
@@ -23,6 +24,7 @@ const FeedCard = ({
     slug,
     organization,
   },
+  handleShare,
 }) => (
   <div
     role="presentation"
@@ -88,7 +90,15 @@ const FeedCard = ({
         </div>
       </div>
 
-      <div className="action share">
+      <div
+        role="presentation"
+        className="action share"
+        onClick={() => handleShare({
+          url: `/posts/${slug}`,
+          title: `${description.substring(0, 40)}...`,
+          content: description,
+        })}
+      >
         <i className="fas fa-share-alt" />
       </div>
     </div>
@@ -98,12 +108,14 @@ const FeedCard = ({
 FeedCard.propTypes = {
   push: PropTypes.any,
   content: PropTypes.object,
+  handleShare: PropTypes.func,
 };
 
 
 FeedCard.defaultProps = {
   push: {},
   content: { author: {} },
+  handleShare: () => '',
 };
 
 export default FeedCard;

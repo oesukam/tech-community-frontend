@@ -49,7 +49,7 @@ export const getFeed = ({
     const {
       data: { feed },
     } = await server.get(
-      `/api/v1/feed?offset=${itemsLength}&limit=${FEED_LIMIT}&category=${category}&search=${search}`,
+      `/feed?offset=${itemsLength}&limit=${FEED_LIMIT}&category=${category}&search=${search}`,
     );
 
     dispatch(setFeed(feed));
@@ -66,7 +66,7 @@ export const getFeed = ({
  */
 export const getFeedOrganizations = () => async (dispatch) => {
   const res = await server.get(
-    '/api/v1/organizations?limit=5',
+    '/organizations?limit=5',
   );
   if (res) {
     const {

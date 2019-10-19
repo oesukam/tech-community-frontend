@@ -12,7 +12,7 @@ class SocialAuth extends Component {
 
   login = (platform) => {
     window.location.replace(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/${platform}`,
+      `${process.env.REACT_APP_BACKEND_URL}/auth/${platform}`,
     );
   };
 

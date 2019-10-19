@@ -49,7 +49,7 @@ describe('Social auth action', () => {
   it('should get details of the logged in user', async () => {
     const username = 'username';
     moxios.stubRequest(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/profiles/${username}`,
+      `${process.env.REACT_APP_BACKEND_URL}/profiles/${username}`,
       {
         status: 200,
         response: {

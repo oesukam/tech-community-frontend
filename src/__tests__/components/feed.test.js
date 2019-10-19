@@ -107,7 +107,7 @@ describe('Feed', () => {
 
     test('Should call the `getFeed` action with success', () => {
       moxios.stubRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/feed?offset=0&&limit=10`,
+        `${process.env.REACT_APP_BACKEND_URL}/feed?offset=0&&limit=10`,
         {
           status: 200,
           response: {
@@ -125,7 +125,7 @@ describe('Feed', () => {
 
     test('Should call the `getFeed` action with error', () => {
       moxios.stubRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/feed?offset=0&&limit=10`,
+        `${process.env.REACT_APP_BACKEND_URL}/feed?offset=0&&limit=10`,
         {
           status: 500,
           response: {},
