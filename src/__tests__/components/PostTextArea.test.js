@@ -29,16 +29,6 @@ describe('PostTextArea.jsx', () => {
     expect(wrapper.instance().state.value).toEqual(event.target.value);
   });
 
-  test('should PostTextArea', () => {
-    const newProps = { ...props, allowImagePicker: false };
-    wrapper = shallow(<PostTextArea {...newProps} />);
-    const event = { target: { value: 'this is the PostTextArea' } };
-    wrapper.find('textarea').simulate('change', event);
-    wrapper.find('Button').simulate('click');
-
-    expect(newProps.post).toHaveBeenCalled();
-  });
-
   test('should select the emage', () => {
     wrapper = shallow(<PostTextArea {...props} />);
     global.URL.createObjectURL = jest.fn(() => 'this is the imageUrl');
@@ -81,7 +71,7 @@ describe('PostTextArea.jsx', () => {
     const event = {
       target: { id: 'id', parentNode: { classList: 'this is the classList' } },
     };
-    wrapper.find('button').simulate('click', event);
+    wrapper.find('button').at(1).simulate('click', event);
     expect(wrapper.instance().state.showEmojiPicker).toEqual(false);
   });
 
