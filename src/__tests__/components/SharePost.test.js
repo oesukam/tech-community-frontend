@@ -11,7 +11,7 @@ describe('SharePost', () => {
   const props = {
     show: true,
     handleClose: jest.fn(),
-    share: jest.fn(),
+    _sharePost: jest.fn(),
   };
 
   const mockStore = configureMockStore([thunk]);
@@ -29,12 +29,6 @@ describe('SharePost', () => {
   it('should share to a platform', () => {
     const wrapper = mount(<SharePostComponent {...props} />);
     wrapper.find('#twitter').simulate('click');
-    expect(wrapper.props().share).toHaveBeenCalled();
-  });
-
-  it('should close SharePost modal when handleClose is hit', () => {
-    const wrapper = mount(<SharePostComponent {...props} />);
-    wrapper.find('#twitter').simulate('click');
-    expect(wrapper.props().handleClose).toHaveBeenCalled();
+    expect(wrapper.props()._sharePost).toHaveBeenCalled();
   });
 });

@@ -8,7 +8,7 @@ import Like from '../Like/Like';
 import { setSharePostContent } from '../../actions/sharePostAction';
 
 
-class PostCard extends Component {
+export class PostCard extends Component {
   handleOpenSharePost = () => {
     const { slug, _setSharePostContent, description } = this.props;
     _setSharePostContent({
