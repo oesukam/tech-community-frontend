@@ -69,10 +69,10 @@ const uploadImage = async (file) => {
  */
 const post = (data) => async (dispatch) => {
   dispatch(postStarted());
-
   try {
     const payload = {
       description: data.value,
+      type: data.category || undefined,
     };
 
     if (data.image) payload.image = await uploadImage(data.image);

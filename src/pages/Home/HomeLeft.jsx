@@ -30,7 +30,9 @@ export class HomeLeft extends Component {
           onClick={() => this.navigateTo('general')}
           className={`side-container__item ${category === 'general' ? 'active' : ''}`}
         >
-          <i className="fa fa-globe" />
+          <span>
+            <i className="fa fa-globe" />
+          </span>
           General
         </div>
         <div
@@ -38,7 +40,9 @@ export class HomeLeft extends Component {
           onClick={() => this.navigateTo('job')}
           className={`side-container__item ${category === 'job' ? 'active' : ''}`}
         >
-          <i className="fa fa-globe" />
+          <span>
+            <i className="fa fa-suitcase" />
+          </span>
           Jobs
         </div>
         <div
@@ -46,7 +50,9 @@ export class HomeLeft extends Component {
           onClick={() => this.navigateTo('event')}
           className={`side-container__item ${category === 'event' ? 'active' : ''}`}
         >
-          <i className="fa fa-globe" />
+          <span>
+            <i className="fa fa-calendar" />
+          </span>
           Events
         </div>
         <div
@@ -54,7 +60,9 @@ export class HomeLeft extends Component {
           onClick={() => this.navigateTo('announcement')}
           className={`side-container__item ${category === 'announcement' ? 'active' : ''}`}
         >
-          <i className="fa fa-globe" />
+          <span>
+            <i className="fa fa-bullhorn" />
+          </span>
           Announcements
         </div>
         <div
@@ -62,7 +70,9 @@ export class HomeLeft extends Component {
           onClick={() => this.navigateTo('question')}
           className={`side-container__item ${category === 'question' ? 'active' : ''}`}
         >
-          <i className="fa fa-globe" />
+          <span>
+            <i className="fa fa-question" />
+          </span>
           Questions
         </div>
       </div>
