@@ -43,7 +43,7 @@ export const getUserDetails = (username) => async (dispatch) => {
   try {
     const {
       data: { profile },
-    } = await server.get(`/api/v1/profiles/${username}`);
+    } = await server.get(`/profiles/${username}`);
     dispatch({
       type: types.GET_USER_DETAILS,
       payload: profile,

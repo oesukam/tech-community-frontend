@@ -29,7 +29,7 @@ export const getPostComments = (postSlug) => async (dispatch) => {
   try {
     const {
       data: { postComments },
-    } = await server.get(`/api/v1/posts/${postSlug}/Comments`);
+    } = await server.get(`/posts/${postSlug}/Comments`);
 
     dispatch(setComments(postComments));
     dispatch(toggleLoading(false));

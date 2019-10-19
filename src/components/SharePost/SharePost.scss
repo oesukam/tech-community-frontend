@@ -1,9 +1,18 @@
+@import '../../styles/colors';
+
 .share-post {
   background: #fff;
   border-radius: 3px;
   width: 50%;
   min-width: 300px;
   max-width: 600px;
+
+  &__header {
+    font-size: 1.5rem;
+    color: $secondary;
+    padding: 10px;
+    text-align: center;
+  }
 
   .SocialMediaShareButton {
     display: flex;

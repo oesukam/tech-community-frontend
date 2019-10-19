@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Post.scss';
+import './PostCard.scss';
+import { connect } from 'react-redux';
 import TimeAgo from '../Helpers/TimeAgo';
 import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import Like from '../Like/Like';
-import SharePost from '../SharePost/SharePost';
+import { setSharePostContent } from '../../actions/sharePostAction';
 
-class Post extends Component {
-  state = {
-    show: false,
-    postSlug: '',
-  };
 
-  handleOpenSharePost(postSlug) {
-    this.setState({ show: true, postSlug });
-  }
-
-  handleCloseSharePost() {
-    this.setState({ show: false });
+export class PostCard extends Component {
+  handleOpenSharePost = () => {
+    const { slug, _setSharePostContent, description } = this.props;
+    _setSharePostContent({
+      url: `/posts/${slug}`,
+      content: description,
+      title: `${description.substring(0, 40)}...`,
+    });
   }
 
   render() {
@@ -32,15 +30,8 @@ class Post extends Component {
       slug,
       push,
     } = this.props;
-    const { show, postSlug } = this.state;
-    const { handleCloseSharePost } = this;
     return (
       <>
-        <SharePost
-          show={show}
-          handleClose={handleCloseSharePost}
-          postSlug={postSlug}
-        />
         <div
           className="post"
           onClick={() => push && push(`/post/${slug}`)}
@@ -96,7 +87,7 @@ class Post extends Component {
               role="button"
               tabIndex="-1"
               className="action share"
-              onClick={() => this.handleOpenSharePost(slug)}
+              onClick={() => this.handleOpenSharePost()}
             >
               <i className="fas fa-share-alt" />
             </div>
@@ -107,7 +98,7 @@ class Post extends Component {
   }
 }
 
-Post.propTypes = {
+PostCard.propTypes = {
   author: PropTypes.object.isRequired,
   userType: PropTypes.string.isRequired,
   image: PropTypes.string,
@@ -117,11 +108,17 @@ Post.propTypes = {
   liked: PropTypes.bool,
   slug: PropTypes.string.isRequired,
   push: PropTypes.func.isRequired,
+  _setSharePostContent: PropTypes.func,
 };
 
-Post.defaultProps = {
+PostCard.defaultProps = {
   image: null,
   liked: false,
+  _setSharePostContent: () => '',
 };
 
-export default Post;
+const mapDispatchToProps = (dispatch) => ({
+  _setSharePostContent: (payload) => dispatch(setSharePostContent(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(PostCard);

@@ -13,4 +13,13 @@ module.exports = {
       query: '',
     },
   },
+  posts: {},
+  sharePost: {
+    show: false,
+    content: {
+      url: '',
+      title: '',
+      content: '',
+    },
+  },
 };

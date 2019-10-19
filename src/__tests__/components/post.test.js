@@ -66,7 +66,7 @@ describe('Post actions', () => {
 
   it('should call the post action with success', () => {
     moxios.stubRequest(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/posts`,
+      `${process.env.REACT_APP_BACKEND_URL}/posts`,
       {
         status: 201,
         response: {
@@ -97,7 +97,7 @@ describe('Post actions', () => {
 
   it('should call the post action with error', () => {
     moxios.stubRequest(
-      `${process.env.REACT_APP_BACKEND_URL}/api/v1/posts`,
+      `${process.env.REACT_APP_BACKEND_URL}/posts`,
       {
         status: 201,
         response: {

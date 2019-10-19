@@ -10,7 +10,7 @@ export const like = (postSlug) => async (dispatch) => {
   dispatch(toggleLoading(true));
 
   try {
-    await server.post(`/api/v1/posts/${postSlug}/like`);
+    await server.post(`/posts/${postSlug}/like`);
     dispatch(toggleLoading(false));
   } catch (e) {
     dispatch(toggleLoading(false));
@@ -25,7 +25,7 @@ export const unlike = (postSlug) => async (dispatch) => {
   dispatch(toggleLoading(true));
 
   try {
-    await server.delete(`/api/v1/posts/${postSlug}/like`);
+    await server.delete(`/posts/${postSlug}/like`);
     dispatch(toggleLoading(false));
   } catch (e) {
     dispatch(toggleLoading(false));

@@ -6,33 +6,33 @@ import Modal from '../Modal/Modal';
 import './SharePost.scss';
 import facebookLogo from '../../assets/images/facebook_logo.png';
 import twitterLogo from '../../assets/images/twitter_logo.png';
+import { sharePost, clearSharePostContent } from '../../actions/sharePostAction';
 
-import { FRONTEND_BASE_URL } from '../../constants';
-
-import shareAction from '../../actions/sharePostAction';
-
+const { REACT_APP_BACKEND_URL } = process.env;
 
 export class SharePost extends Component {
-  handleClick = (postSlug, platform) => {
-    const { share, handleClose } = this.props;
-    share({ postSlug, platform });
-    handleClose();
+  handleClick = (url, platform) => {
+    const { _sharePost } = this.props;
+    _sharePost({ url, platform });
   };
 
   render() {
-    const { show, handleClose, postSlug } = this.props;
-    const POST_URL = `${FRONTEND_BASE_URL}/post/${postSlug}`;
-
+    const { show, _clearSharePostContent, content: { url, title } } = this.props;
+    const POST_URL = `${REACT_APP_BACKEND_URL}/${url}`;
     return (
-      <Modal show={show} handleClose={handleClose}>
+      <Modal show={show} handleClose={_clearSharePostContent}>
+
         <div className="share-post">
+          <header className="share-post__header">
+            {title}
+          </header>
           <div
             role="presentation"
             className="social_share"
             id="twitter"
-            onClick={() => this.handleClick(postSlug, 'twitter')}
+            onClick={() => this.handleClick(url, 'twitter')}
           >
-            <TwitterShareButton url={POST_URL}>
+            <TwitterShareButton url={POST_URL} title={title}>
               <img
                 src={twitterLogo}
                 className="social_logo"
@@ -46,9 +46,9 @@ export class SharePost extends Component {
             role="presentation"
             className="social_share"
             id="facebook"
-            onClick={() => this.handleClick(postSlug, 'facebook')}
+            onClick={() => this.handleClick(url, 'facebook')}
           >
-            <FacebookShareButton url={POST_URL}>
+            <FacebookShareButton url={POST_URL} title={title}>
               <img
                 src={facebookLogo}
                 className="social_logo"
@@ -63,24 +63,30 @@ export class SharePost extends Component {
   }
 }
 
+const mapStateToProps = ({ sharePost: { show, content } }) => ({
+  show, content,
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  share: (data) => dispatch(shareAction(data)),
+  _sharePost: (payload) => dispatch(sharePost(payload)),
+  _clearSharePostContent: (payload) => dispatch(clearSharePostContent(payload)),
 });
 
 SharePost.propTypes = {
   show: PropTypes.bool,
-  postSlug: PropTypes.string,
-  handleClose: PropTypes.func.isRequired,
-  share: PropTypes.func,
+  content: PropTypes.object,
+  _sharePost: PropTypes.func,
+  _clearSharePostContent: PropTypes.func,
 };
 
 SharePost.defaultProps = {
   show: false,
-  postSlug: '',
-  share: () => '',
+  content: { url: '' },
+  _sharePost: () => '',
+  _clearSharePostContent: () => '',
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(SharePost);

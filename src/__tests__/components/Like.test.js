@@ -111,7 +111,7 @@ describe('Like', () => {
 
     test('Should call the `like` action with success', () => {
       moxios.stubRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/post/slug`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/slug`,
         {
           status: 200,
           response: {},
@@ -125,7 +125,7 @@ describe('Like', () => {
 
     test('Should call the `like` action with error', () => {
       moxios.stubRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/post/slug`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/slug`,
         {
           status: 409,
           response: {},
@@ -139,7 +139,7 @@ describe('Like', () => {
 
     test('Should call the `unLike` action with success', () => {
       moxios.stubRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/post/slug`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/slug`,
         {
           status: 200,
           response: {},
@@ -153,7 +153,7 @@ describe('Like', () => {
 
     test('Should call the `unLike` action with error', () => {
       moxios.stubRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/v1/post/slug`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/slug`,
         {
           status: 409,
           response: {},

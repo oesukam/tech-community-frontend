@@ -1,11 +1,6 @@
 import axios from 'axios';
 import server from '../Api/server';
-import {
-  POST_ERROR,
-  POST_STARTED,
-  POST_SUCCESS,
-  RESTORE_TICK,
-} from '../actionTypes/postTypes';
+import * as types from '../actionTypes/postTypes';
 
 const {
   REACT_APP_CLOUDINARY_URL_IMAGE,
@@ -17,7 +12,7 @@ const {
  * when the process starts
  * @return {object} action
  */
-const postStarted = () => ({ type: POST_STARTED });
+const postStarted = () => ({ type: types.POST_STARTED });
 
 /**
  * Triggers an action
@@ -26,7 +21,7 @@ const postStarted = () => ({ type: POST_STARTED });
  * @return {object} action
  */
 const postSuccess = (post) => ({
-  type: POST_SUCCESS,
+  type: types.POST_SUCCESS,
   payload: post,
 });
 
@@ -37,9 +32,10 @@ const postSuccess = (post) => ({
  * @return {object} action
  */
 const postError = (error) => ({
-  type: POST_ERROR,
+  type: types.POST_ERROR,
   payload: error,
 });
+
 
 /**
  * Triggers an action
@@ -47,7 +43,7 @@ const postError = (error) => ({
  * to restore the tick
  * @return {object} action
  */
-const restoreTick = () => ({ type: RESTORE_TICK });
+const restoreTick = () => ({ type: types.RESTORE_TICK });
 
 const uploadImage = async (file) => {
   const formData = new FormData();
@@ -81,7 +77,7 @@ const post = (data) => async (dispatch) => {
 
     if (data.image) payload.image = await uploadImage(data.image);
 
-    const res = await server.post('/api/v1/posts', payload);
+    const res = await server.post('/posts', payload);
 
     dispatch(postSuccess(res.data.post));
     setTimeout(() => {

@@ -31,7 +31,7 @@ export default (slug) => async (dispatch) => {
     const {
       data: { post },
     } = await server.get(
-      `/api/v1/posts/${slug}`,
+      `/posts/${slug}`,
     );
 
     dispatch(fetchSuccess(post));
