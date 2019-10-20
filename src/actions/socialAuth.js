@@ -12,14 +12,12 @@ export const setCurrentUser = (user) => ({
   payload: user,
 });
 
-export const showSocialAuth = (user) => ({
+export const showSocialAuth = () => ({
   type: SHOW_SOCIAL_AUTH,
-  payload: user,
 });
 
-export const hideSocialAuth = (user) => ({
+export const hideSocialAuth = () => ({
   type: HIDE_SOCIAL_AUTH,
-  payload: user,
 });
 
 /**

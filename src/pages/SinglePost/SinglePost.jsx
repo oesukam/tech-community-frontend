@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Layout from '../../containers/Layout/Layout';
 import Post from '../../components/SinglePost/SinglePost';
 
-const SinglePost = ({ match, location }) => (
-  <Layout match={match} location={location}>
+const SinglePost = ({ match, location, history }) => (
+  <Layout match={match} location={location} history={history}>
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-8 offset-md-2">
@@ -19,6 +19,11 @@ const SinglePost = ({ match, location }) => (
 SinglePost.propTypes = {
   match: PropTypes.any.isRequired,
   location: PropTypes.any.isRequired,
+  history: PropTypes.any,
+};
+
+SinglePost.defaultProps = {
+  history: {},
 };
 
 export default SinglePost;
