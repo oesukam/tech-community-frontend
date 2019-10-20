@@ -1,7 +1,42 @@
+@import '../../styles/colors';
+
 .profile {
   background-color: #f4f6f9;
+  &__user {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &__avatar {
+      margin: 1.5rem 0;
+      height: 150px;
+      width: 150px;
+      border-radius: 100%;
+      text-align: center;
+    }
+    &__counters {
+      width: 100%;
+      display: flex;
+      div {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: center;
+        padding: 5px;
+        border: 1px solid $surface;
+        span {
+          font-size: 1.5rem;
+          color: $primary;
+        }
+        p {
+          margin-bottom: 5px;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
   &__details {
-    margin: 3% 10px;
+    margin: 0 0 3%;
     padding-left: 10px;
     background-color: white;
     .belt {
@@ -17,7 +52,7 @@
   }
 
   &__social {
-    margin: 3% 10px;
+    margin: 0 0 3%;
     padding-left: 10px;
     background-color: white;
     .belt {
@@ -60,7 +95,7 @@
   }
 
   &__location {
-    margin: 3% 10px;
+    margin: 0 0 3%;
     padding-left: 10px;
     background-color: white;
     .belt {
@@ -97,7 +132,7 @@
 }
 
 .belt {
-  border-left: solid 5px #56b7fd;
+  border-left: solid 5px $primary;
 }
 
 .names {
