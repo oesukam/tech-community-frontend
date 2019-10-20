@@ -4,7 +4,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Layout from '../../containers/Layout/Layout';
 import defaultAvatar from '../../assets/images/person.png';
+import Button from '../Button/Button';
 
+const followButtonStyle = {
+  paddingTop: '3px',
+  paddingBottom: '3px',
+  padding: '10px',
+  fontSize: '1rem',
+  width: '100%',
+};
 
 export const Profile = ({
   details,
@@ -32,6 +40,11 @@ export const Profile = ({
                 <p>Following</p>
               </div>
             </div>
+            <Button
+              style={followButtonStyle}
+              text="Follow"
+              disabled
+            />
           </div>
         </div>
         <div className="col-md-9">
