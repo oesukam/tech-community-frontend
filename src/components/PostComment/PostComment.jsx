@@ -61,7 +61,7 @@ export const mapStateToProps = ({ postComment }) => {
  * @returns {object} props
  */
 export const mapDispatchToProps = (dispatch) => ({
-  post: (slug, body) => dispatch(postCommentAction(slug, body)),
+  post: (payload) => dispatch(postCommentAction(payload)),
 });
 
 export default connect(
