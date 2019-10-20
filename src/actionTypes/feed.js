@@ -1,3 +1,4 @@
 export const TOOGLE_LOADING = 'TOOGLE_LOADING';
 export const SET_FEED = 'SET_FEED';
 export const SET_FEED_ORGANIZATIONS = 'SET_FEED_ORGANIZATIONS';
+export const CLEAR_FEED = 'CLEAR_FEED';

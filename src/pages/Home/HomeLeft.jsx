@@ -16,15 +16,26 @@ export class HomeLeft extends Component {
       itemsLength: 0,
       category,
       search,
+      clear: true,
     });
   };
 
   render() {
     const { location } = this.props;
-    const { category = 'general' } = queryString.parse(location.search);
+    const { category = '' } = queryString.parse(location.search);
     return (
       <div className="side-container">
         <div className="side-container__header">Categories</div>
+        <div
+          role="presentation"
+          onClick={() => this.navigateTo('')}
+          className={`side-container__item ${category === '' ? 'active' : ''}`}
+        >
+          <span>
+            <i className="fa fa-list" />
+          </span>
+          All
+        </div>
         <div
           role="presentation"
           onClick={() => this.navigateTo('general')}

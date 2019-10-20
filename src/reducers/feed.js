@@ -19,13 +19,18 @@ const reducer = (
     case types.SET_FEED:
       return {
         ...state,
-        items: [...state.items, ...payload],
+        items: [...new Set([...state.items, ...payload])],
         limit: state.limit + FEED_LIMIT,
       };
     case types.SET_FEED_ORGANIZATIONS:
       return {
         ...state,
         organizations: payload,
+      };
+    case types.CLEAR_FEED:
+      return {
+        ...state,
+        items: [],
       };
     default:
       return state;
