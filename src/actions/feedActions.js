@@ -14,6 +14,14 @@ export const toggleLoading = (state) => ({
 });
 
 /**
+ * Cleat feed
+ * @return {object} action
+ */
+export const clearFeed = () => ({
+  type: types.CLEAR_FEED,
+});
+
+/**
  * Set feed
  * @return {object} action
  */
@@ -31,6 +39,7 @@ export const setFeedOrganizations = (payload) => ({
   payload,
 });
 
+
 /**
  * Get feed
  * @return {object} response
@@ -40,11 +49,12 @@ export const getFeed = ({
   itemsLength,
   category = 'general',
   search = '',
+  clear,
 }) => async (dispatch) => {
   if (limit > itemsLength + FEED_LIMIT) return;
 
   dispatch(toggleLoading(true));
-
+  if (clear) dispatch(clearFeed());
   try {
     const {
       data: { feed },

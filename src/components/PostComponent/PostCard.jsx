@@ -29,6 +29,7 @@ export class PostCard extends Component {
       liked,
       slug,
       push,
+      commentsCount,
     } = this.props;
     return (
       <>
@@ -78,7 +79,7 @@ export class PostCard extends Component {
 
               <div className="action">
                 <i className="far fa-comment-alt" />
-                <span className="count">12</span>
+                <span className="count">{commentsCount}</span>
               </div>
             </div>
 
@@ -109,12 +110,14 @@ PostCard.propTypes = {
   slug: PropTypes.string.isRequired,
   push: PropTypes.func.isRequired,
   _setSharePostContent: PropTypes.func,
+  commentsCount: PropTypes.number,
 };
 
 PostCard.defaultProps = {
   image: null,
   liked: false,
   _setSharePostContent: () => '',
+  commentsCount: 0,
 };
 
 const mapDispatchToProps = (dispatch) => ({

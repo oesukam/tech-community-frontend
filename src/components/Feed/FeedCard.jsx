@@ -23,6 +23,7 @@ const FeedCard = ({
     liked,
     slug,
     organization,
+    commentsCount,
   },
   handleShare,
 }) => (
@@ -86,7 +87,7 @@ const FeedCard = ({
 
         <div className="action">
           <i className="far fa-comment-alt" />
-          <span className="count">12</span>
+          <span className="count">{commentsCount}</span>
         </div>
       </div>
 
