@@ -39,6 +39,10 @@ const FeedCard = ({
           className="image"
           src={resolvePlaceholder(profilePicture, userType)}
           alt="placeholder"
+          onClick={(e) => navigateTo(e, {
+            push,
+            url: `/${userType === 'person' ? 'profiles' : 'organizations'}/${organization || username}`,
+          })}
         />
 
         <div className="info">

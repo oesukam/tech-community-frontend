@@ -150,8 +150,8 @@ export class PostTextArea extends Component {
     const {
       value, image = '', showConfirmCategory, category,
     } = this.state;
-    const { post, slug } = this.props;
-    if (value && showConfirmCategory) {
+    const { post, slug, comment } = this.props;
+    if (value && (showConfirmCategory || comment)) {
       post({
         value, image, slug, category,
       });
@@ -401,6 +401,7 @@ PostTextArea.propTypes = {
   tick: PropTypes.bool,
   post: PropTypes.func.isRequired,
   onChange: PropTypes.func,
+  comment: PropTypes.bool,
 };
 
 PostTextArea.defaultProps = {
@@ -414,6 +415,7 @@ PostTextArea.defaultProps = {
   loading: false,
   tick: false,
   onChange: () => '',
+  comment: false,
 };
 
 export default PostTextArea;

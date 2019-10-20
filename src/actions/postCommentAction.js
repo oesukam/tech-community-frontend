@@ -48,7 +48,7 @@ const restoreTick = () => ({ type: RESTORE_COMMENT_TICK });
  * @param {*} { username, email, password }
  * @return {object} response
  */
-const postCommentAction = (slug, body) => async (dispatch) => {
+const postCommentAction = ({ slug, value: body }) => async (dispatch) => {
   dispatch(postCommentStarted());
 
   try {

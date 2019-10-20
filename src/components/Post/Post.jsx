@@ -6,7 +6,14 @@ import PostTextArea from '../PostTextArea/PostTextArea';
 
 export const Post = ({
   post, loading, error, tick,
-}) => <PostTextArea post={post} loading={loading} error={error} tick={tick} />;
+}) => (
+  <PostTextArea
+    post={post}
+    loading={loading}
+    error={error}
+    tick={tick}
+  />
+);
 
 Post.propTypes = {
   loading: PropTypes.bool,

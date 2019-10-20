@@ -13,6 +13,7 @@ export class PostComment extends Component {
     } = this.props;
     return (
       <PostTextArea
+        comment
         minChar={1}
         placeholder="Write your comment here"
         slug={slug}
@@ -60,7 +61,7 @@ export const mapStateToProps = ({ postComment }) => {
  * @returns {object} props
  */
 export const mapDispatchToProps = (dispatch) => ({
-  post: (slug, body) => dispatch(postCommentAction(slug, body)),
+  post: (payload) => dispatch(postCommentAction(payload)),
 });
 
 export default connect(
