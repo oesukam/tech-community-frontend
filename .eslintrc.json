@@ -33,6 +33,9 @@
     "no-bitwise": 0,
     "no-underscore-dangle": 0,
     "consistent-return": 0,
-    "jsx-a11y/label-has-associated-control": 0
+    "jsx-a11y/label-has-associated-control": 0,
+    "import/named": 0,
+    "prefer-promise-reject-errors": 0,
+    "import/no-cycle": 0
   }
 }

@@ -14,9 +14,9 @@ import { setSearchState } from '../../actions/searchActions';
 
 const Autocomplete = ({ hits }) => (
   <ul className="search-autocomplete">
-    {hits.map((hit) => (
+    {hits.map((hit) => (hit.title ? (
       <li key={hit.objectID}>
-        <Link to={`/${hit.resource}s/${hit.objectID}`}>
+        <Link to={`/${hit.resource}s/${hit.objectID || hit.slug}`}>
           <p>{hit.title}</p>
           <span>
             <i className="fa fa-list" />
@@ -24,7 +24,7 @@ const Autocomplete = ({ hits }) => (
           </span>
         </Link>
       </li>
-    ))}
+    ) : null))}
   </ul>
 );
 

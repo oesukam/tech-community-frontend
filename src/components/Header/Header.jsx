@@ -84,14 +84,22 @@ export class Header extends Component {
     if (isAuth) {
       return (
         <div className="user-info">
-          <div className="user-info__notif">
-            <span className="counter">12</span>
-            <i className="fas fa-bell" alt="" />
-          </div>
-          <div className="user-info__message">
-            <span className="counter">12</span>
-            <i className="fas fa-envelope" alt="" />
-          </div>
+          {
+            false ? (
+              <>
+                <div className="user-info__notif">
+                  <span className="counter">12</span>
+                  <i className="fas fa-bell" alt="" />
+                </div>
+                <div className="user-info__message">
+                  <span className="counter">12</span>
+                  <i className="fas fa-envelope" alt="" />
+                </div>
+              </>
+            )
+              : null
+          }
+
           <div className="user-info__avatar" alt="">
             <img
               role="presentation"

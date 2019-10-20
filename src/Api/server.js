@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from '../store';
+import { showSocialAuth } from '../actions/socialAuth';
 
 const token = localStorage.getItem('token') || undefined;
 const server = axios.create({
@@ -15,7 +17,14 @@ server.interceptors.request.use(
     if (userToken) config.headers.Authorization = `Bearer ${userToken}`;
     return config;
   },
-  (error) => Promise.reject(error),
+  (err) => {
+    const { error } = err.response.data;
+    if (error === 'JsonWebTokenError: jwt malformed') {
+      store.dispatch(showSocialAuth());
+    }
+    return Promise.reject({ ...err });
+  },
+
 );
 
 export default server;
