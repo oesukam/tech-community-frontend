@@ -13,6 +13,7 @@ export class PostComment extends Component {
     } = this.props;
     return (
       <PostTextArea
+        comment
         minChar={1}
         placeholder="Write your comment here"
         slug={slug}
