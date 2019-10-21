@@ -2,7 +2,6 @@
 
 .post-comments {
   width: 100%;
-  margin: 0 27% 0;
 
   .info {
     margin-top: 20px;
@@ -20,6 +19,7 @@
 
     .post {
       display: flex;
+      flex-direction: row;
       align-items: stretch;
       margin: 0 0 20px;
       padding: 20px 20px 30px;
@@ -41,7 +41,7 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
 
           .name {
             font-weight: 600;
@@ -58,6 +58,7 @@
         }
 
         .body {
+          padding-top: 10px;
           font-size: 0.9em;
         }
       }

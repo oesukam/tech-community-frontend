@@ -5,6 +5,7 @@ import ContentLoader from '../Helpers/ContentLoader';
 import Post from '../PostComponent/PostCard';
 import PostComment from '../PostComment/PostComment';
 import fetchSinglePost from '../../actions/fetchSinglePostAction';
+import PostComments from '../PostComments/PostComments';
 import './SinglePost.scss';
 
 export class SinglePost extends Component {
@@ -18,17 +19,19 @@ export class SinglePost extends Component {
   }
 
   renderRelatedPosts = () => {
-    const { relatedPosts: { isEmpty, feed } } = this.props;
+    const { onFetchSinglePost, relatedPosts: { isEmpty, feed }, history: { push } } = this.props;
     if (isEmpty) return <span className="text-muted font-weight-bolder">Nothing yet!</span>;
-    return feed.map((post) => <Post {...post} key={post._id} />);
+    return feed.map(
+      (post) => <Post {...post} key={post._id} push={push} onFetchSinglePost={onFetchSinglePost} />,
+    );
   }
 
 
   render() {
-    const { post } = this.props;
+    const { post, slug } = this.props;
     return (
       <div className="row" id="single-post">
-        <div className="col-md-7">
+        <div className="col-md-8">
           <div className="single-post">
             {!post ? (
               <ContentLoader />
@@ -37,11 +40,12 @@ export class SinglePost extends Component {
                 <Post {...post} />
                 <hr />
                 <PostComment slug={post.slug} allowImagePicker={false} />
+                <PostComments post={post} slug={slug} />
               </>
             )}
           </div>
         </div>
-        <div className="col-md-3 related-posts">
+        <div className="col-md-4 related-posts">
           <h4 className="mb-4">
             Related Posts
           </h4>
@@ -59,6 +63,7 @@ SinglePost.propTypes = {
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
   }).isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 /**

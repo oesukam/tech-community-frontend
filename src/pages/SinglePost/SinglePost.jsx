@@ -6,11 +6,14 @@ import Post from '../../components/SinglePost/SinglePost';
 const SinglePost = ({ match, location, history }) => (
   <Layout match={match} location={location} history={history}>
     <div className="container-fluid">
-      <Post slug={match.params.slug} />
+      <div className="row">
+        <div className="col-md-12">
+          <Post slug={match.params.slug} history={history} />
+        </div>
+      </div>
     </div>
   </Layout>
 );
-
 
 SinglePost.propTypes = {
   match: PropTypes.any.isRequired,

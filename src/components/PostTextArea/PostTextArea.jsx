@@ -148,9 +148,14 @@ export class PostTextArea extends Component {
 
   submitPost = () => {
     const {
+      onToggleSocialModal, isAuth, post, slug, comment,
+    } = this.props;
+    if (!isAuth) return onToggleSocialModal(true);
+
+    const {
       value, image = '', showConfirmCategory, category,
     } = this.state;
-    const { post, slug, comment } = this.props;
+
     if (value && (showConfirmCategory || comment)) {
       post({
         value, image, slug, category,
@@ -402,6 +407,8 @@ PostTextArea.propTypes = {
   post: PropTypes.func.isRequired,
   onChange: PropTypes.func,
   comment: PropTypes.bool,
+  isAuth: PropTypes.bool.isRequired,
+  onToggleSocialModal: PropTypes.func.isRequired,
 };
 
 PostTextArea.defaultProps = {

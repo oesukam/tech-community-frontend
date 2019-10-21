@@ -34,6 +34,7 @@ const props = {
   },
   onFetchSinglePost: jest.fn(),
   slug: 'slug',
+  history: { push: () => {} },
 };
 
 describe('Post.jsx', () => {

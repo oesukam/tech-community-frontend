@@ -10,7 +10,7 @@ const reducer = (state = { loading: true }, { type, payload }) => {
     case types.SET_COMMENTS:
       return {
         ...state,
-        items: payload,
+        items: payload.reverse(),
       };
     default:
       return state;
