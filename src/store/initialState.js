@@ -22,4 +22,18 @@ module.exports = {
       content: '',
     },
   },
+  singlePost: {
+    post: {
+      author: {},
+      slug: '',
+      userType: '',
+      description: '',
+      likesCount: 0,
+      createdAt: '',
+    },
+    relatedPosts: {
+      isEmpty: false,
+      feed: [],
+    },
+  },
 };

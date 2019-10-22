@@ -1,7 +1,14 @@
 @import '../../styles/colors';
-
-.single-post {
-  width: 100%;
-  margin-top: 20px;
-  transition: height 1s ease;
+#single-post{
+  justify-content: space-around;
+  .single-post {
+    width: 100%;
+    margin-top: 20px;
+    transition: height 1s ease;
+  }
+  
+  .related-posts {
+    margin-top: 20px;
+    transition: height 1s ease;
+  }
 }
