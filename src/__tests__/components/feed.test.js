@@ -28,6 +28,7 @@ describe('Feed', () => {
     feed: [feedMocks],
     loading: false,
     limit: 2,
+    location: { search: { category: 'question' } },
   };
 
   describe('Feed.jsx', () => {

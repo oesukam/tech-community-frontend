@@ -2,27 +2,41 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import { getFeed, getFeedOrganizations } from '../../actions/feedActions';
 import { setSharePostContent } from '../../actions/sharePostAction';
-
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
 import FeedCard from './FeedCard';
 
 export class Feed extends Component {
   componentDidMount() {
-    const { onGetFeed, limit, onGetFeedOrganizations } = this.props;
-    onGetFeed({ limit, itemsLength: 0 });
+    const {
+      onGetFeed, limit, onGetFeedOrganizations,
+    } = this.props;
+
+    const { category } = this.getQueries();
+    onGetFeed({ limit, itemsLength: 0, category });
+
     onGetFeedOrganizations();
     window.onscroll = debounce(() => {
       onScrollToBottom(() => this.handleInfiniteScroll());
     });
   }
 
+  getQueries() {
+    const { location: { search } } = this.props;
+    return queryString.parse(search);
+  }
+
   handleInfiniteScroll() {
-    const { onGetFeed, feed = [], limit } = this.props;
+    const {
+      onGetFeed, feed = [], limit,
+    } = this.props;
+
+    const { category } = this.getQueries();
     if (feed.length < 1) return;
-    onGetFeed({ limit, itemsLength: feed.length });
+    onGetFeed({ limit, itemsLength: feed.length, category });
   }
 
   render() {
@@ -82,6 +96,7 @@ Feed.propTypes = {
   limit: PropTypes.number,
   onGetFeed: PropTypes.func,
   history: PropTypes.any,
+  location: PropTypes.object.isRequired,
   onGetFeedOrganizations: PropTypes.func,
   _setSharePostContent: PropTypes.func,
 };
