@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PostTextArea from '../PostTextArea/PostTextArea';
 import postCommentAction from '../../actions/postCommentAction';
+import { handleShowAndHide as toggleSocialModal } from '../../actions/socialAuth';
 
 export class PostComment extends Component {
   state = {};
 
   render() {
     const {
-      post, slug, loading, error, tick,
+      post, slug, loading, error, tick, onToggleSocialModal, isAuth,
     } = this.props;
     return (
       <PostTextArea
@@ -21,7 +22,9 @@ export class PostComment extends Component {
         loading={loading}
         error={error}
         tick={tick}
+        isAuth={isAuth}
         allowImagePicker={false}
+        onToggleSocialModal={onToggleSocialModal}
       />
     );
   }
@@ -33,6 +36,8 @@ PostComment.propTypes = {
   error: PropTypes.any,
   tick: PropTypes.bool,
   post: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  onToggleSocialModal: PropTypes.func.isRequired,
 };
 
 PostComment.defaultProps = {
@@ -46,12 +51,13 @@ PostComment.defaultProps = {
  * @param {*} { auth }
  * @returns {object} props
  */
-export const mapStateToProps = ({ postComment }) => {
+export const mapStateToProps = ({ currentUser: { isAuth }, postComment }) => {
   const { loading, error, tick } = postComment;
   return {
     loading,
     error,
     tick,
+    isAuth,
   };
 };
 
@@ -62,6 +68,7 @@ export const mapStateToProps = ({ postComment }) => {
  */
 export const mapDispatchToProps = (dispatch) => ({
   post: (payload) => dispatch(postCommentAction(payload)),
+  onToggleSocialModal: (show) => dispatch(toggleSocialModal(show)),
 });
 
 export default connect(

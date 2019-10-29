@@ -39,9 +39,11 @@ describe('Post.jsx', () => {
         loading: false,
         error: false,
         tick: true,
+        isAuth: false,
       };
       const state = mapStateToProps({
         postComment: { ...expectedState },
+        currentUser: { isAuth: false },
       });
       expect(state).toEqual(expectedState);
     });

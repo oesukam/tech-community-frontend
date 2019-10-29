@@ -18,6 +18,12 @@ export class PostCard extends Component {
     });
   }
 
+  handlePushPost(slug) {
+    const { onFetchSinglePost, push } = this.props;
+    push(`/posts/${slug}`);
+    onFetchSinglePost(slug);
+  }
+
   render() {
     const {
       author: { username, picture: profilePicture },
@@ -34,11 +40,7 @@ export class PostCard extends Component {
     return (
       <>
         <div
-          className="post"
-          onClick={() => push && push(`/post/${slug}`)}
-          onKeyDown={() => null}
-          role="button"
-          tabIndex="-1"
+          className="post post-comment"
         >
           <div className="header">
             <div className="right">
@@ -67,9 +69,27 @@ export class PostCard extends Component {
             </div>
           </div>
 
-          {image && <img src={image} alt="" className="post-image" />}
+          {image && (
+          <img
+            src={image}
+            alt=""
+            className="post-image"
+            onClick={() => this.handlePushPost(slug)}
+            onKeyDown={() => null}
+            role="presentation"
+            tabIndex="-1"
+          />
+          )}
 
-          <div className="body">{description}</div>
+          <div
+            className="body"
+            onClick={() => this.handlePushPost(slug)}
+            onKeyDown={() => null}
+            role="button"
+            tabIndex="-1"
+          >
+            {description}
+          </div>
 
           <div className="category">Web design</div>
 
@@ -77,7 +97,13 @@ export class PostCard extends Component {
             <div className="left">
               <Like {...{ slug, likesCount, liked }} />
 
-              <div className="action">
+              <div
+                className="action"
+                onClick={() => this.handlePushPost(slug)}
+                onKeyDown={() => null}
+                role="presentation"
+                tabIndex="-1"
+              >
                 <i className="far fa-comment-alt" />
                 <span className="count">{commentsCount}</span>
               </div>
@@ -111,6 +137,7 @@ PostCard.propTypes = {
   push: PropTypes.func.isRequired,
   _setSharePostContent: PropTypes.func,
   commentsCount: PropTypes.number,
+  onFetchSinglePost: PropTypes.func,
 };
 
 PostCard.defaultProps = {
@@ -118,6 +145,7 @@ PostCard.defaultProps = {
   liked: false,
   _setSharePostContent: () => '',
   commentsCount: 0,
+  onFetchSinglePost: () => null,
 };
 
 const mapDispatchToProps = (dispatch) => ({

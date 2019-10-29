@@ -1,16 +1,12 @@
 @import '../../styles/colors';
 
-.post {
+.post.post-comment {
   display: flex;
   flex-direction: column;
   padding: 15px 20px;
   background-color: #fff;
   margin: 0px 0 20px;
   transform: translateY(150px);
-
-  &:hover {
-    cursor: pointer;
-  }
 
   a {
     text-decoration: none;
@@ -66,6 +62,10 @@
     font-size: 1em;
     padding-top: 20px;
     font-weight: 400;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .category {

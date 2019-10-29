@@ -10,7 +10,7 @@ import defaultAvatar from '../../assets/images/person.png';
 export class PostComments extends Component {
   componentDidMount() {
     const {
-      post: { slug },
+      slug,
       onGetPostComments,
     } = this.props;
     onGetPostComments(slug);
@@ -29,15 +29,13 @@ export class PostComments extends Component {
       <div className="post-comments">
         <div className="info">
           <span>
-            {commentsCount}
-            {' '}
-Comment
+            {`${commentsCount} `}
+            Comment
             {commentsCount !== 1 ? 's' : ''}
           </span>
           <span>
-            {likesCount}
-            {' '}
-Like
+            {`${likesCount} `}
+            Like
             {likesCount !== 1 ? 's' : ''}
           </span>
         </div>
@@ -45,24 +43,22 @@ Like
         <div className="posts">
           {loading && <ContentLoader />}
 
-          {items.map(
-            ({
-              author: { username }, createdAt, body, _id,
-            }) => (
-              <div className="post" key={_id}>
-                <img src={undefined || defaultAvatar} alt="profile" />
-                <div className="right">
-                  <div className="top">
-                    <span className="name">{username}</span>
-                    <span className="date">
-                      <TimeAgo date={createdAt} />
-                    </span>
-                  </div>
-                  <div className="body">{body}</div>
+          {!loading && items.map(({
+            author: { username, picture: profilePicture }, createdAt, body, _id,
+          }) => (
+            <div className="post" key={_id}>
+              <img src={profilePicture || defaultAvatar} alt="profile" />
+              <div className="right">
+                <div className="top">
+                  <span className="name">{username}</span>
+                  <span className="date">
+                    <TimeAgo date={createdAt} />
+                  </span>
                 </div>
+                <div className="body">{body}</div>
               </div>
-            ),
-          )}
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -72,8 +68,8 @@ Like
 PostComments.propTypes = {
   items: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
+  slug: PropTypes.string.isRequired,
   post: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
     likesCount: PropTypes.number.isRequired,
   }).isRequired,
   onGetPostComments: PropTypes.func.isRequired,

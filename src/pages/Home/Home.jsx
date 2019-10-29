@@ -11,7 +11,7 @@ import HomeRight from './HomeRight';
 export const Home = (props) => (
   <Layout {...props}>
     <div className="container-fluid">
-      <div className="row">
+      <div className="row home-page">
         <div className="col-md-3">
           <HomeLeft {...props} />
         </div>

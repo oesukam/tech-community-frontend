@@ -32,7 +32,11 @@ const FeedCard = ({
     className="post"
     key={slug}
   >
-    <div className="header">
+    <div
+      role="presentation"
+      className="header"
+      onClick={(e) => navigateTo(e, { push, url: `/posts/${slug}` })}
+    >
       <div className="right">
         <img
           role="presentation"
@@ -45,7 +49,9 @@ const FeedCard = ({
           })}
         />
 
-        <div className="info">
+        <div
+          className="info"
+        >
           <span
             role="presentation"
             className="name"
@@ -85,11 +91,17 @@ const FeedCard = ({
 
     <div className="category">Web design</div>
 
-    <div className="bottom">
+    <div
+      className="bottom"
+    >
       <div className="left">
         <Like {...{ slug, likesCount, liked }} />
 
-        <div className="action">
+        <div
+          className="action"
+          role="presentation"
+          onClick={() => push(`/posts/${slug}`)}
+        >
           <i className="far fa-comment-alt" />
           <span className="count">{commentsCount}</span>
         </div>

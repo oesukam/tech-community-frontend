@@ -5,6 +5,7 @@ import {
   POST_COMMENT_SUCCESS,
   RESTORE_COMMENT_TICK,
 } from '../actionTypes/postCommentTypes';
+import { getPostComments } from './postComments';
 
 /**
  * Triggers an action
@@ -60,6 +61,8 @@ const postCommentAction = ({ slug, value: body }) => async (dispatch) => {
 
     const { post } = res.data;
     dispatch(postCommentSuccess(post));
+    dispatch(getPostComments(slug));
+
     setTimeout(() => {
       dispatch(restoreTick());
     }, 3000);

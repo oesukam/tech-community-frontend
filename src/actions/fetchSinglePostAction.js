@@ -2,6 +2,8 @@ import server from '../Api/server';
 
 import * as types from '../actionTypes/singlePostTypes';
 
+import { getPostComments } from './postComments';
+
 /**
  * Toggles the loading state
  * @return {object} action
@@ -58,9 +60,10 @@ export default (slug) => async (dispatch) => {
       `/posts/${slug}`,
     );
 
+    dispatch(getPostComments(slug));
     dispatch(fetchSuccess(post));
     dispatch(toggleLoading(false));
-    dispatch(await fetchRelatedPosts(post.type, slug));
+    dispatch(fetchRelatedPosts(post.type, slug));
   } catch (e) {
     dispatch(toggleLoading(false));
   }
