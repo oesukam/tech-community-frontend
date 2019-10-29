@@ -1,0 +1,17 @@
+.notFound {
+  display: flex;
+
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 0 20px;
+    background-color: #fff;
+
+    span {
+      text-align: center;
+      font-size: 1.3em;
+    }
+  }
+}

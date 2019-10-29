@@ -8,6 +8,7 @@ import { setSharePostContent } from '../../actions/sharePostAction';
 import ContentLoader from '../Helpers/ContentLoader';
 import onScrollToBottom from '../../helpers/onScrollToBottom';
 import FeedCard from './FeedCard';
+import NotFound from '../NotFound/NotFound';
 
 export class Feed extends Component {
   componentDidMount() {
@@ -50,6 +51,11 @@ export class Feed extends Component {
     return (
       <>
         <div className="feed">
+          {
+            !loading && feed.length === 0
+            && (<NotFound text="No post was found!" />)
+          }
+
           {feed.map((content) => (
             <FeedCard
               key={content.slug}
