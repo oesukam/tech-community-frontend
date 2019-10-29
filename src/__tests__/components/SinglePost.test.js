@@ -28,6 +28,10 @@ const props = {
     createdAt: 'createdAt',
     push: () => {},
   },
+  relatedPosts: {
+    isEmpty: false,
+    feed: [],
+  },
   onFetchSinglePost: jest.fn(),
   slug: 'slug',
 };

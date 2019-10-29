@@ -6,11 +6,7 @@ import Post from '../../components/SinglePost/SinglePost';
 const SinglePost = ({ match, location, history }) => (
   <Layout match={match} location={location} history={history}>
     <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-8 offset-md-2">
-          <Post slug={match.params.slug} />
-        </div>
-      </div>
+      <Post slug={match.params.slug} />
     </div>
   </Layout>
 );

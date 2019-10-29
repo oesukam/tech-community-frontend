@@ -11,6 +11,7 @@ export const toggleLoading = (state) => ({
   payload: state,
 });
 
+
 /**
  * Set feed
  * @return {object} action
@@ -19,6 +20,29 @@ export const fetchSuccess = (post) => ({
   type: types.FETCH_SUCCESS,
   payload: post,
 });
+
+/**
+ * Set related posts
+ * @return {object} action
+ */
+export const setPosts = (filteredFeed) => ({
+  type: types.FETCH_RELATED_POSTS,
+  payload: {
+    isEmpty: !filteredFeed.length,
+    feed: filteredFeed,
+  },
+});
+
+const fetchRelatedPosts = (category, singlePostSlug) => async (dispatch) => {
+  try {
+    const { data: { feed } } = await server.get(`feed?offset=0&limit=3&category=${category}`);
+
+    const filteredFeed = feed.filter(({ slug }) => slug !== singlePostSlug);
+    dispatch(setPosts(filteredFeed));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 /**
  * Get feed
@@ -36,6 +60,7 @@ export default (slug) => async (dispatch) => {
 
     dispatch(fetchSuccess(post));
     dispatch(toggleLoading(false));
+    dispatch(await fetchRelatedPosts(post.type, slug));
   } catch (e) {
     dispatch(toggleLoading(false));
   }
