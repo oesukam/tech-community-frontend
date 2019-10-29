@@ -9,18 +9,19 @@ h1 {
 .side-container {
   background-color: white;
   &__header {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 1rem;
   }
   &__item {
     display: flex;
     align-items: center;
+    font-size: 1rem;
     span {
       display: inline-block;
       width: 40px;
       color: rgba(0, 0, 0, 0.8);
       i {
-        font-size: 1.5rem;
+        font-size: 1rem;
         margin-right: 1rem;
         color: inherit;
       }
