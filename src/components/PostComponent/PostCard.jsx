@@ -95,8 +95,7 @@ export class PostCard extends Component {
 
           <div className="bottom">
             <div className="left">
-              <Like {...{ slug, likesCount, liked }} />
-
+              <Like slug={slug} likesCount={likesCount} liked={liked} />
               <div
                 className="action"
                 onClick={() => this.handlePushPost(slug)}
@@ -134,7 +133,7 @@ PostCard.propTypes = {
   createdAt: PropTypes.string.isRequired,
   liked: PropTypes.bool,
   slug: PropTypes.string.isRequired,
-  push: PropTypes.func.isRequired,
+  push: PropTypes.func,
   _setSharePostContent: PropTypes.func,
   commentsCount: PropTypes.number,
   onFetchSinglePost: PropTypes.func,
@@ -142,10 +141,11 @@ PostCard.propTypes = {
 
 PostCard.defaultProps = {
   image: null,
-  liked: false,
+  liked: null,
   _setSharePostContent: () => '',
   commentsCount: 0,
   onFetchSinglePost: () => null,
+  push: () => null,
 };
 
 const mapDispatchToProps = (dispatch) => ({
