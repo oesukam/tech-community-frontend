@@ -1,7 +1,7 @@
 module.exports = {
   currentUser: {
     isAuth: localStorage.getItem('token') !== null,
-    user: {},
+    user: { username: null },
   },
   feed: {
     items: [],

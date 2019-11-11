@@ -12,7 +12,7 @@ import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
 import NotFound from '../pages/NotFound/NotFound';
 import SinglePost from '../pages/SinglePost/SinglePost';
-import Profile from './Profile/Profile';
+
 import SharePost from './SharePost/SharePost';
 
 export const Routes = ({ isAuth, showShare }) => (
@@ -24,16 +24,12 @@ export const Routes = ({ isAuth, showShare }) => (
       <Route
         exact
         path="/protected"
-        render={props =>
-          isAuth ? <Home {...props} /> : <Redirect to="/login" />
-        }
+        render={(props) => (isAuth ? <Home {...props} /> : <Redirect to="/login" />)}
       />
       <Route
         exact
         path="/profile"
-        render={props =>
-          isAuth ? <Profile {...props} /> : <Redirect to="/" />
-        }
+        render={(props) => (isAuth ? <Profile {...props} /> : <Redirect to="/" />)}
       />
 
       <Route exact path="*" component={NotFound} />
