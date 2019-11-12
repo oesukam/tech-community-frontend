@@ -1,0 +1,27 @@
+@import '../../styles/colors';
+.latest-users{
+    background-color: $surface;
+
+    .user{
+        display: flex;
+        padding: 20px 20px 20px 10px;
+        margin-bottom: 20px;
+        background-color: #fff;
+
+        img{
+            width: 100px;
+            height: 80px;
+            object-fit: contain;
+            margin-right:20px;
+        }
+
+        .info{
+            align-self: flex-start;
+
+            .name{
+                font-weight: 500;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

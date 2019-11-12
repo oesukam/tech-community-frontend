@@ -19,7 +19,7 @@ export const Home = (props) => (
           <Post />
           <Feed {...props} />
         </div>
-        <div className="col-md-3">
+        <div className="col-md-3 d-none d-md-block">
           <HomeRight {...props} />
         </div>
 
