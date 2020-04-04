@@ -22,7 +22,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case types.GET_USER_DETAILS:
       return {
         ...state,
-        details: payload,
+        user: payload,
       };
     case types.GET_USER_DETAILS_ERROR:
       return {

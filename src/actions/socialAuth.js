@@ -29,6 +29,7 @@ export default (token, user) => async (dispatch) => {
   localStorage.setItem('token', token);
   dispatch(setIsAuth());
   dispatch(setCurrentUser(user));
+  localStorage.setItem('username', user.username);
   return true;
 };
 

@@ -1,0 +1,40 @@
+#loader_container {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  #loader {
+    background: #ddd;
+    border: 1px solid #ddd;
+    border-top: 2px solid #000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: spinner infinite 1s linear;
+    .circle {
+      padding: 5px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+    #c_1 {
+      background: #eee;
+      border: 1px solid #eee;
+      border-bottom: 2px solid #000;
+      animation: spinner infinite 0.5s linear reverse;
+    }
+  }
+  @keyframes spinner {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
