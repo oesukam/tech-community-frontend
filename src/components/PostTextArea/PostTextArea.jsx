@@ -73,15 +73,20 @@ export class PostTextArea extends Component {
     }
   };
 
+  trimedTextLength = (text) => String(text).replace(/\s\s+/g, ' ').length;
+
   _onChange = (e) => {
     const textareaLineHeight = 24;
+    const text = e.target.value;
+    const textLength = this.trimedTextLength(text);
+
     const {
       minRows, maxRows, minChar, maxChar, onChange,
     } = this.props;
     if (maxChar && maxChar <= e.target.value.length - 1) return;
 
-    if (e.target.value.length >= minChar) this.setState({ disabled: false });
-    if (e.target.value.length < minChar) this.setState({ disabled: true });
+    if (textLength >= minChar) this.setState({ disabled: false });
+    if (textLength < minChar) this.setState({ disabled: true });
 
     const previousRows = e.target.rows;
     e.target.rows = minRows; // reset number of rows in textarea
@@ -285,6 +290,8 @@ export class PostTextArea extends Component {
       show,
     } = this.state;
 
+    const textLength = this.trimedTextLength(value);
+
     const {
       loading,
       tick,
@@ -374,7 +381,7 @@ export class PostTextArea extends Component {
                 className="number-character"
                 style={{ color: disabled ? '#fff' : '#13c39a' }}
               >
-                {value.length}
+                {textLength}
 /
                 {maxChar}
               </span>

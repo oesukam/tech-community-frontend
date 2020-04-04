@@ -40,7 +40,7 @@ export class SinglePost extends Component {
                 <Post {...post} />
                 <hr />
                 <PostComment slug={post.slug} allowImagePicker={false} />
-                <PostComments post={post} slug={slug} />
+                <PostComments slug={slug} />
               </>
             )}
           </div>

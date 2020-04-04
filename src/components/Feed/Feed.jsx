@@ -12,9 +12,7 @@ import NotFound from '../NotFound/NotFound';
 
 export class Feed extends Component {
   componentDidMount() {
-    const {
-      onGetFeed, limit, onGetFeedOrganizations,
-    } = this.props;
+    const { onGetFeed, limit, onGetFeedOrganizations } = this.props;
 
     const { category } = this.getQueries();
     onGetFeed({ limit, itemsLength: 0, category });
@@ -26,14 +24,14 @@ export class Feed extends Component {
   }
 
   getQueries() {
-    const { location: { search } } = this.props;
+    const {
+      location: { search },
+    } = this.props;
     return queryString.parse(search);
   }
 
   handleInfiniteScroll() {
-    const {
-      onGetFeed, feed = [], limit,
-    } = this.props;
+    const { onGetFeed, feed = [], limit } = this.props;
 
     const { category } = this.getQueries();
     if (feed.length < 1) return;
@@ -51,10 +49,9 @@ export class Feed extends Component {
     return (
       <>
         <div className="feed">
-          {
-            !loading && feed.length === 0
-            && (<NotFound text="No post was found!" />)
-          }
+          {!loading && feed.length === 0 && (
+            <NotFound text="No post was found!" />
+          )}
 
           {feed.map((content) => (
             <FeedCard
@@ -64,10 +61,12 @@ export class Feed extends Component {
               handleShare={_setSharePostContent}
             />
           ))}
-          {loading
-            && [...Array(feed.length > 1 ? 1 : 3).keys()].map((value) => (
-              <ContentLoader key={value} />
-            ))}
+          {loading && (
+            <>
+              <br />
+              <ContentLoader count={feed.length > 1 ? 1 : 3} />
+            </>
+          )}
         </div>
       </>
     );
