@@ -36,6 +36,7 @@ export class PostCard extends Component {
       slug,
       push,
       commentsCount,
+      comments,
     } = this.props;
     return (
       <>
@@ -95,8 +96,7 @@ export class PostCard extends Component {
 
           <div className="bottom">
             <div className="left">
-              <Like {...{ slug, likesCount, liked }} />
-
+              <Like slug={slug} likesCount={likesCount} liked={liked} />
               <div
                 className="action"
                 onClick={() => this.handlePushPost(slug)}
@@ -105,7 +105,7 @@ export class PostCard extends Component {
                 tabIndex="-1"
               >
                 <i className="far fa-comment-alt" />
-                <span className="count">{commentsCount}</span>
+                <span className="count">{comments.length || commentsCount}</span>
               </div>
             </div>
 
@@ -134,22 +134,29 @@ PostCard.propTypes = {
   createdAt: PropTypes.string.isRequired,
   liked: PropTypes.bool,
   slug: PropTypes.string.isRequired,
-  push: PropTypes.func.isRequired,
+  push: PropTypes.func,
   _setSharePostContent: PropTypes.func,
   commentsCount: PropTypes.number,
+  comments: PropTypes.array,
   onFetchSinglePost: PropTypes.func,
 };
 
 PostCard.defaultProps = {
   image: null,
-  liked: false,
+  liked: null,
   _setSharePostContent: () => '',
   commentsCount: 0,
+  comments: [],
   onFetchSinglePost: () => null,
+  push: () => null,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   _setSharePostContent: (payload) => dispatch(setSharePostContent(payload)),
 });
 
-export default connect(null, mapDispatchToProps)(PostCard);
+const mapStateToProps = ({ postComments: { items } }) => ({
+  comments: items,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostCard);

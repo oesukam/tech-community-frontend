@@ -18,28 +18,12 @@ export class PostComments extends Component {
 
   render() {
     const {
-      post: { likesCount },
       items,
       loading,
     } = this.props;
 
-    const commentsCount = items.length;
-
     return (
       <div className="post-comments">
-        <div className="info">
-          <span>
-            {`${commentsCount} `}
-            Comment
-            {commentsCount !== 1 ? 's' : ''}
-          </span>
-          <span>
-            {`${likesCount} `}
-            Like
-            {likesCount !== 1 ? 's' : ''}
-          </span>
-        </div>
-
         <div className="posts">
           {loading && <ContentLoader />}
 
@@ -69,9 +53,6 @@ PostComments.propTypes = {
   items: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   slug: PropTypes.string.isRequired,
-  post: PropTypes.shape({
-    likesCount: PropTypes.number.isRequired,
-  }).isRequired,
   onGetPostComments: PropTypes.func.isRequired,
 };
 

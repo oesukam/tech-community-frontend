@@ -16,6 +16,11 @@ export class Like extends Component {
     this.setState({ highlight: liked, likesCount });
   }
 
+  componentDidUpdate(prevProps) {
+    const { liked, likesCount } = this.props;
+    if (prevProps.liked !== liked) this.setState({ highlight: liked, likesCount });
+  }
+
   toggleLikeHighlight = () => {
     const { likesCount, highlight } = this.state;
     const checkLimit = () => (highlight && likesCount > 0 ? likesCount - 1 : likesCount + 1);
