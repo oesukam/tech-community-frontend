@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import * as Sentry from '@sentry/browser';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './index.scss';
@@ -14,6 +15,9 @@ const routing = (
   </Provider>
 );
 
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_DSN,
+});
 ReactDOM.render(routing, document.getElementById('root'));
 
 serviceWorker.unregister();
