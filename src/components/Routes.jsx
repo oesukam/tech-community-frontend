@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import Home from '../pages/Home/Home';
-import Profile from '../pages/Profile/Profile';
+import Profile from './Profile/Profile';
 import NotFound from '../pages/NotFound/NotFound';
 import SinglePost from '../pages/SinglePost/SinglePost';
 

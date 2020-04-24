@@ -4,7 +4,7 @@ const { assert } = require('chai');
 
 describe('Feed', () => {
   it('should display the website feed', done => {
-    this.timeout('15s');
+    jest.setTimeout(15000);
 
     const nightmare = Nightmare();
 

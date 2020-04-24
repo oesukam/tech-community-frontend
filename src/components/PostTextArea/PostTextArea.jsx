@@ -382,7 +382,7 @@ export class PostTextArea extends Component {
                 style={{ color: disabled ? '#fff' : '#13c39a' }}
               >
                 {textLength}
-/
+                /
                 {maxChar}
               </span>
               <Button

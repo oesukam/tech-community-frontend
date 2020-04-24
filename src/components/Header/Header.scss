@@ -209,3 +209,15 @@
     border-top: 1px solid #eaeaea;
   }
 }
+
+.navbar-brand {
+  .logo {
+    width: 45px;
+    cursor: pointer;
+    margin-left: -0.6rem;
+  }
+
+  .brand {
+    font-size: larger;
+  }
+}

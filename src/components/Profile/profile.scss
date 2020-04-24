@@ -1,12 +1,27 @@
 @import '../../styles/colors';
 
+@mixin details-display {
+  span {
+    font-size: 12px;
+    color: gray;
+    font-weight: lighter;
+  }
+
+  p {
+    font-size: .9rem;
+  }
+}
+
 .profile {
   background-color: #f4f6f9;
+  padding-top: 15px;
+
   &__user {
     background-color: white;
     display: flex;
     align-items: center;
     flex-direction: column;
+
     &__avatar {
       margin: 1.5rem 0;
       height: 150px;
@@ -14,9 +29,11 @@
       border-radius: 100%;
       text-align: center;
     }
+
     &__counters {
       width: 100%;
       display: flex;
+
       div {
         display: flex;
         flex-direction: column;
@@ -24,10 +41,12 @@
         align-items: center;
         padding: 5px;
         border: 1px solid $surface;
+
         span {
           font-size: 1.5rem;
           color: $primary;
         }
+
         p {
           margin-bottom: 5px;
           font-size: 0.8rem;
@@ -35,18 +54,16 @@
       }
     }
   }
+
   &__details {
     margin: 0 0 3%;
     padding-left: 10px;
     background-color: white;
+
     .belt {
       h3 {
         padding-left: 2%;
         padding-top: 15px;
-      }
-
-      i {
-        cursor: pointer;
       }
     }
   }
@@ -59,38 +76,17 @@
       h5 {
         padding-left: 2%;
         padding-top: 15px;
-      }
-    }
-    &--facebook {
-      span {
-        font-size: 12px;
-        color: gray;
-        font-weight: lighter;
+        font-weight: bold;
+        font-size: 1rem;
       }
     }
 
-    &--linkedIn {
-      span {
-        font-size: 12px;
-        color: gray;
-        font-weight: lighter;
-      }
-    }
-
-    &--twitter {
-      span {
-        font-size: 12px;
-        color: gray;
-        font-weight: lighter;
-      }
-    }
-
-    &--github {
-      span {
-        font-size: 12px;
-        color: gray;
-        font-weight: lighter;
-      }
+    &--facebook,
+    &--linkedIn,
+    &--twitter,
+    &--github
+     {
+      @include details-display;
     }
   }
 
@@ -102,32 +98,96 @@
       h5 {
         padding-left: 2%;
         padding-top: 15px;
+        font-weight: bold;
+        font-size: 1rem;
       }
     }
 
-    &--country {
-      span {
-        font-size: 12px;
-        color: gray;
-        font-weight: lighter;
-      }
-    }
-
-    &--city {
-      span {
-        font-size: 12px;
-        color: gray;
-        font-weight: lighter;
-      }
-    }
-
+    &--country,
+    &--city,
     &--province {
-      span {
-        font-size: 12px;
-        color: gray;
-        font-weight: lighter;
+      @include details-display;
+    }
+  }
+
+  &__links{
+    margin-top: 15px;
+    background-color: white;
+  }
+
+  &__link-item {
+    cursor: not-allowed;
+    display: flex;
+    padding: 10px 20px 10px 40px;
+    font-size: large;
+    color: #4a4848 !important;
+
+    i {
+      width: 15%;
+      padding: 2px;
+    }
+
+    span {
+      width: 85%;
+      font-size: 1rem;
+    }
+  }
+
+  &__following-list{
+    background-color: white;
+  }
+}
+
+.following-list {
+
+  &__title {
+    padding-top: 15px;
+    h5 {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  }
+
+  &__content{
+
+    .card-custom {
+      position: relative;
+      padding-bottom: .5rem;
+      margin-bottom: .8rem;
+      display: inline-block;
+      border-bottom: solid 2px #f4f6f9;
+
+      &__img {
+        width: 20%;
+        border-radius: 3px;
+
+        &-container {
+          float: left;
+        }
+      }
+
+      &__name {
+        float: right;
+        width: 75%;
+
+        h5 {
+          font-size: .95rem;
+          font-weight: bold;
+        }
+
+        p {
+          font-weight: lighter;
+          font-size: .8rem;
+        }
       }
     }
+  }
+
+  &__more {
+    text-align: center;
+    padding-bottom: 10px;
+    color: #7c7c7c;
+    cursor: not-allowed;
   }
 }
 
@@ -136,55 +196,26 @@
 }
 
 .names {
-  &__first {
-    span {
-      font-size: 12px;
-      color: gray;
-      font-weight: lighter;
-    }
-  }
-  &__last {
-    span {
-      color: gray;
-      font-size: 12px;
-      font-weight: lighter;
-    }
-  }
-
+  &__first,
+  &__last,
   &__middle {
-    span {
-      font-size: 12px;
-      color: gray;
-      font-weight: lighter;
-    }
+    @include details-display;
   }
 }
 
 .addresses {
-  &__email {
-    span {
-      font-size: 12px;
-      color: gray;
-      font-weight: lighter;
-    }
-  }
-  &__username {
-    span {
-      font-size: 12px;
-      color: gray;
-      font-weight: lighter;
-    }
-  }
-
+  &__email,
+  &__username,
   &__website {
     span {
       font-size: 12px;
       color: gray;
       font-weight: lighter;
     }
-    /* p a {
-      text-decoration: none;
-    } */
+
+    p {
+      font-size: .9rem;
+    }
   }
 }
 
@@ -202,6 +233,10 @@
     margin-top: 2%;
     width: 7%;
   }
+}
+
+.fa-pen {
+  cursor: pointer;
 }
 
 @media (max-width: 425px) {

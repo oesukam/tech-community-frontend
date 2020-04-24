@@ -46,8 +46,30 @@ export const Profile = ({
               disabled
             />
           </div>
+          <div className="profile__links">
+            <div className="container profile__link-item">
+              <i className="fa fa-globe" />
+              <span>General Settings</span>
+            </div>
+            <div className="container profile__link-item">
+              <i className="fa fa-globe" />
+              <span>Education</span>
+            </div>
+            <div className="container profile__link-item">
+              <i className="fa fa-globe" />
+              <span>Professional</span>
+            </div>
+            <div className="container profile__link-item">
+              <i className="fa fa-globe" />
+              <span>Projects</span>
+            </div>
+            <div className="container profile__link-item">
+              <i className="fa fa-globe" />
+              <span>Publications</span>
+            </div>
+          </div>
         </div>
-        <div className="col-md-9">
+        <div className="col-md-6">
           <div className="profile__details">
             <div className="belt row title">
               <h3>Profile</h3>
@@ -57,31 +79,47 @@ export const Profile = ({
             <div className="profile__details--names row belt">
               <div className="names__first col-lg-4">
                 <span>First name</span>
-                <p>{details && details.firstName ? details.firstName : 'First name'}</p>
+                <p>
+                  {details && details.firstName ? details.firstName : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="names__last col-lg-4">
                 <span>Last name</span>
-                <p>{details && details.lastName ? details.lastName : 'Last name'}</p>
+                <p>
+                  {details && details.lastName ? details.lastName : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="names__middle col-lg-4">
                 <span>Middle name</span>
-                <p>{details && details.middleName ? details.middleName : 'Middle name'}</p>
+                <p>
+                  {details && details.middleName ? details.middleName : ''}
+                  &nbsp;
+                </p>
               </div>
             </div>
             <div className="profile__details--addresses row belt">
               <div className="addresses__email col-lg-4">
                 <span>Email</span>
-                <p>{details ? details.email : 'Email'}</p>
+                <p className="font-lighter">
+                  {details ? details.email : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="addresses__username col-lg-4">
                 <span>username</span>
-                <p>{details ? details.username : 'Username'}</p>
+                <p>
+                  {details ? details.username : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="addresses__website col-lg-4">
                 <span>website</span>
                 <p>
-                  <a href={details && details.website ? details.website : 'website.domain.com'}>
-                    {details && details.website ? details.website : 'website.domain.com'}
+                  <a href={details && details.website ? details.website : '#'}>
+                    {details && details.website ? details.website : ''}
+                    &nbsp;
                   </a>
                 </p>
               </div>
@@ -95,19 +133,31 @@ export const Profile = ({
             <div className="row belt">
               <div className="profile__social--facebook col-lg-3">
                 <span>Facebook</span>
-                <p>{details && details.facebook ? details.facebook : 'facebook'}</p>
+                <p>
+                  {details && details.facebook ? details.facebook : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="profile__social--linkedIn col-lg-3">
                 <span>LinkedIn</span>
-                <p>{details && details.linkedIn ? details.LinkedIn : 'LinkedIn'}</p>
+                <p>
+                  {details && details.linkedIn ? details.LinkedIn : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="profile__social--github col-lg-3">
                 <span>GitHub</span>
-                <p>{details && details.github ? details.github : 'gitHub'}</p>
+                <p>
+                  {details && details.github ? details.github : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="profile__social--twitter col-lg-3">
                 <span>Twitter</span>
-                <p>{details && details.twitter ? details.twitter : 'twitter'}</p>
+                <p>
+                  {details && details.twitter ? details.twitter : ''}
+                  &nbsp;
+                </p>
               </div>
             </div>
           </div>
@@ -119,17 +169,67 @@ export const Profile = ({
             <div className="row belt">
               <div className="col-lg-4 profile__location--country">
                 <span>Country</span>
-                <p>{details && details.country ? details.country : 'Country'}</p>
+                <p>
+                  {details && details.country ? details.country : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="col-lg-4 profile__location--city">
                 <span>City</span>
-                <p>{details && details.city ? details.city : 'City'}</p>
+                <p>
+                  {details && details.city ? details.city : ''}
+                  &nbsp;
+                </p>
               </div>
               <div className="col-lg-4 profile__location--province">
                 <span>Province</span>
-                <p>{details && details.province ? details.province : 'Province'}</p>
+                <p>
+                  {details && details.province ? details.province : ''}
+                  &nbsp;
+                </p>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <div className="profile__following-list">
+            <div className="container following-list__title">
+              <h5>Following</h5>
+            </div>
+            <hr />
+            <div className="container following-list__content">
+              <div className="card-custom">
+                <img
+                  src={defaultAvatar}
+                  alt="avatar"
+                  className="card-custom__img"
+                />
+
+                <div className="container card-custom__name">
+                  <h5>
+                    John Doe
+                  </h5>
+                  <p className="text-muted text-lighter">Person</p>
+                </div>
+              </div>
+              <div className="card-custom">
+                <img
+                  src={defaultAvatar}
+                  alt="avatar"
+                  className="card-custom__img"
+                />
+
+                <div className="container card-custom__name">
+                  <h5>
+                    John Doe
+                  </h5>
+                  <p className="text-muted text-lighter">Person</p>
+                </div>
+              </div>
+
+            </div>
+            <hr />
+            <div className="following-list__more">See more</div>
           </div>
         </div>
       </div>
@@ -151,7 +251,7 @@ Profile.defaultProps = {
   match: {},
 };
 
-export const mapStateToProps = ({ currentUser: { details } }) => ({
+export const mapStateToProps = ({ currentUser: { user: details } }) => ({
   details,
 });
 
