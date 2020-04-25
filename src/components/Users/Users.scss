@@ -1,6 +1,7 @@
 @import '../../styles/colors';
 .latest-users{
     background-color: $surface;
+    overflow: hidden;
 
     .user{
         display: flex;

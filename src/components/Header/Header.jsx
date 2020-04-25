@@ -8,6 +8,7 @@ import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import SocialAuth from '../Login/socialAuth';
 import socialAuth, { handleShowAndHide, getUserDetails } from '../../actions/socialAuth';
+import { getUserFollowersDetails } from '../../actions/profile';
 import defaultAvatar from '../../assets/images/person.png';
 import './Header.scss';
 import { setIsLoggedOut } from '../../actions/logout';
@@ -23,7 +24,12 @@ export class Header extends Component {
   };
 
   componentDidMount = () => {
-    const { location, _socialAuth: socialAuthAction, _getUserDetails } = this.props;
+    const {
+      location,
+      _socialAuth: socialAuthAction,
+      _getUserDetails,
+      _getUserFollowersDetails,
+    } = this.props;
     const url = location.search;
     const userData = queryString.parse(url);
     const { token, user } = userData;
@@ -33,10 +39,12 @@ export class Header extends Component {
     try {
       if (user && !localToken) {
         socialAuthAction(token, JSON.parse(user));
+        _getUserFollowersDetails(JSON.parse(user).user.username);
         localStorage.setItem('username', JSON.parse(user).user.username);
         history.push('/');
       } else if (username) {
         _getUserDetails(username);
+        _getUserFollowersDetails(username);
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -78,10 +86,9 @@ export class Header extends Component {
 
   renderUser = () => {
     const {
-      isAuth, user, userDetails, _handleShowAndHide, history: _history,
+      isAuth, user: currentUser, _handleShowAndHide, history: _history,
     } = this.props;
     const { menu, dropdown } = this.state;
-    const currentUser = user.user ? user.user : userDetails;
     if (isAuth) {
       return (
         <div className="user-info">
@@ -111,7 +118,7 @@ export class Header extends Component {
             />
             <div className={`header-popup ${dropdown ? 'show' : 'hide'}`}>
               {currentUser && <p className="header-popup__username">{currentUser.username}</p>}
-              <p className="header-popup__profile" onClick={() => _history.push('/profile')}>
+              <p className="header-popup__profile" onClick={() => _history.push(`/profiles/${currentUser.username}`)}>
                 Profile
               </p>
               <p onClick={this.logout} className="header-popup__logout">
@@ -166,40 +173,40 @@ export class Header extends Component {
   }
 }
 
-export const mapStateToProps = ({ currentUser: { user, isAuth, details: userDetails } }) => ({
+export const mapStateToProps = ({ currentUser: { user, isAuth } }) => ({
   isAuth,
   user,
-  userDetails,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
   _socialAuth: (token, user) => dispatch(socialAuth(token, user)),
   _handleShowAndHide: (show) => dispatch(handleShowAndHide(show)),
   _logout: () => dispatch(setIsLoggedOut()),
-  _getUserDetails: (username) => dispatch(getUserDetails(username)),
+  _getUserDetails: (username) => dispatch(getUserDetails(username, true)),
+  _getUserFollowersDetails: (username) => dispatch(getUserFollowersDetails(username, true)),
 });
 
 Header.propTypes = {
   isAuth: PropTypes.bool,
   user: PropTypes.object,
   location: PropTypes.any,
-  userDetails: PropTypes.object,
   _socialAuth: PropTypes.func,
   _handleShowAndHide: PropTypes.func,
   _logout: PropTypes.func,
   _getUserDetails: PropTypes.func,
+  _getUserFollowersDetails: PropTypes.func,
   history: PropTypes.any,
 };
 
 Header.defaultProps = {
   isAuth: false,
   user: {},
-  userDetails: {},
   location: {},
   _socialAuth: () => '',
   _handleShowAndHide: () => '',
   _logout: () => '',
   _getUserDetails: () => '',
+  _getUserFollowersDetails: () => '',
   history: {},
 };
 

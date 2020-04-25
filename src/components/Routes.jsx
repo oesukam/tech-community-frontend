@@ -28,8 +28,8 @@ export const Routes = ({ isAuth, showShare }) => (
       />
       <Route
         exact
-        path="/profile"
-        render={(props) => (isAuth ? <Profile {...props} /> : <Redirect to="/" />)}
+        path="/profiles/:username"
+        render={(props) => (<Profile {...props} isAuth={isAuth} />)}
       />
 
       <Route exact path="*" component={NotFound} />

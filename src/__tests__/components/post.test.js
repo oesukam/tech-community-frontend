@@ -36,8 +36,10 @@ describe('Post.jsx', () => {
         error: false,
         tick: false,
       };
-      const state = mapStateToProps({ posts: { ...expectedState } });
-      expect(state).toEqual(expectedState);
+      const state = mapStateToProps({
+        posts: { ...expectedState }, currentUser: { isAuth: false },
+      });
+      expect(state).toEqual({ ...expectedState, isAuth: false });
     });
     test('should return `mapDispatchToProps`', () => {
       const dispatch = (action) => action;

@@ -36,4 +36,5 @@ module.exports = {
       feed: [],
     },
   },
+  socialAuth: { show: false },
 };
