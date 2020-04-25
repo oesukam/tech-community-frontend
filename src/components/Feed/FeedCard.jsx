@@ -24,6 +24,7 @@ const FeedCard = ({
     slug,
     organization,
     commentsCount,
+    tags,
   },
   handleShare,
 }) => (
@@ -89,7 +90,9 @@ const FeedCard = ({
       {description}
     </div>
 
-    <div className="category">Web design</div>
+    <div className="categories">
+      {tags.map((tag) => <div className="category">{tag}</div>)}
+    </div>
 
     <div
       className="bottom"
