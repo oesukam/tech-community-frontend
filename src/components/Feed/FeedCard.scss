@@ -65,17 +65,25 @@
       }
     }
 
-    .category {
-      text-transform: uppercase;
-      font-size: 0.8em;
-      margin-top: 15px;
-      padding: 5px 10px;
-      border-radius: 3px;
-      background-color: $surface;
-      align-self: flex-start;
-      &:hover {
-        color: #fff;
-        background-color: $primary;
+    .categories{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .category {
+        text-transform: uppercase;
+        font-size: 0.8em;
+        margin-top: 15px;
+        margin-right: 10px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        background-color: $surface;
+        align-self: flex-start;
+        &:hover {
+          cursor: pointer;
+          color: #fff;
+          background-color: $primary;
+        }
       }
     }
 

@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import 'emoji-mart/css/emoji-mart.css';
 import './PostTextArea.scss';
+import TagsDropDown from '../TagsDropDown';
 
 const buttonStyle = {
   paddingTop: '3px',
@@ -158,12 +159,12 @@ export class PostTextArea extends Component {
     if (!isAuth) return onToggleSocialModal(true);
 
     const {
-      value, image = '', showConfirmCategory, category,
+      value, image = '', showConfirmCategory, category, tags = [],
     } = this.state;
 
     if (value && (showConfirmCategory || comment)) {
       post({
-        value, image, slug, category,
+        value, image, slug, category, tags,
       });
       this.setState({
         showConfirmCategory: false,
@@ -280,6 +281,10 @@ export class PostTextArea extends Component {
     );
   }
 
+  handleTagsSelected = (tags) => {
+    this.setState({ tags });
+  }
+
   render() {
     const {
       showEmojiPicker,
@@ -349,7 +354,7 @@ export class PostTextArea extends Component {
             </div>
           ) : null}
           <div className="actions">
-            <div>
+            <div className="actions__left">
               <i
                 role="presentation"
                 id="emoji-btn"
@@ -372,7 +377,10 @@ export class PostTextArea extends Component {
                 onSelect={this.addEmoji}
               />
               )}
+
+              <TagsDropDown onTagsSelected={this.handleTagsSelected} />
             </div>
+
             <div
               title={disabled ? 'The minimum number of character is 50' : ''}
               className="post-action"

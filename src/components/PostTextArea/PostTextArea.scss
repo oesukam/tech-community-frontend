@@ -56,6 +56,11 @@
       font-size: 1.5em;
       cursor: pointer;
     }
+
+    &__left{
+      display: flex;
+      align-items: center;
+    }
   }
 
   .post-action {
