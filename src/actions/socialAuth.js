@@ -20,32 +20,22 @@ export const hideSocialAuth = () => ({
   type: HIDE_SOCIAL_AUTH,
 });
 
-/**
- * Login the user
- * @param {*} { username, email, password }
- * @return {object} response
- */
-export default (token, user) => async (dispatch) => {
-  localStorage.setItem('token', token);
-  dispatch(setIsAuth());
-  dispatch(setCurrentUser(user));
-  localStorage.setItem('username', user.username);
-  return true;
-};
-
 export const handleShowAndHide = (show) => (dispatch) => {
   if (show) dispatch(showSocialAuth());
   if (!show) dispatch(hideSocialAuth());
 };
 
-export const getUserDetails = (username) => async (dispatch) => {
+export const getUserDetails = (username, isCurrentUsersProfile) => async (dispatch) => {
   try {
     const {
       data: { profile },
     } = await server.get(`/profiles/${username}`);
     dispatch({
       type: types.GET_USER_DETAILS,
-      payload: profile,
+      payload: {
+        profile,
+        isCurrentUsersProfile,
+      },
     });
   } catch (error) {
     dispatch({
@@ -53,4 +43,17 @@ export const getUserDetails = (username) => async (dispatch) => {
       payload: error,
     });
   }
+};
+
+/**
+ * Login the user
+ * @param {*} { username, email, password }
+ * @return {object} response
+ */
+export default (token, user) => (dispatch) => {
+  localStorage.setItem('token', token);
+  dispatch(setIsAuth());
+  dispatch(setCurrentUser(user));
+  localStorage.setItem('username', user.username);
+  return Promise.resolve(true);
 };

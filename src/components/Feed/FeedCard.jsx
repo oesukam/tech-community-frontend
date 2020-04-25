@@ -91,7 +91,7 @@ const FeedCard = ({
     </div>
 
     <div className="categories">
-      {tags.map((tag) => <div className="category">{tag}</div>)}
+      {tags && tags.map((tag) => <div className="category">{tag}</div>)}
     </div>
 
     <div

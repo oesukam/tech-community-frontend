@@ -2,6 +2,10 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import PostTextArea from '../../components/PostTextArea/PostTextArea';
 
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn,
+}));
+
 let wrapper;
 
 const props = {
@@ -87,6 +91,7 @@ describe('PostTextArea.jsx', () => {
     wrapper = mount(
       <PostTextArea {...props} />,
     );
+
     wrapper.instance().hideModal();
     expect(wrapper.instance().state.show).toEqual(false);
   });

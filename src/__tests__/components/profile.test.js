@@ -1,5 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Profile, mapStateToProps } from '../../components/Profile/Profile';
@@ -26,7 +28,13 @@ const store = mockStore({
 
 mapStateToProps({ currentUser: { details: {} } });
 
-const profile = shallow(<Profile store={store} {...props} />);
+const profile = mount(
+  <MemoryRouter>
+    <Provider store={store}>
+      <Profile {...props} />
+    </Provider>
+  </MemoryRouter>,
+);
 
 describe('Profile.jsx', () => {
   test('should render Profile.jx', () => {

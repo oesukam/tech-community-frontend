@@ -31,7 +31,7 @@ export class Users extends Component {
               <Button
                 text="VIEW PROFILE"
                 style={{ fontSize: '.6em', padding: '6px' }}
-                onClick={() => push(`/profile/${username}`)}
+                onClick={() => push(`/profiles/${username}`)}
               />
             </div>
           </div>
