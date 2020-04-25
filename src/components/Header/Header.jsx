@@ -12,6 +12,7 @@ import defaultAvatar from '../../assets/images/person.png';
 import './Header.scss';
 import { setIsLoggedOut } from '../../actions/logout';
 import HeaderSearch from './HeaderSearch';
+import logoImg from '../../assets/images/logo.png';
 
 const history = createBrowserHistory();
 
@@ -143,7 +144,8 @@ export class Header extends Component {
       <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-white">
         <div id="sticky-nav" className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Navbar
+            <img src={logoImg} alt="logo" className="rounded-circle logo" />
+            {/* <span className="font-weight-lighter brand">Tech Community</span> */}
           </Link>
           <HeaderSearch history={history} />
           <SocialAuth />

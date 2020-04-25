@@ -87,7 +87,10 @@ describe('Header.jsx', () => {
     test('should return `mapStateToProps`', () => {
       const expectedState = {
         isAuth: false,
-        user: {},
+        user: {
+          username: null,
+        },
+        userDetails: undefined,
       };
       const state = mapStateToProps(initialState);
       expect(state).toEqual(expectedState);
