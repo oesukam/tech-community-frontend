@@ -6,7 +6,7 @@ import Post from '../../components/Post/Post';
 import Feed from '../../components/Feed/Feed';
 import HomeLeft from './HomeLeft';
 import HomeRight from './HomeRight';
-
+import { ScrollToTop } from '../../components/ScrollToTop/ScrollToTop';
 
 export const Home = (props) => (
   <Layout {...props}>
@@ -18,6 +18,7 @@ export const Home = (props) => (
         <div className="col-md-6">
           <Post />
           <Feed {...props} />
+          <ScrollToTop />
         </div>
         <div className="col-md-3 d-none d-md-block">
           <HomeRight {...props} />
