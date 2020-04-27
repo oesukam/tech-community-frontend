@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Layout from '../../containers/Layout/Layout';
 import Post from '../../components/SinglePost/SinglePost';
+import { ScrollToTop } from '../../components/ScrollToTop/ScrollToTop';
 
 const SinglePost = ({ match, location, history }) => (
   <Layout match={match} location={location} history={history}>
@@ -9,6 +10,7 @@ const SinglePost = ({ match, location, history }) => (
       <div className="row">
         <div className="col-md-12">
           <Post slug={match.params.slug} history={history} />
+          <ScrollToTop />
         </div>
       </div>
     </div>

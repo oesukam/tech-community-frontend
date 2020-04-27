@@ -1,0 +1,25 @@
+#scroll-to-top {
+  position: fixed;
+  padding: 5px;
+  bottom: 20px;
+  right: 40px;
+  z-index: 1;
+  outline: none;
+  background: #fff;
+  border: 1px solid #ddd;
+  transition: all 0.2s linear;
+
+  img {
+    width: 44px;
+    height: 44px;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 1px #aaa;
+    transition: all 0.2s linear;
+  }
+
+  &.hide-back-to_top {
+    display: none;
+  }
+}
