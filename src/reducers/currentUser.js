@@ -80,7 +80,9 @@ const reducer = (state = initialState, { type, payload }) => {
         },
         user: {
           ...state.user,
-          following: [...state.user.following, { user: [state.membersProfile] }],
+          following: state.user.following
+            ? [...state.user.following, { user: [state.membersProfile] }]
+            : [{ user: [state.membersProfile] }],
           followedCount: state.user.followedCount + 1,
         },
       };
