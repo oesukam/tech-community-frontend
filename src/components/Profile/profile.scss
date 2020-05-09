@@ -9,6 +9,7 @@
 
   p, input {
     font-size: .9rem;
+    overflow-x: hidden;
   }
 
   input {
@@ -169,6 +170,7 @@
   &__links{
     margin-top: 15px;
     background-color: white;
+    display: none;
   }
 
   &__link-item {
@@ -212,6 +214,7 @@
       margin-bottom: .8rem;
       display: inline-block;
       border-bottom: solid 2px #f4f6f9;
+      cursor: pointer;
 
       &__img {
         width: 20%;
