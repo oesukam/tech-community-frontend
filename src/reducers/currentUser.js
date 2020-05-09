@@ -75,6 +75,8 @@ const reducer = (state = initialState, { type, payload }) => {
         membersProfile: {
           ...state.membersProfile,
           isFollowed: true,
+          followers: [...state.membersProfile.followers, { user: [state.user] }],
+          followerCount: state.membersProfile.followerCount + 1,
         },
         user: {
           ...state.user,
@@ -88,6 +90,10 @@ const reducer = (state = initialState, { type, payload }) => {
         membersProfile: {
           ...state.membersProfile,
           isFollowed: false,
+          followers: state.membersProfile.followers.filter(
+            (person) => person.user[0].username !== state.user.username,
+          ),
+          followerCount: state.membersProfile.followerCount - 1,
         },
         user: {
           ...state.user,

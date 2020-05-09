@@ -73,7 +73,7 @@ export const Profile = ({
               />
               <div className="profile__user__counters">
                 <div className="profile__user__counters__followers">
-                  <span>{details.followersCount || 0}</span>
+                  <span>{details.followerCount || 0}</span>
                   <p>Followers</p>
                 </div>
                 <div className="profile__user__counters__following">
@@ -540,7 +540,7 @@ export const Profile = ({
                 ))}
               </div>
               <hr />
-              <div className="following-list__more">See more</div>
+              {details.following && details.following.length !== 0 && <div className="following-list__more">See more</div>}
             </div>
           </div>
         </div>
