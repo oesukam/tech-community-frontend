@@ -73,7 +73,7 @@ export const Profile = ({
               />
               <div className="profile__user__counters">
                 <div className="profile__user__counters__followers">
-                  <span>{details.followersCount || 0}</span>
+                  <span>{details.followerCount || 0}</span>
                   <p>Followers</p>
                 </div>
                 <div className="profile__user__counters__following">
@@ -84,14 +84,17 @@ export const Profile = ({
               {
                 user.username !== username
                 && membersProfile.username
-                && isAuth
                 && (
                   <Button
-                    style={followButtonStyle}
+                    style={{ ...followButtonStyle, cursor: isAuth ? 'pointer' : 'not-allowed' }}
                     text={`${!details.isFollowed ? '' : 'un'}follow`}
-                    onClick={() => followUnflow(`${
-                      !details.isFollowed ? '' : 'UN'
-                    }FOLLOW_USER`, details.username)}
+                    onClick={() => {
+                      if (isAuth) {
+                        followUnflow(`${
+                          !details.isFollowed ? '' : 'UN'
+                        }FOLLOW_USER`, details.username);
+                      }
+                    }}
                   />
                 )
               }
@@ -523,7 +526,11 @@ export const Profile = ({
               <hr />
               <div className="container following-list__content">
                 {details.following && details.following.map((person) => (
-                  <div className="card-custom">
+                  <div
+                    className="card-custom"
+                    key={person.user[0].username}
+                    onClick={() => history.push(`/profiles/${person.user[0].username}`)}
+                  >
                     <img
                       src={person.user[0].picture || defaultAvatar}
                       alt="avatar"
@@ -540,7 +547,7 @@ export const Profile = ({
                 ))}
               </div>
               <hr />
-              <div className="following-list__more">See more</div>
+              {details.following && details.following.length !== 0 && <div className="following-list__more">See more</div>}
             </div>
           </div>
         </div>
