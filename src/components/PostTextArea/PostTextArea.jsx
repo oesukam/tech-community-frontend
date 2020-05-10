@@ -6,6 +6,7 @@ import Modal from '../Modal/Modal';
 import 'emoji-mart/css/emoji-mart.css';
 import './PostTextArea.scss';
 import TagsDropDown from '../TagsDropDown';
+import categories from '../../constants/categories';
 
 const buttonStyle = {
   paddingTop: '3px',
@@ -80,7 +81,6 @@ export class PostTextArea extends Component {
     const textareaLineHeight = 24;
     const text = e.target.value;
     const textLength = this.trimedTextLength(text);
-
     const {
       minRows, maxRows, minChar, maxChar, onChange,
     } = this.props;
@@ -121,7 +121,7 @@ export class PostTextArea extends Component {
     this.setState({
       category: id,
     });
-  }
+  };
 
   restoreImage = () => {
     this.setState({
@@ -159,12 +159,20 @@ export class PostTextArea extends Component {
     if (!isAuth) return onToggleSocialModal(true);
 
     const {
-      value, image = '', showConfirmCategory, category, tags = [],
+      value,
+      image = '',
+      showConfirmCategory,
+      category,
+      tags = [],
     } = this.state;
 
     if (value && (showConfirmCategory || comment)) {
       post({
-        value, image, slug, category, tags,
+        value,
+        image,
+        slug,
+        category,
+        tags,
       });
       this.setState({
         showConfirmCategory: false,
@@ -176,7 +184,7 @@ export class PostTextArea extends Component {
     });
   };
 
-  closeConfirmCategory =() => {
+  closeConfirmCategory = () => {
     this.setState({
       showConfirmCategory: false,
     });
@@ -184,91 +192,28 @@ export class PostTextArea extends Component {
 
   renderConfirmCategory = () => {
     const { showConfirmCategory, category } = this.state;
-    const {
-      loading,
-      tick,
-    } = this.props;
+    const { loading, tick } = this.props;
     return (
       <Modal show={showConfirmCategory} handleClose={this.closeConfirmCategory}>
         <div className="post-category">
           <h3>Choose post category</h3>
-          <p>
-            <input
-              type="radio"
-              id="general"
-              name="category"
-              onChange={this.onCategoryChange}
-              checked={category === 'general'}
-            />
-            <label htmlFor="general">
-              <span>
-                <i className="fa fa-globe" />
-              </span>
-              General
-            </label>
-          </p>
-          <p>
-            <input
-              type="radio"
-              id="job"
-              name="category"
-              onChange={this.onCategoryChange}
-              checked={category === 'job'}
-            />
-            <label htmlFor="job">
-              <span>
-                <i className="fa fa-suitcase" />
-              </span>
-              Jobs
-            </label>
-          </p>
-          <p>
-            <input
-              type="radio"
-              id="event"
-              name="category"
-              onChange={this.onCategoryChange}
-              checked={category === 'event'}
-            />
-            <label htmlFor="event">
-              <span>
-                <i className="fa fa-calendar" />
-              </span>
-              Events
-            </label>
-          </p>
-          <p>
-            <input
-              type="radio"
-              id="annoucement"
-              name="category"
-              onChange={this.onCategoryChange}
-              checked={category === 'annoucement'}
-            />
-            <label htmlFor="annoucement">
-              <span>
-                <i className="fa fa-bullhorn" />
-              </span>
-              Announcements
-            </label>
-          </p>
-
-          <p>
-            <input
-              type="radio"
-              id="question"
-              name="category"
-              onChange={this.onCategoryChange}
-              checked={category === 'question'}
-            />
-            <label htmlFor="question">
-              <span>
-                <i className="fa fa-question" />
-              </span>
-              Questions
-            </label>
-          </p>
-
+          {categories.map(({ name, value, icon }) => (
+            <p>
+              <input
+                type="radio"
+                id={name}
+                name="category"
+                onChange={this.onCategoryChange}
+                checked={category === name}
+              />
+              <label htmlFor={name}>
+                <span>
+                  <i className={`fa fa-${icon}`} />
+                </span>
+                {value}
+              </label>
+            </p>
+          ))}
           <Button
             style={categoryButtonStyle}
             loading={loading}
@@ -279,11 +224,11 @@ export class PostTextArea extends Component {
         </div>
       </Modal>
     );
-  }
+  };
 
   handleTagsSelected = (tags) => {
     this.setState({ tags });
-  }
+  };
 
   render() {
     const {
@@ -362,20 +307,20 @@ export class PostTextArea extends Component {
                 onClick={this.toogleOnClickEmojiPicker}
               />
               {allowImagePicker && (
-              <i
-                role="presentation"
-                className="fas fa-image"
-                onClick={() => this.imageInput.current.click()}
-              />
+                <i
+                  role="presentation"
+                  className="fas fa-image"
+                  onClick={() => this.imageInput.current.click()}
+                />
               )}
 
               {showEmojiPicker && (
-              <Picker
-                title="Tech Community"
-                emoji="point_up"
-                style={{ position: 'absolute', left: 0, top: '100%' }}
-                onSelect={this.addEmoji}
-              />
+                <Picker
+                  title="Tech Community"
+                  emoji="point_up"
+                  style={{ position: 'absolute', left: 0, top: '100%' }}
+                  onSelect={this.addEmoji}
+                />
               )}
 
               <TagsDropDown onTagsSelected={this.handleTagsSelected} />

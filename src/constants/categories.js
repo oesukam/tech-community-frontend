@@ -29,4 +29,14 @@ export default [
     value: 'question',
     icon: 'question',
   },
+  {
+    name: 'Mentorship Requests',
+    value: 'mentorship',
+    icon: 'hands-helping',
+  },
+  {
+    name: 'Collaborations',
+    value: 'collaboration',
+    icon: 'users',
+  },
 ];

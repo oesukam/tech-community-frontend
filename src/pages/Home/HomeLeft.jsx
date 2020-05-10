@@ -6,10 +6,13 @@ import { getFeed } from '../../actions/feedActions';
 import categories from '../../constants/categories';
 import './HomeLeft.scss';
 
-
 export class HomeLeft extends Component {
   navigateTo = (category) => {
-    const { history, searchState: { query: search = '' }, onGetFeed } = this.props;
+    const {
+      history,
+      searchState: { query: search = '' },
+      onGetFeed,
+    } = this.props;
     history.push(`/?search=${search}&category=${category}`);
     onGetFeed({
       limit: 0,
@@ -31,7 +34,9 @@ export class HomeLeft extends Component {
           <div
             role="presentation"
             onClick={() => this.navigateTo(value)}
-            className={`side-container__item ${category === value ? 'active' : ''}`}
+            className={`side-container__item ${
+              category === value ? 'active' : ''
+            }`}
             key={name}
           >
             <span>
@@ -64,12 +69,9 @@ HomeLeft.defaultProps = {
  * @param {*} { auth }
  * @returns {object} props
  */
-export const mapStateToProps = ({
-  search: {
-    searchState,
-
-  },
-}) => ({ searchState });
+export const mapStateToProps = ({ search: { searchState } }) => ({
+  searchState,
+});
 
 /**
  * Maps dispatches to props
@@ -80,7 +82,4 @@ export const mapDispatchToProps = (dispatch) => ({
   onGetFeed: (limit, itemsLength) => dispatch(getFeed(limit, itemsLength)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(HomeLeft);
+export default connect(null, mapDispatchToProps)(HomeLeft);
