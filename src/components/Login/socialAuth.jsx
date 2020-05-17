@@ -11,8 +11,9 @@ class SocialAuth extends Component {
   state = {};
 
   login = (platform) => {
+    const { url = '' } = this.props;
     window.location.replace(
-      `${process.env.REACT_APP_BACKEND_URL}/auth/${platform}`,
+      `${process.env.REACT_APP_BACKEND_URL}/auth/${platform}?url=${url}`,
     );
   };
 
@@ -69,15 +70,14 @@ SocialAuth.propTypes = {
   _handleShowAndHide: PropTypes.func,
   text: PropTypes.string,
   show: PropTypes.bool,
+  url: PropTypes.string,
 };
 
 SocialAuth.defaultProps = {
   _handleShowAndHide: () => '',
   text: '',
   show: false,
+  url: '',
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SocialAuth);
+export default connect(mapStateToProps, mapDispatchToProps)(SocialAuth);

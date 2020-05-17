@@ -7,7 +7,10 @@ import { connect } from 'react-redux';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import SocialAuth from '../Login/socialAuth';
-import socialAuth, { handleShowAndHide, getUserDetails } from '../../actions/socialAuth';
+import socialAuth, {
+  handleShowAndHide,
+  getUserDetails,
+} from '../../actions/socialAuth';
 import { getUserFollowersDetails } from '../../actions/profile';
 import defaultAvatar from '../../assets/images/person.png';
 import './Header.scss';
@@ -86,27 +89,27 @@ export class Header extends Component {
 
   renderUser = () => {
     const {
-      isAuth, user: currentUser, _handleShowAndHide, history: _history,
+      isAuth,
+      user: currentUser,
+      _handleShowAndHide,
+      history: _history,
     } = this.props;
     const { menu, dropdown } = this.state;
     if (isAuth) {
       return (
         <div className="user-info">
-          {
-            false ? (
-              <>
-                <div className="user-info__notif">
-                  <span className="counter">12</span>
-                  <i className="fas fa-bell" alt="" />
-                </div>
-                <div className="user-info__message">
-                  <span className="counter">12</span>
-                  <i className="fas fa-envelope" alt="" />
-                </div>
-              </>
-            )
-              : null
-          }
+          {false ? (
+            <>
+              <div className="user-info__notif">
+                <span className="counter">12</span>
+                <i className="fas fa-bell" alt="" />
+              </div>
+              <div className="user-info__message">
+                <span className="counter">12</span>
+                <i className="fas fa-envelope" alt="" />
+              </div>
+            </>
+          ) : null}
 
           <div className="user-info__avatar" alt="">
             <img
@@ -117,8 +120,13 @@ export class Header extends Component {
               onClick={this.toggleDropdown}
             />
             <div className={`header-popup ${dropdown ? 'show' : 'hide'}`}>
-              {currentUser && <p className="header-popup__username">{currentUser.username}</p>}
-              <p className="header-popup__profile" onClick={() => _history.push(`/profiles/${currentUser.username}`)}>
+              {currentUser && (
+                <p className="header-popup__username">{currentUser.username}</p>
+              )}
+              <p
+                className="header-popup__profile"
+                onClick={() => _history.push(`/profiles/${currentUser.username}`)}
+              >
                 Profile
               </p>
               <p onClick={this.logout} className="header-popup__logout">
@@ -147,6 +155,10 @@ export class Header extends Component {
   };
 
   render() {
+    const {
+      location: { pathname },
+    } = this.props;
+
     return (
       <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-white">
         <div id="sticky-nav" className="container-fluid">
@@ -155,7 +167,7 @@ export class Header extends Component {
             {/* <span className="font-weight-lighter brand">Tech Community</span> */}
           </Link>
           <HeaderSearch history={history} />
-          <SocialAuth />
+          <SocialAuth url={pathname} />
           {this.renderUser()}
           <button
             onClick={this.toggleMenu}
@@ -210,7 +222,4 @@ Header.defaultProps = {
   history: {},
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
