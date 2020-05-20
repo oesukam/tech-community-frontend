@@ -60,6 +60,10 @@ export const Profile = ({
     resetFetchedMember();
   }, []);
 
+  useEffect(() => {
+    resetFetchedMember();
+  }, [window.location.href]);
+
   return (
     <Layout match={match} location={location} history={history}>
       <div className="container-fluid">
