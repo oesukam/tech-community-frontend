@@ -62,7 +62,6 @@ export const mapStateToProps = ({
   },
 }) => ({ organizations });
 
-
 export default connect(
   mapStateToProps,
 )(HomeRight);

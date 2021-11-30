@@ -1,7 +1,6 @@
 import * as types from '../actionTypes/sharePostTypes';
 import { sharePost as initialState } from '../store/initialState';
 
-
 const sharePostReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case types.SHARE_POST_STARTED:

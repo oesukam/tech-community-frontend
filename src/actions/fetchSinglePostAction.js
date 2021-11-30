@@ -13,7 +13,6 @@ export const toggleLoading = (state) => ({
   payload: state,
 });
 
-
 /**
  * Set feed
  * @return {object} action

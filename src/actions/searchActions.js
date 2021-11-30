@@ -1,6 +1,5 @@
 import * as types from '../actionTypes/searchTypes';
 
-
 /**
  * Set search state
  * @return {object} action

@@ -39,7 +39,6 @@ export const setFeedOrganizations = (payload) => ({
   payload,
 });
 
-
 /**
  * Get feed
  * @return {object} response
@@ -68,7 +67,6 @@ export const getFeed = ({
     dispatch(toggleLoading(false));
   }
 };
-
 
 /**
  * Get feed

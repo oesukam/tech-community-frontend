@@ -26,7 +26,6 @@ export class SinglePost extends Component {
     );
   }
 
-
   render() {
     const { post, slug } = this.props;
     return (
