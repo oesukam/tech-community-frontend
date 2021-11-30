@@ -24,4 +24,4 @@ jobs:
         run: yarn lint
 
       - name: Build App
-        run: yarn build
+        run: CI=false yarn build
