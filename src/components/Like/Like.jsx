@@ -93,7 +93,6 @@ Like.defaultProps = {
   onToggleSocialModal: () => '',
 };
 
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

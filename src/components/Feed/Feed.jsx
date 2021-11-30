@@ -23,19 +23,19 @@ export class Feed extends Component {
     });
   }
 
-  getQueries() {
-    const {
-      location: { search },
-    } = this.props;
-    return queryString.parse(search);
-  }
-
   handleInfiniteScroll() {
     const { onGetFeed, feed = [], limit } = this.props;
 
     const { category } = this.getQueries();
     if (feed.length < 1) return;
     onGetFeed({ limit, itemsLength: feed.length, category });
+  }
+
+  getQueries() {
+    const {
+      location: { search },
+    } = this.props;
+    return queryString.parse(search);
   }
 
   render() {

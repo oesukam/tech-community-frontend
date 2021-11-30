@@ -1,4 +1,3 @@
-
 import {
   InstantSearch,
   SearchBox,

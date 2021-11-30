@@ -7,7 +7,6 @@ import resolvePlaceholder from '../../helpers/resolvePlaceHolder';
 import Like from '../Like/Like';
 import { setSharePostContent } from '../../actions/sharePostAction';
 
-
 export class PostCard extends Component {
   handleOpenSharePost = () => {
     const { slug, _setSharePostContent, description } = this.props;

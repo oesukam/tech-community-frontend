@@ -36,7 +36,6 @@ const postError = (error) => ({
   payload: error,
 });
 
-
 /**
  * Triggers an action
  * when the post has been succeessful

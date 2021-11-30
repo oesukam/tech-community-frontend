@@ -5,7 +5,6 @@ import TimeAgo from '../Helpers/TimeAgo';
 import Like from '../Like/Like';
 import './FeedCard.scss';
 
-
 const navigateTo = (e, { push, url }) => {
   e.stopPropagation();
   push(url);
@@ -130,7 +129,6 @@ FeedCard.propTypes = {
   content: PropTypes.object,
   handleShare: PropTypes.func,
 };
-
 
 FeedCard.defaultProps = {
   push: {},

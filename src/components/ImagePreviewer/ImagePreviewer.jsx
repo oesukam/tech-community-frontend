@@ -2,7 +2,6 @@ import React from 'react';
 import './ImagePreviewer.scss';
 import PropTypes from 'prop-types';
 
-
 const ImagePreviewer = ({ image, style, onClick }) => (
   <div role="presentation" className="image-previewer" style={style} onClick={onClick}>
     <img src={image} alt="preview" />
@@ -20,6 +19,5 @@ ImagePreviewer.defaultProps = {
   style: {},
   onClick: () => '',
 };
-
 
 export default ImagePreviewer;
