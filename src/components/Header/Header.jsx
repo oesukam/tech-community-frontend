@@ -57,9 +57,9 @@ export class Header extends Component {
     window.addEventListener('click', (e) => {
       const { dropdown } = this.state;
       if (
-        e.target.parentNode.className !== 'user-info__avatar'
-        && e.target.parentNode.className
-        && !e.target.parentNode.className.includes('header-popup')
+        e.target?.parentNode?.className !== 'user-info__avatar'
+        && e.target?.parentNode?.className
+        && !e.target?.parentNode?.className?.includes('header-popup')
         && dropdown
       ) {
         this.setState({ dropdown: false });
